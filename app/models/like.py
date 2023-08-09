@@ -9,7 +9,7 @@ class Like(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     post_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('posts.id')), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('user.id')), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
 
     posts = db.relationship('Post', back_populates='likes')
     user = db.relationship('User', back_populates='likes')
@@ -21,5 +21,5 @@ class Like(db.Model):
             'post_id': self.post_id,
             'user_id': self.user_id,
             'user': self.user.to_dict(),
-            'posts': self.user.to_dict()
+            'posts': self.posts.to_dict()
         }
