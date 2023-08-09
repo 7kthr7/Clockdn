@@ -14,7 +14,7 @@ def seed_users():
         occupation = 'Student',
         biography = 'Student at App Academy',
         profile_image = 'https://tinyurl.com/yn36x35m',
-        hashed_password = 'password',
+        password = 'password',
         )
     
     Naruto = User(
@@ -26,7 +26,7 @@ def seed_users():
         occupation = 'The Seventh Hokage',
         biography = 'I am the 7th Hokage of the Hidden Leaf Village',
         profile_image = 'https://tinyurl.com/mpcxtheb',
-        hashed_password = 'password',
+        password = 'password',
         )
     Levi = User (
         first_name = 'Levi',
@@ -37,7 +37,7 @@ def seed_users():
         occupation = 'Soldier',
         biography = 'I am a captain of the Special Operation Squad within the Survey Corp',
         profile_image = 'https://tinyurl.com/54uep5bn',
-        hashed_password = 'password',
+        password = 'password',
         )
     
     Light = User (
@@ -49,7 +49,7 @@ def seed_users():
         occupation = 'Detective',
         biography = 'I am a highly skilled an eccentric detective who studied forensic science and criminal psychology',
         profile_image = 'https://tinyurl.com/yxenke6j',
-        hashed_password = 'password',
+        password = 'password',
         )
     Satotu = User (
         first_name = 'Saturo',
@@ -60,7 +60,7 @@ def seed_users():
         occupation = 'Teacher',
         biography = 'I am a teacher and mentor atTokyo Jujutsu High',
         profile_image = 'https://tinyurl.com/mtj6w8mf',
-        hashed_password = 'password',
+        password = 'password',
 )
     
     Tanjiro = User (
@@ -72,7 +72,7 @@ def seed_users():
         occupation = 'Demon Slayer',
         biography = 'I was a former charcoal burner and became a self-taught Demon Slayer. I work with the Hashira group in the Demon Slayer Corps',
         profile_image = 'https://tinyurl.com/3f6vxk43',
-        hashed_password = 'password',
+        password = 'password',
     )
 
     Mikasa = User (
@@ -84,7 +84,7 @@ def seed_users():
         occupation = 'Soldier',
         biography = 'I was a former top-ranked soldier for the 104th Training Corps. Currenly I am enlisted with the Survey Corps',
         profile_image = 'https://tinyurl.com/ms2dbcfj',
-        hashed_password = 'password',
+        password = 'password',
     )
 
     Sakura = User (
@@ -96,7 +96,7 @@ def seed_users():
         occupation = 'Director, Medical Ninjustu Teacher ',
         biography = ' I was a former spy, but my passion for medicien led me to become the head of the Medical Department, the director of the Konoha Hospital and a medican ninjustu trainer.',
         profile_image = 'https://tinyurl.com/9sjc5u9r',
-        hashed_password = 'password',
+        password = 'password',
     )
 
     Sailor = User (
@@ -108,7 +108,7 @@ def seed_users():
         occupation = 'student, sailor gauradian',
         biography = ' I am a student as well as the Sailor Guardian for love and justice',
         profile_image = 'https://tinyurl.com/2p8wsnee',
-        hashed_password = 'password',
+        password = 'password',
     )
     Claymore = User (
         first_name = 'Clare',
@@ -119,7 +119,7 @@ def seed_users():
         occupation = 'Swordswoman',
         biography = ' I am an expert swordswoman and have amazing attention to detail skills.',
         profile_image = 'https://tinyurl.com/24aen24m',
-        hashed_password = 'password',
+        password = 'password',
     )
 
 
