@@ -31,13 +31,7 @@ def seed_likes():
     Like(user_id=8, post_id=2),
     ]
 
-    for like in likes:
-        existing_like = Like.query.filter_by(
-            user_id=like.user_id, post_id=like.post_id).first()
-        if existing_like:
-            db.session.delete(existing_like)
-        elif like not in likes:  
-            likes.append(like)
+  
 
     db.session.add_all(likes)
     db.session.commit()
