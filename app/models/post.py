@@ -1,6 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
 
+
 class Post(db.Model):
     __tablename__ = 'posts'
 
@@ -8,8 +9,8 @@ class Post(db.Model):
         __table_args__ = {'schema': SCHEMA}
         
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(20), nullable=False)
-    body = db.Column(db.String(1000), nullable=False) 
+    title = db.Column(db.String(100), nullable=False)
+    body = db.Column(db.String(255), nullable=False) 
     post_images = db.Column(db.String, nullable=True)
     created_at = db.Column(db.Date, default=datetime.now())
     updated_at = db.Column(db.Date, default=datetime.now())
