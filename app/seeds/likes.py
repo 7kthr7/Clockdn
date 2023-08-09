@@ -33,7 +33,7 @@ def seed_likes():
 
   
 
-    db.session.add_all(likes)
+    create_likes = [db.session.add(like) for like in likes]
     db.session.commit()
     
 def undo_likes():
