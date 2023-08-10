@@ -3,7 +3,7 @@ from flask_login import login_required
 from app.models import User, db
 # from app.forms import EditUserForm
 
-from .aws_helpers import get_unique_filename, upload_file_to_s3, remove_file_from_s3
+# from .aws_helpers import get_unique_filename, upload_file_to_s3, remove_file_from_s3
 
 
 user_routes = Blueprint('users', __name__)
