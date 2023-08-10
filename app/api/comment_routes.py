@@ -22,6 +22,29 @@ def get_comments(post_id):
     return comments, 200
 
 
+## Get user's comments 
+@comment_routes.route('/user')
+@login_required
+def get_comment_user():
+
+
+    user_id = current_user.id
+    user_comment = Comment.query.filter_by(user_id=user_id).all()
+    posts = [comment.post_id for comment in user_comment]  
+    commented_posts = Post.query.filter(Post.id.in_(posts)).all()
+    post_details = {post.id: post.to_dict() for post in commented_posts}
+
+    comments_with_posts = [
+        {
+            'comment_id': comment.id,
+            'post': post_details[comment.post_id]
+        }
+        for comment in user_comment
+    ]
+
+    return  comments_with_posts, 200
+
+
 ## Create comments for a post 
 
 @comment_routes.route('/<int:post_id>', methods = ['POST'])
