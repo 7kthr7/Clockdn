@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, session, request
 from app.forms import PostForm  
 from app.models import User, db, Post
-from ..api.aws_helpers import get_unique_filename, upload_file_to_s3
+from .aws_helpers import get_unique_filename, upload_file_to_s3
 from datetime import datetime
 from flask_login import login_required, current_user
 
@@ -24,6 +24,9 @@ def get_posts():
 
 ### Create post
 # - Similar to sign up  
+     # image_url = upload['url']
+    # else:
+    #         image_url = None
 
 
 @post_routes.route('/feed/new', methods = ['POST'])
@@ -31,23 +34,27 @@ def get_posts():
 def create_post():
     form = PostForm()
     form.csrf_token.data = request.cookies.get('csrf_token')
+    upload = {'url': None} 
 
     if form.validate_on_submit():
-        image = form.post_image.data  
-
-        if image:
+            
+            image = form.data["post_images"] 
             image.filename = get_unique_filename(image.filename)
             upload = upload_file_to_s3(image)
+            print(upload)
 
             if "url" not in upload:
-                return jsonify({'error': upload['errors']})
-
-           
+                return  upload['errors']
+       
+         
+    print("Form data - title:----------->", form.data['title'])
+    print("Form data - body:------------>", form.body.data)
 
 
     new_post = Post(
-        title=form.title.data,
-        body=form.body.data,
+        
+        title=form.data['title'],
+        body=form.data['body'],
         post_images=upload['url'],  
         user_id=current_user.id,
         created_at=datetime.now(),
@@ -56,7 +63,7 @@ def create_post():
 
     db.session.add(new_post)
     db.session.commit()
-    return jsonify(new_post.to_dict()), 201
+    return new_post.to_dict(), 201
 
    
 ### User post

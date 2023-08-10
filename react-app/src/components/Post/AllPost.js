@@ -2,6 +2,8 @@ import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPostsThunk } from "../../store/post";
+import OpenModalButton from "../OpenModalButton";
+import CreatePost from "./CreatePost";
 import './Allposts.css'
 
 
@@ -17,6 +19,11 @@ const FeedPosts = () => {
     return (
         <div>
             <h3> CLOCKDN FEED
+            <OpenModalButton
+                            
+                            buttonText="Start a post"
+                            modalComponent={<CreatePost />}
+                        />
             {posts.map((post) => (
                 <div key={post.id} className="single-post">
                     {post.title}

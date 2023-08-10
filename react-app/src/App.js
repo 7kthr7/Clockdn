@@ -6,6 +6,7 @@ import LoginFormPage from "./components/LoginFormPage";
 import FeedPosts from "./components/Post/AllPost";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
+// import CreatePost from "./components/Post/CreatePost";
 
 function App() {
   const dispatch = useDispatch();
@@ -28,6 +29,9 @@ function App() {
           <Route path="/feed">
             <FeedPosts />
           </Route>
+          {/* <Route path="/feed/new">
+            <CreatePost />
+          </Route> */}
         </Switch>
       )}
     </>
