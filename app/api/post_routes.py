@@ -9,6 +9,7 @@ post_routes = Blueprint('post', __name__)
 
 
 #### All post
+# - Get all posts including comments, likes, and the user it belongs t0
 
 @post_routes.route('/feed')
 @login_required
@@ -20,12 +21,15 @@ def get_posts():
     return post_detail
 
 
+
 ### Create post
+# - Similar to sign up  
+
+
 @post_routes.route('/feed/new', methods = ['POST'])
 @login_required
 def create_post():
     form = PostForm()
-
     form.csrf_token.data = request.cookies.get('csrf_token')
 
     if form.validate_on_submit():
@@ -66,11 +70,11 @@ def create_post():
 def update_post(id):
     edit_post = Post.query.get(id)
 
-    if not edit_post:
-        return {'errors': 'Post not found.'}, 404
-
+    
+    if edit_post.id != id:
+            return {'message': 'Post not found'}, 404
     if edit_post.user_id != current_user.id:
-        return {'errors': 'Unauthorized.'}, 401
+        return {'message': 'Unauthorized.'}, 401
 
     form = PostForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -94,7 +98,8 @@ def update_post(id):
 
         return edit_post.to_dict(), 200
 
-    return {'errors': form.errors}, 401
+    return {'message': form.errors}, 401
+    
 
 
 
@@ -109,4 +114,4 @@ def delete_post(id):
         db.session.delete(post)
     db.session.commit()
 
-    return {'Post Successfully Deleted': id}
+    return {'message': 'Post Successfully Deleted'}, 200

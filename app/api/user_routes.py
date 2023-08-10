@@ -42,7 +42,11 @@ def user(id):
     return user.to_dict()
 
 
-       
+## Edit User
+#   - Similar to sign up
+#   - Keep original input
+#   - Remove images from aws 
+ 
 
 @user_routes.route('/<int:id>', methods=['PUT'])
 @login_required
@@ -55,23 +59,17 @@ def edit_user(id):
     occupation = data.get('occupation')
     biography = data.get('biography')
     city = data.get('city')
-    state = data.get('state')
-
-   
+    state = data.get('state')  
 
     if user:
         if profile_image:
-            if user.profile_image:
-                remove_file_from_s3(user.profile_image)
+            remove_file_from_s3(user.profile_image)
 
-            # image = data['profile_image']
             profile_image.filename = get_unique_filename(profile_image.filename)
             upload = upload_file_to_s3(profile_image)
-
+            user.profile_image = upload['url']
             if "url" not in upload:
                 return {'error': upload['errors']}
-
-            user.profile_image = upload['url']
 
         user.first_name = first_name
         user.last_name = last_name
@@ -83,6 +81,9 @@ def edit_user(id):
         db.session.commit()
         return user.to_dict()
     return {'Message': 'User Information was successfully updated'}
+
+## Delete User
+#   - Exactly like python project delete user 
 
 @user_routes.route('/<int:id>', methods=['Delete'])
 @login_required

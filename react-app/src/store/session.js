@@ -11,6 +11,8 @@ const removeUser = () => ({
 	type: REMOVE_USER,
 });
 
+
+
 export const authenticate = () => async (dispatch) => {
 	const response = await fetch("/api/auth/", {
 		headers: {
@@ -82,6 +84,41 @@ export const signUp = (firstName, lastName, email, city, state, occupation, biog
 	const response = await fetch("/api/auth/signup", {
 		method: "POST",
 		body: newUser
+	});
+
+	if (response.ok) {
+		const data = await response.json();
+		// console.log('RETURN DATA',data)
+		dispatch(setUser(data));
+		return null;
+	} else if (response.status < 500) {
+		const data = await response.json();
+		if (data.errors) {
+			return data.errors;
+		}
+	} else {
+		return ["An error occurred. Please try again."];
+	}
+};
+
+
+export const editUserThunk = (firstName, lastName, email, city, state, occupation, biography, profileImage, password) => async (dispatch) => {
+	console.log('Input Data:', profileImage)
+	const editUser = new FormData();
+	
+	editUser.append('first_name', firstName);
+	editUser.append('last_name', lastName);
+	editUser.append('email', email);
+	editUser.append('city', city);
+	editUser.append('state', state);
+	editUser.append('occupation', occupation);
+	editUser.append('biography', biography);
+	editUser.append('profile_image', profileImage);
+	editUser.append('password', password);
+
+	const response = await fetch(`/api/users/${id}`, {
+		method: "PUT",
+		body: editUser
 	});
 
 	if (response.ok) {
