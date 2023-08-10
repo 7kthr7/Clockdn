@@ -29,7 +29,6 @@ class User(db.Model, UserMixin):
     posts = db.relationship('Post', back_populates='user', cascade='all, delete-orphan')
     comments = db.relationship('Comment', back_populates='user', cascade='all, delete-orphan')
     likes = db.relationship('Like', back_populates='user', cascade='all, delete-orphan')
-    
     followed = db.relationship(
         'User', secondary=connections,
         primaryjoin=(connections.c.follower_id == id),
@@ -61,7 +60,8 @@ class User(db.Model, UserMixin):
     def is_following(self, user):
             return self.followed.filter(connections.c.followed_id == user.id).count() > 0
 
-    def to_dict_connections(self):
+    
+    def to_dict(self):
         return {
             'id': self.id,
             'first_name': self.first_name,
@@ -73,20 +73,18 @@ class User(db.Model, UserMixin):
             'biography': self.biography,
             'profile_image': self.profile_image,
             'created_at': self.created_at.strftime('%B %d, %Y %I:%M %p'),
-            'updated_at': self.updated_at.strftime('%B %d, %Y %I:%M %p')
+            'updated_at': self.updated_at.strftime('%B %d, %Y %I:%M %p'),
+            # 'followers': [follower.to_dict_connections() for follower in self.followed],
+            # 'following': [following.to_dict_connections() for following in self.connections] 
         }
     
-    def to_dict(self):
+   
+
+    def to_dict_connections(self):
         return {
-            'id': self.id,
             'first_name': self.first_name,
             'last_name': self.last_name,
-            'email': self.last_name,
-            'city': self.city,
-            'state': self.state,
             'occupation': self.occupation,
-            'biography': self.biography,
             'profile_image': self.profile_image,
-            'followers': [follower.to_dict_followers() for follower in self.followers],
-            'following': [following.to_dict_followers() for following in self.followed]
+            
         }
