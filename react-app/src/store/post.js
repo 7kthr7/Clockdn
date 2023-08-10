@@ -32,15 +32,17 @@ export const getPostsThunk = () => async (dispatch) => {
 export const createPostThunk = (post) => async (dispatch) => {
     const response = await fetch("/api/post/feed/new", {
         method: 'POST',
-        body: JSON.stringify(post),
-        headers: {
-            'Content-Type': 'application/json'
-        }
+        body: post
+     
     });
+    console.log("---------->", response)
 
     if (response.ok) {
         const data = await response.json();
+        console.log("--------------->", data)
         dispatch(addPost(data));
+         dispatch(getPostsThunk());
+        console.log("-------------------->", data)
     } else {
         const errorData = await response.json();
         if (errorData.errors) {
@@ -50,7 +52,7 @@ export const createPostThunk = (post) => async (dispatch) => {
 };
 
 
-        // dispatch(getPostsThunk());
+       
 
 
 

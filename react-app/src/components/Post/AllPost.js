@@ -13,29 +13,29 @@ const FeedPosts = () => {
 
     useEffect(() => {
         dispatch(getPostsThunk())
-    },[dispatch] )
+    }, [dispatch])
 
 
     return (
         <div>
             <h3> CLOCKDN FEED
-            <OpenModalButton
-                            
-                            buttonText="Start a post"
-                            modalComponent={<CreatePost />}
-                        />
-            {posts.map((post) => (
-                <div key={post.id} className="single-post">
-                    {post.title}
-                    {post.body}
-                    <img
-                  src={post.post_images}
-                  alt={post.post_images}
-                  style={{ width: "400px", height: "400px", marginBottom: "2px", marginLeft: '5px', marginTop:'10px' }}
+                <OpenModalButton
+
+                    buttonText="Start a post"
+                    modalComponent={<CreatePost />}
                 />
-                </div>
-                
-            ))}
+                {posts.reverse().map((post) => (
+                    <div key={post.id} className="single-post">
+                        {post.title}
+                        {post.body}
+                        <img
+                            src={post.post_images}
+                            alt={post.post_images}
+                            style={{ width: "400px", height: "400px", marginBottom: "2px", marginLeft: '5px', marginTop: '10px' }}
+                        />
+                    </div>
+
+                ))}
             </h3>
 
         </div>

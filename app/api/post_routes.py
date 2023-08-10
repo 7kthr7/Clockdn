@@ -47,14 +47,14 @@ def create_post():
                 return  upload['errors']
        
          
-    print("Form data - title:----------->", form.data['title'])
+    print("Form data - title:----------->", form.title.data)
     print("Form data - body:------------>", form.body.data)
 
 
     new_post = Post(
         
-        title=form.data['title'],
-        body=form.data['body'],
+        title=form.title.data,
+        body=form.body.data,
         post_images=upload['url'],  
         user_id=current_user.id,
         created_at=datetime.now(),

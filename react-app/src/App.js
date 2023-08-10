@@ -6,7 +6,7 @@ import LoginFormPage from "./components/LoginFormPage";
 import FeedPosts from "./components/Post/AllPost";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
-// import CreatePost from "./components/Post/CreatePost";
+import CreatePost from "./components/Post/CreatePost";
 
 function App() {
   const dispatch = useDispatch();
