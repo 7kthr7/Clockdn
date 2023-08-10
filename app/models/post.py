@@ -26,6 +26,7 @@ class Post(db.Model):
         return {
             'id': self.id,
             'title': self.title,
+            'body': self.body,
             'comments': [comment.to_dict() for comment in self.comments],
             'likes': [like.to_dict() for like in self.likes], 
             'post_images': self.post_images,

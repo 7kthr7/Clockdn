@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
+from wtforms import StringField, SubmitField, TextAreaField
 from flask_wtf.file import FileField, FileAllowed, FileRequired
 from wtforms.validators import DataRequired
 from ..api.aws_helpers import ALLOWED_EXTENSIONS
@@ -7,7 +7,7 @@ from ..api.aws_helpers import ALLOWED_EXTENSIONS
 
 class PostForm(FlaskForm):
     title = StringField('title')
-    body = StringField('body', validators=[DataRequired()])
+    body = TextAreaField('body', validators=[DataRequired()])
     post_image = FileField('post image', validators=[FileAllowed(list(ALLOWED_EXTENSIONS))])
     submit = SubmitField('Submit')
 
