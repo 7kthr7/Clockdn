@@ -20,6 +20,6 @@ class Like(db.Model):
             'id': self.id,
             'post_id': self.post_id,
             'user_id': self.user_id,
-            'user': self.user.to_dict(),
-            'posts': self.posts.to_dict()
+            # 'user': self.user.to_dict(),
+            # 'posts': self.posts.to_dict()
         }

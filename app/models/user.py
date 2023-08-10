@@ -74,8 +74,8 @@ class User(db.Model, UserMixin):
             'profile_image': self.profile_image,
             'created_at': self.created_at.strftime('%B %d, %Y %I:%M %p'),
             'updated_at': self.updated_at.strftime('%B %d, %Y %I:%M %p'),
-            'followers': [follower.to_dict_connections() for follower in self.followed],
-            'following': [following.to_dict_connections() for following in self.connections] 
+            # 'followers': [follower.to_dict_connections() for follower in self.followed],
+            # 'following': [following.to_dict_connections() for following in self.connections] 
         }
     
    

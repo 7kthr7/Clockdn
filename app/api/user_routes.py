@@ -42,47 +42,6 @@ def user(id):
     return user.to_dict()
 
 
-# @user_routes.route('/update/<int:id>', methods=['PUT'])
-# @login_required
-# def edit_user(id):
-
-#     form = EditUserForm()
-#     print('UPDATE FORM DATA 2222222--->', form.data)
-#     form['csrf_token'].data = request.cookies['csrf_token']
-#     print('UPDATE FORM DATA 111111--->', form.data)
-    
-    
-#     if id > 10 and form.validate_on_submit():
-        
-#         user = User.query.get(id)
-        
-#         image = form.data["profile_image"]
-#         image.filename = get_unique_filename(image.filename)
-#         upload = upload_file_to_s3(image)
-        
-#         if "url" not in upload:
-#             return {'error': upload['errors']}
-
-#         if user.id:
-#             user.first_name=form.data['first_name']
-#             user.last_name=form.data['last_name']
-#             user.email=form.data['email']
-#             user.city=form.data['city']
-#             user.state=form.data['state']
-#             user.occupation=form.data['occupation']
-#             user.biography=form.data['biography']
-#             user.profile_image=upload['url']
-#             user.password=form.data['password']
-
-#             print("------->", user.id, user.first_name)
-            
-#             db.session.commit()
-#             return user.to_dict()
-#         print('UPDATED FORM DATA--->!!!!!!!', form.data)
-        
-#         print('INVALID FORM DATA--->!!!!!!!', form.errors)
-#         return {'errors': validation_errors_to_error_messages(form.errors)}, 401
-#         print('INVALID FORM DATA--->!!!!!!!', form.data)
        
 
 @user_routes.route('/<int:id>', methods=['PUT'])

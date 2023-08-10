@@ -59,7 +59,7 @@ def upgrade():
 
     op.create_table('posts',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('title', sa.String(length=100), nullable=False),
+    sa.Column('title', sa.String(length=100), nullable=True),
     sa.Column('body', sa.String(length=1000), nullable=False),
     sa.Column('post_images', sa.String(), nullable=True),
     sa.Column('created_at', sa.Date(), nullable=True),

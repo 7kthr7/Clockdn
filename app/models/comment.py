@@ -22,10 +22,10 @@ class Comment(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
-            'body': self.comment,
+            'body': self.body,
             'user_id': self.user_id,
             'post_id': self.post_id,
-            'user': self.user.to_dict(),
+            # 'user': self.user.to_dict(),
             'created_at': self.created_at,
             'updated_at': self.updated_at
     }

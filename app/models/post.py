@@ -9,7 +9,7 @@ class Post(db.Model):
         __table_args__ = {'schema': SCHEMA}
         
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(100), nullable=False)
+    title = db.Column(db.String(100), nullable=True)
     body = db.Column(db.String(1000), nullable=False) 
     post_images = db.Column(db.String, nullable=True)
     created_at = db.Column(db.Date, default=datetime.now())
@@ -29,7 +29,7 @@ class Post(db.Model):
             'comments': [comment.to_dict() for comment in self.comments],
             'likes': [like.to_dict() for like in self.likes], 
             'post_images': self.post_images,
-            'user': self.user.to_dict(),
+            # 'user': self.user.to_dict(),
             'user_id': self.user_id,
             'created_at': self.created_at,
             'updated_at': self.updated_at
