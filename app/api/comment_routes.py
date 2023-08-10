@@ -28,11 +28,12 @@ def get_comments(post_id):
 def get_comment_user():
 
 
-    user_id = current_user.id
-    user_comment = Comment.query.filter_by(user_id=user_id).all()
+    
+    user_comment = Comment.query.filter_by(user_id=current_user.id).all()
     posts = [comment.post_id for comment in user_comment]  
     commented_posts = Post.query.filter(Post.id.in_(posts)).all()
     post_details = {post.id: post.to_dict() for post in commented_posts}
+    print("---------->", user_comment)
 
     comments_with_posts = [
         {
@@ -42,7 +43,7 @@ def get_comment_user():
         for comment in user_comment
     ]
 
-    return  comments_with_posts, 200
+    return {'comments_with_posts': comments_with_posts}, 200
 
 
 ## Create comments for a post 
