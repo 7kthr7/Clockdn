@@ -124,20 +124,6 @@ def seed_users():
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     db.session.add(demo)
     db.session.add(Naruto)
     db.session.add(Levi)
