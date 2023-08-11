@@ -27,6 +27,7 @@ function App() {
             <SignupFormPage />
           </Route>
           <Route path="/feed">
+            {/* <CreatePost /> */}
             <FeedPosts />
           </Route>
           {/* <Route path="/feed/new">

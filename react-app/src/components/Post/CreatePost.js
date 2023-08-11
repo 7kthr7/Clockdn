@@ -2,13 +2,11 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { createPostThunk } from '../../store/post';
 import { useModal } from '../../context/Modal';
-import { useHistory } from "react-router-dom";
 
 const CreatePost = () => {
     const dispatch = useDispatch();
-    // const history = useHistory()
     const { closeModal } = useModal();
-    const [title, setTitle] = useState('');
+    const [title, setTitle] = useState(null);
     const [body, setBody] = useState('');
     const [post_images, setPost_images] = useState(null);
 
@@ -21,44 +19,49 @@ const CreatePost = () => {
         newPost.append('post_images', post_images);
 
         dispatch(createPostThunk(newPost));
-        console.log("YAAAAAY IT'S A SUCCESS ----------->", dispatch)
        
-            closeModal();
-            // history.push('/feed')
-
-       
+        closeModal();
     };
 
     return (
         <div>
+              
             <h3>NEW POST FORM</h3>
+
+
             <form method='POST' encType='multipart/form-data' onSubmit={handleSubmit}>
-                <label>
-                    Title
-                    <input
-                        type='text'
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                        required
-                    />
-                </label>
-                <label>
-                    Body
-                    <textarea
-                        value={body}
-                        onChange={(e) => setBody(e.target.value)}
-                        required
-                    />
-                </label>
-                <label>
-                    Image
-                    <input
-                        type='file'
-                        onChange={(e) => setPost_images(e.target.files[0])}
-                        accept='.jpg, .jpeg, .png'
-                        name='post_images'
-                    />
-                </label>
+                
+                    <label>
+                        Body
+                        <textarea
+                            value={body}
+                            onChange={(e) => setBody(e.target.value)}
+                            required
+                        />
+                    </label>
+               
+                
+                    <label>
+                        Title
+                        <textarea
+                            type='text'
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                        />
+                    </label>
+                  
+               
+                {post_images === null ? ( 
+                    <label>
+                        Image
+                        <input
+                            type='file'
+                            onChange={(e) => setPost_images(e.target.files[0])}
+                            accept='.jpg, .jpeg, .png'
+                            name='post_images'
+                        />
+                    </label>
+                ) : null}
                 <button type='submit'>Create Post</button>
             </form>
         </div>
