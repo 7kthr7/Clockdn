@@ -3,17 +3,19 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPostsThunk } from "../../store/post";
 import CreatePost from "./CreatePost";
-import EditPost from "./EditPost";
+// import EditPost from "./EditPost";
 import OpenModalButton from "../OpenModalButton";
 
 import './Allposts.css'
+// import DeletePost from "./DeletePost";
 
 
 const FeedPosts = () => {
     const dispatch = useDispatch()
     const posts = Object.values(useSelector((state) => state.post.allPosts))
     const currentUser = useSelector((state) => state.session.user)
-    const [editPostId, setEditPostId] = useState(null);
+    // const [editPostId, setEditPostId] = useState(null);
+    // const [deletePostId, setDeletePostId] = useState(null);
 
 
     useEffect(() => {
@@ -21,13 +23,20 @@ const FeedPosts = () => {
     }, [dispatch]);
 
 
-    const handleEditClick = (postId) => {
-        setEditPostId(postId);
-    };
+    // const handleEditClick = (postId) => {
+    //     setEditPostId(postId);
+    // };
 
-    const handleCloseEdit = () => {
-        setEditPostId(null);
-    };
+    // const handleCloseEdit = () => {
+    //     setEditPostId(null);
+    // };
+    // const handleDeleteClick = (postId) => {
+    //     setDeletePostId(postId);
+    // };
+
+    // const handleCloseDelete = () => {
+    //     setDeletePostId(null);
+    // };
 
     return (
         <div>
@@ -39,18 +48,29 @@ const FeedPosts = () => {
 
                 {posts.reverse().map((post) => (
                     <div key={post.id} className="single-post">
-                        {post.title}
-                        {post.body}
+                       <div  style={{ border: "2px solid purple"}} >{post.title}</div> 
+
+                       <div  style={{ border: "2px solid blue"}} >{post.body}</div> 
                         <img
                             src={post.post_images}
-                            style={{ width: "400px", height: "400px", marginBottom: "2px", marginLeft: '5px', marginTop: '10px' }}
+                            alt={post.post_images}
+                            style={{ width: "200px", height: "200px", marginBottom: "2px", marginLeft: '5px', marginTop: '10px' }}
                         />
-                        {currentUser && currentUser.id === post.user_id && (
+                        <div>
+                        {/* {currentUser && currentUser.id === post.user_id && (
                             <button onClick={() => handleEditClick(post.id)}>Edit</button>
                         )}
                         {editPostId === post.id && (
                             <EditPost post={post} onClose={handleCloseEdit} />
+                        )} */}
+                        </div>
+                        
+                         {/* {currentUser && currentUser.id === post.user_id && (
+                            <button onClick={() => handleDeleteClick(post.id)}>Delete</button>
                         )}
+                        {deletePostId === post.id && (
+                            <DeletePost post={post} onClose={handleCloseDelete} />
+                        )} */}
                     </div>
                 ))}
             </h3>

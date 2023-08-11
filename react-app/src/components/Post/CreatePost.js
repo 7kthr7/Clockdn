@@ -6,7 +6,7 @@ import { useModal } from '../../context/Modal';
 const CreatePost = () => {
     const dispatch = useDispatch();
     const { closeModal } = useModal();
-    const [title, setTitle] = useState(null);
+    const [title, setTitle] = useState("");
     const [body, setBody] = useState('');
     const [post_images, setPost_images] = useState(null);
 
@@ -51,7 +51,7 @@ const CreatePost = () => {
                     </label>
                   
                
-                {post_images === null ? ( 
+                
                     <label>
                         Image
                         <input
@@ -61,7 +61,7 @@ const CreatePost = () => {
                             name='post_images'
                         />
                     </label>
-                ) : null}
+             
                 <button type='submit'>Create Post</button>
             </form>
         </div>
