@@ -57,7 +57,7 @@ const CreatePost = () => {
                         <input
                             type='file'
                             onChange={(e) => setPost_images(e.target.files[0])}
-                            accept='.jpg, .jpeg, .png'
+                            accept='.jpg, .jpeg, .png, .gif'
                             name='post_images'
                         />
                     </label>
