@@ -25,6 +25,10 @@ class Post(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
+            'first_name':self.user.first_name,
+            'last_name':self.user.last_name,
+            'profile_image':self.user.profile_image,
+            'occupation': self.user.occupation,
             'title': self.title,
             'body': self.body,
             'comments': [comment.to_dict() for comment in self.comments],

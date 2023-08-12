@@ -94,10 +94,12 @@ def create_post():
 
 ### Update post
 
-@post_routes.route('/edit/<int:id>/', methods = ['PUT'])
+@post_routes.route('/<int:id>', methods = ['PUT'])
 @login_required
 
 def update_post(id):
+
+    
     post = Post.query.get(id)
     data = request.form
     title = data.get('title')

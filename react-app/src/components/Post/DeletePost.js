@@ -1,25 +1,26 @@
-// import React, { useState, useEffect } from 'react';
-// import { useDispatch } from 'react-redux';
-// import { deletePostThunk } from '../../store/post';
-// import { useModal } from '../../context/Modal';
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { deletePostThunk, getPostsThunk } from '../../store/post';
+import { useModal } from '../../context/Modal';
 
-// const DeletePost = ({ postId }) => {
+const DeletePost = ({ postId }) => {
 
 
-//     const dispatch = useDispatch()
-//     const { closeModal } = useModal();
+    const dispatch = useDispatch()
+    const { closeModal } = useModal();
 
-//     const handleSubmit = () => {
-//         dispatch(deletePostThunk(postId))
-//         closeModal()
-//     }
+    const handleSubmit = () => {
+        dispatch(deletePostThunk(postId))
+        closeModal()
+        dispatch(getPostsThunk())
+    }
 
-//     return (
-//         <div>
-//             <button onClick={handleSubmit}>Yes Delete</button>
-//             <button onClick={closeModal}>No Don't Delete</button>
-//         </div>
-//     )
+    return (
+        <div>
+            <button onClick={handleSubmit}>Yes Delete</button>
+            <button onClick={closeModal}>No Don't Delete</button>
+        </div>
+    )
 
-// }
-// export default DeletePost
+}
+export default DeletePost

@@ -3,7 +3,7 @@ const LOAD_POSTS = "post/LOAD_POSTS"
 const LOAD_POST = "posts/LOAD_POST"
 const CREATE_POST = "post/CREATE_POST"
 const EDIT_POST = "post/EDIT_POST"
-// const DELETE_POST = 'post/DELETE_POST'
+const DELETE_POST = 'post/DELETE_POST'
 
 //action creator
 
@@ -23,14 +23,14 @@ const addPost = (post) => ({
     post
 })
 
-// const editPost = (postId) => ({
-//     type: EDIT_POST,
-//     postId
-// })
-// const deletePost = (postId) => ({
-//     type: DELETE_POST,
-//     postId
-// })
+const editPost = (postId) => ({
+    type: EDIT_POST,
+    postId
+})
+const deletePost = (postId) => ({
+    type: DELETE_POST,
+    postId
+})
 
 
 //thunk
@@ -83,42 +83,43 @@ export const createPostThunk = (post) => async (dispatch) => {
 
 //pass in the form data 
 
-export const editPostThunk = (postId, FormData) => async (dispatch) => {
-    const response = await fetch(`/api/post/edit/${postId}`, {
+export const editPostThunk = (formData, postId) => async (dispatch) => {
+    const response = await fetch(`/api/post/${postId}`, {
         method: 'PUT',
-        body: FormData
+        body: formData
     });
-    console.log("EDIT ---------->", FormData)
+    console.log("EDIT ----------> RESPONSE", response)
+    console.log("EDIT BODY ---------->", formData)
 
     if (response.ok) {
         const data = await response.json();
-        console.log('UPDATED RESPONSE', data)
-        dispatch(addPost(FormData));
-        return data;
+        console.log('UPDATED RESPONSE --------->', data)
+        dispatch(editPost(data));
+        dispatch(getPostsThunk());
+        console.log('DISPATCH RESPONSE --------->', dispatch(editPost(data)))
+
+        // return data;
     }
    
 };
 
-// export const deletePostThunk = (postId) => async (dispatch) => {
-//     const response = await fetch(`/api/post/${postId}`, {
-//         method: 'DELETE'
-//     })
-//     console.log("---------->", response)
-//     if (response.ok) {
-//         const data = await response.json()
-//         dispatch(deletePost(postId))
-//         console.log("---------------------->", data)
+export const deletePostThunk = (postId) => async (dispatch) => {
+    const response = await fetch(`/api/post/${postId}`, {
+        method: 'DELETE'
+    })
+    console.log("---------->", response)
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(deletePost(postId))
+        dispatch(getPostsThunk());
+        console.log("---------------------->", data)
 
-//         console.log("---------------------------->", data)
+        console.log("---------------------------->", data)
 
 
-//     } else {
-//         const errorData = await response.json();
-//         if (errorData.errors) {
-//             return;
-//         }
-//     }
-// };
+    }
+
+}
 
 
 
@@ -154,6 +155,11 @@ export default function reducer(state = initialState, action) {
             
             const newState = { ...state, allPosts: {...state.allPosts}}
             newState.allPosts[action.post.id] = action.post
+        }
+        case EDIT_POST: {
+            const newState = {...state}
+            newState.allPosts[action.postId] = action.postId
+            return newState
         }
         // case EDIT_POST: {
         //     console.log("ACTION----->",action);
