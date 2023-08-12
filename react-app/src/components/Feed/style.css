@@ -1,0 +1,31 @@
+/* --------------Start-Post-Button--------------- */
+
+.start-post-wrapper {
+    border: 2px solid blue;
+    display: flex;
+    flex-direction: column;
+    height: 100px;
+    width: 400px;
+    align-items:center;
+    margin: 0.8rem 1.6rem 0;
+
+}
+
+.start-post-button button{
+    border-radius: 35px !important;
+    font-size: 1.4rem;
+    background-color: transparent;
+    max-width: none;
+    border: 1px solid;
+    flex-grow: 1;
+    padding-left: 1.6rem;
+    
+}
+
+/* ---------------Home Page --------------- */
+#home-page{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #f3f2ef;
+}

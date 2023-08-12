@@ -1,0 +1,29 @@
+/* -----------Feed Page-------- */
+
+
+.feed-page {
+    position: relative;
+    flex-direction: column;
+    width: 580px;
+    height: auto;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    background-color: #f3f2ef;
+}
+
+
+/* -----------Posts box------------ */
+
+.posts-wrapper{
+    border: 1.5px solid rgb(255, 0, 0);
+   
+}
+
+.individual-post-container{
+    border: 1px solid rgb(0, 0, 0);
+    margin-top: 20px;
+    background-color: white;
+    border-radius: 10px;
+    
+}

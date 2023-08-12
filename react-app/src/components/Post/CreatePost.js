@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { createPostThunk } from '../../store/post';
 import { useModal } from '../../context/Modal';
+// import OpenModalButton from '../OpenModalButton'
+
 
 const CreatePost = () => {
     const dispatch = useDispatch();
@@ -27,19 +29,16 @@ const CreatePost = () => {
         <div>
               
             <h3>NEW POST FORM</h3>
+            {/* <OpenModalButton
+                    buttonText="Start a post"
+                    modalComponent={<CreatePost />}
+                    className = "start-post-button"
+                /> */}
+
 
 
             <form method='POST' encType='multipart/form-data' onSubmit={handleSubmit}>
                 
-                    <label>
-                        Body
-                        <textarea
-                            value={body}
-                            onChange={(e) => setBody(e.target.value)}
-                            required
-                        />
-                    </label>
-               
                 
                     <label>
                         Title
@@ -50,6 +49,15 @@ const CreatePost = () => {
                         />
                     </label>
                   
+               
+                    <label>
+                        Body
+                        <textarea
+                            value={body}
+                            onChange={(e) => setBody(e.target.value)}
+                            required
+                        />
+                    </label>
                
                 
                     <label>

@@ -3,10 +3,10 @@ import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
-import FeedPosts from "./components/Post/AllPost";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
-import CreatePost from "./components/Post/CreatePost";
+import HomePage from "./components/Feed";
 
 function App() {
   const dispatch = useDispatch();
@@ -27,12 +27,11 @@ function App() {
             <SignupFormPage />
           </Route>
           <Route path="/feed">
-            {/* <CreatePost /> */}
-            <FeedPosts />
+          <ProtectedRoute>
+            <HomePage/>
+            </ProtectedRoute>
           </Route>
-          {/* <Route path="/feed/new">
-            <CreatePost />
-          </Route> */}
+         
         </Switch>
       )}
     </>

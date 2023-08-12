@@ -1,172 +1,89 @@
-// // import React, { useState } from 'react';
-// // import { useDispatch, useSelector } from "react-redux";
-// // import { editPostThunk } from '../../store/post';
-// // import { useModal } from '../../context/Modal';
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { editPostThunk, getPostsThunk } from "../../store/post";
+import { useModal } from "../../context/Modal";
+// import { useParams } from 'react-router-dom'
 
 
-// // const EditPost = () => {
-// //     //Get Post from state
-// //     //Bring in imports
-// //     const dispatch = useDispatch()
-// //     const { closeModal } = useModal();
-// //     const posts = Object.values(useSelector((state) => state.post.allPosts))
-// //     const [title, setTitle] = useState(posts.title)
-// //     const [body, setBody] = useState(posts.body)
-// //     const [post_images] = useState(posts.post_images)
+const EditPost = ({ postId }) => {
+// const { postId } = useParams();
 
-    
-// //     const handleSubmit = async (e) => {
-// //         e.preventDefault();
+    const dispatch = useDispatch();
+    const posts = Object.values(useSelector((state) => state.post.allPosts))
 
-// //         const editPost = new FormData();
-// //         editPost.append('title', title);
-// //         editPost.append('body', body);
-// //         editPost.append('post_images', post_images);
+    console.log('ALL POST STATE --->', posts)
 
-// //         dispatch(editPostThunk(editPost));
-       
-// //         closeModal();
-// //     };
+    const postDetail = posts.find((post) => post.id === postId)
 
-// //     return (
-// //         <div>
-              
-// //             <h3>NEW POST FORM</h3>
+    console.log('SINGLE POST FROM ALL POST STATE-->', postDetail)
+    console.log('POST ID AND OCCUPATION OF SINGLE POST -->', postId, postDetail.occupation)
+   
+    const [title, setTitle] = useState(postDetail.title);
+    const [body, setBody] = useState(postDetail.body);
+    const [post_images, setPost_images] = useState(postDetail.post_images);
+    const { closeModal } = useModal();
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
 
-// //             <form method='PUT' encType='multipart/form-data' onSubmit={handleSubmit}>
-                
-// //                     <label>
-// //                         Body
-// //                         <textarea
-// //                             value={body}
-// //                             onChange={(e) => setBody(e.target.value)}
-// //                             required
-// //                         />
-// //                     </label>
-               
-                
-// //                     <label>
-// //                         Title
-// //                         <textarea
-// //                             type='text'
-// //                             value={title}
-// //                             onChange={(e) => setTitle(e.target.value)}
-// //                         />
-// //                     </label>
+        const newPost = new FormData();
+        newPost.append('title', title)
+        newPost.append('body', body)
+        newPost.append('post_images', post_images)
+
+        dispatch(editPostThunk(newPost, postDetail.id));
+        closeModal();
+        dispatch(getPostsThunk())
+    }
+    return (
+                <div>
+                      
+                    <h3>EDIT POST FORM</h3>
                   
-               
-                 
-// //                     <label>
-// //                         Image
-// //                         <input
-// //                             type='file'
-// //                             onChange={(e) => setPost_images(e.target.files[0])}
-// //                             accept='.jpg, .jpeg, .png'
-// //                             name='post_images'
-// //                         />
-// //                     </label>
-                
-// //                 <button type='submit'>Create Post</button>
-// //             </form>
-// //         </div>
-// //     );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// // } 
-// // export default EditPost
-
-
-// import React, { useState, useEffect } from 'react';
-// import { useDispatch } from 'react-redux';
-// import { editPostThunk } from '../../store/post';
-// import { useModal } from '../../context/Modal';
-
-// const EditPost = ({ post }) => {
-//     const dispatch = useDispatch();
-//     const { closeModal } = useModal();
-    
-//     const [title, setTitle] = useState('');
-//     const [body, setBody] = useState('');
-//     const [post_images, setPost_images] = useState(null);
-//     console.log("---------------------------->", post_images)
-
-
-//     useEffect(() => {
-//         setTitle(post.title);
-//         setBody(post.body);
-//         setPost_images([post.post_images])
-//     }, [post]);
-
-//     const handleSubmit = async (e) => {
-//         e.preventDefault();
-
-//         const editPost = new FormData();
-//         editPost.append('title', title);
-//         editPost.append('body', body);
-//         editPost.append('post_images', post_images);
+                    <form method='PUT' encType='multipart/form-data' onSubmit={handleSubmit}>
+                        <div>
+                            {postDetail.first_name} {postDetail.last_name}
+                            <img
+                            src={postDetail.profile_image}
+                            style={{ width: "40px", height: "50px" }}
+                            />
+                        </div>
+                                   
+                            <label>
+                                Title
+                                <textarea
+                                    type='text'
+                                    value={title}
+                                    onChange={(e) => setTitle(e.target.value)}
+                                />
+                            </label>
+                          
+                       
+                            <label>
+                                Body
+                                <textarea
+                                    value={body}
+                                    onChange={(e) => setBody(e.target.value)}
+                                    required
+                                />
+                            </label>
+                       
+                        
+                            <label>
+                                Image
+                                <input
+                                    type='file'
+                                    onChange={(e) => setPost_images(e.target.files[0])}
+                                    accept='.jpg, .jpeg, .png, .gif'
+                                    name='post_images'
+                                />
+                            </label>
+                     
+                        <button type='submit'>Edit Post</button>
+                    </form>
+                </div>
+            );
+        };
         
-// //I think not working becausue what is the post.id?
-//         dispatch(editPostThunk(post.id, editPost));
-//         console.log("---------------------------->", post_images)
-
-//         closeModal();
-//     };
-//     console.log("---------------------------->", post_images)
-
-
-//     return (
-//         <div>
-//             <h3>EDIT POST FORM</h3>
-//             <form method='PUT' encType='multipart/form-data' onSubmit={handleSubmit}>
-//                 <label>
-//                     Body
-//                     <textarea
-//                         value={body}
-//                         onChange={(e) => setBody(e.target.value)}
-//                         required
-//                     />
-//                 </label>
-
-//                 <label>
-//                     Title
-//                     <input
-//                         type='text'
-//                         value={title}
-//                         onChange={(e) => setTitle(e.target.value)}
-//                     />
-//                 </label>
-
-//                 <label>
-//                     Image
-//                     <input
-//                         type='file'
-//                         onChange={(e) => setPost_images(e.target.files[0])}
-//                         accept='.jpg, .jpeg, .png'
-//                         name='post_images'
-//                     />
-//                 </label>
-
-//                 <button type='submit'>Save Changes</button>
-//             </form>
-//         </div>
-//     );
-// };
-
-// export default EditPost;
+        export default EditPost;
