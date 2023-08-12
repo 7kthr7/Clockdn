@@ -9,13 +9,13 @@ from flask_login import login_required, current_user
 like_routes = Blueprint('like', __name__)
 
 
-@like_routes.route('/<int:post_id>')
+@like_routes.route('/')
 @login_required
-def get_like(post_id):
+def get_like():
 
 
-    post_likes = Post.query.get(post_id).likes
-    likes = [like.to_dict() for like in post_likes]
+    all_likes = Like.query.all()
+    likes = [like.to_dict() for like in all_likes]
     
     return likes, 200
 

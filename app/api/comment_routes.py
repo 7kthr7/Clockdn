@@ -11,13 +11,16 @@ comment_routes = Blueprint('comment', __name__)
 
 ## All comments for a post 
 
-@comment_routes.route('/<int:post_id>')
+@comment_routes.route('/')
 @login_required
-def get_comments(post_id):
+def get_comments():
 
 
-    post_comments = Post.query.get(post_id).comments
-    comments = [comment.to_dict() for comment in post_comments]
+    all_comments = Comment.query.all()
+    comments = [comment.to_dict() for comment in all_comments]
+    print('IS THIS EVERYTHING  ----------->', comments)
+
+ 
     
     return comments, 200
 
@@ -38,7 +41,7 @@ def get_comment_user():
     comments_with_posts = [
         {
             'comment_id': comment.id,
-            'post': post_details[comment.post_id]
+            'post': post_details[comment.post]
         }
         for comment in user_comment
     ]

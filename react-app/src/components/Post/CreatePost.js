@@ -31,15 +31,6 @@ const CreatePost = () => {
 
             <form method='POST' encType='multipart/form-data' onSubmit={handleSubmit}>
                 
-                    <label>
-                        Body
-                        <textarea
-                            value={body}
-                            onChange={(e) => setBody(e.target.value)}
-                            required
-                        />
-                    </label>
-               
                 
                     <label>
                         Title
@@ -50,6 +41,15 @@ const CreatePost = () => {
                         />
                     </label>
                   
+               
+                    <label>
+                        Body
+                        <textarea
+                            value={body}
+                            onChange={(e) => setBody(e.target.value)}
+                            required
+                        />
+                    </label>
                
                 
                     <label>

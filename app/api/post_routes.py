@@ -20,6 +20,28 @@ def get_posts():
 
     return post_detail
 
+## - Get posts by Id
+
+@post_routes.route('/<int:post_id>')
+@login_required
+def get_post(post_id):
+    
+    post = Post.query.get(post_id)
+
+    if post:
+        singlePost = post.to_dict()
+
+    user = post.user
+    singlePost['user_id'] = {
+        'user_id': user.id,
+        'first_name': user.first_name,
+        'last_name': user.last_name,
+        'occupation': user.occupation,
+        'profile_image': user.profile_image
+    }
+
+
+    return singlePost
 
 
 ### Create post
@@ -72,34 +94,34 @@ def create_post():
 
 ### Update post
 
-@post_routes.route('/<int:id>/edit', methods=['PUT'])
+@post_routes.route('/edit/<int:id>/', methods = ['PUT'])
 @login_required
-@login_required
+
 def update_post(id):
     post = Post.query.get(id)
     data = request.form
-    post_title = data.get('title')
-    post_body = data.get('body')
-    image = request.files.get('post_images')
+    title = data.get('title')
+    body = data.get('body')
+    post_images = request.files.get('post_images')
 
     if post:
-        if image:
+        if post_images:
             if post.post_images:
                 remove_file_from_s3(post.post_images)
 
-            image.filename = get_unique_filename(image.filename)
-            upload = upload_file_to_s3(image)
+            post_images.filename = get_unique_filename(post_images.filename)
+            upload = upload_file_to_s3(post_images)
 
             if "url" not in upload:
                 return {'error': upload['errors']}
 
             post.post_images = upload['url']
 
-        if post_title:
-            post.title = post_title
+        if title:
+            post.title = title
 
-        if post_body:
-            post.body = post_body
+        if body:
+            post.body = body
 
         db.session.commit()
         return post.to_dict()

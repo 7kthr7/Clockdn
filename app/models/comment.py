@@ -25,7 +25,12 @@ class Comment(db.Model):
             'body': self.body,
             'user_id': self.user_id,
             'post_id': self.post_id,
+            'first_name':self.user.first_name,
+            'last_name':self.user.last_name,
+            'profile_image':self.user.profile_image,
             # 'user': self.user.to_dict(),
             'created_at': self.created_at,
             'updated_at': self.updated_at
     }
+
+ 
