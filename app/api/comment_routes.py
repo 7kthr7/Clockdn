@@ -20,16 +20,7 @@ def get_comments():
     comments = [comment.to_dict() for comment in all_comments]
     print('IS THIS EVERYTHING  ----------->', comments)
 
-    # for comment in comments:
-           
-    #        user_post_comment = comment['user_id']
-    #        user = User.query.get(user_post_comment)
-    #        user_comment = user.to_dict()
-    #        comment['first_name'] = user_comment['first_name']
-    #        comment['last_name'] = user_comment['last_name']
-    #        comment['profile_name'] = user_comment['profile_name']
-
-
+  
      
     
     return comments, 200
@@ -80,7 +71,7 @@ def create_comment(post_id):
 
         db.session.add(new_comment)
         db.session.commit()
-        return jsonify(new_comment.to_dict()), 201
+        return new_comment.to_dict(), 201
     
 
 
@@ -88,33 +79,29 @@ def create_comment(post_id):
 
 ## Update user's comments for a post 
 
+@comment_routes.route('/edit/<int:id>', methods=['PUT'])
+@login_required
+def update_comment(id):
+#     comment = Comment.query.get(comment_id)
+#     data = request.get_json()
 
-# @comment_routes.route('/<int:id>', methods=['PUT'])
-# @login_required
-# def update_comment(id):
-#     edit_comment = Comment.query.get(id)
+#     if comment:
+#         comment.body = data['body']
 
-    
-#     if edit_comment.id != id:
-#             return {'message': 'comment not found'}, 404
-#     if edit_comment.user_id != current_user.id:
-#         return {'message': 'Unauthorized.'}, 401
-    
-
-
-#     form = CommentForm()
-#     form['csrf_token'].data = request.cookies['csrf_token']
-
-
-#     if form.validate_on_submit():
-#         edit_comment.body = form.data['body']
-#         edit_comment.updated_at = datetime.now()
 #         db.session.commit()
+#         return comment.to_dict()
+#     return {'Message': 'Comment was not successfully edited'}
 
-#         return edit_comment.to_dict(), 200
 
-#     return {'message': form.errors}, 401
+    comment = Comment.query.get(id)
+   
+    data = request.form
+    body = data.get('body')
 
+    if body:
+        comment.body = body
+        db.session.commit()
+        return comment.to_dict()
 
 
 
