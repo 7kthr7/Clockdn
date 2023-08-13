@@ -102,6 +102,36 @@ export const signUp = (firstName, lastName, email, city, state, occupation, biog
 };
 
 
+export const editUserThunk = (formData, userId) => async (dispatch) => {
+	console.log('formData --------->', formData)
+	console.log('formData --------->', userId)
+
+    const response = await fetch(`/api/users/${userId}`, {
+        method: 'PUT',
+        body: formData
+    })
+	console.log('RESPONSE --------------->', response)
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(setUser(data));
+        return data
+    }
+
+}
+
+export const deleteUserThunk = (userId) => async (dispatch) => {
+	const response = await fetch(`/api/users/${userId}`, {
+		method: 'DELETE'
+	})
+	if (response.ok) {
+		dispatch(removeUser())
+	}
+	return response
+}
+
+
+
+
 // export const editUserThunk = (firstName, lastName, email, city, state, occupation, biography, profileImage, password) => async (dispatch) => {
 // 	console.log('Input Data:', profileImage)
 // 	const editUser = new FormData();

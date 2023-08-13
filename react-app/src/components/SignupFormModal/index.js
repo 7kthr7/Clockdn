@@ -154,15 +154,15 @@ function SignupFormModal() {
 
 
 				
-				<div className="signup-container">
-					<label htmlFor="profile-image-upload" className="signup-image-label-text">
+				<div >
+					<label >
 					<input
-						id='profile-image-upload'
-						className="signup-form-profile-image"
+						
+						
 						type="file"
 						onChange={(e) => setProfileImage(e.target.files[0])}
 						accept=".jpg, .jpeg, .png"
-						name='profile-image'
+						
 					/>
 					</label>
 				

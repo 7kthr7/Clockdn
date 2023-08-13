@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { deletePostThunk, getPostsThunk } from '../../store/post';
 import { useModal } from '../../context/Modal';

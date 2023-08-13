@@ -1,10 +1,10 @@
 const LOAD_USERS = '/user/LOAD_USERS'
 const LOAD_USER = '/user/LOAD_USER'
-const EDIT_USER = '/user/EDIT_USER'
+// const EDIT_USER = '/user/EDIT_USER'
 
-const getUsers = (users) => ({
+const getUsers = (payload) => ({
     type: LOAD_USERS,
-    users
+    payload
 })
 
 const getUser = (user) => ({
@@ -13,12 +13,10 @@ const getUser = (user) => ({
 
 })
 
-const editUser = (userId) => ({
-    type: EDIT_USER,
-    userId
-})
-
-
+// const editUser = (userId) => ({
+//     type: EDIT_USER,
+//     userId
+// })
 
 
 export const getUserThunk = () => async (dispatch) => {
@@ -27,7 +25,7 @@ export const getUserThunk = () => async (dispatch) => {
     if (response.ok) {
         const data = await response.json();
         dispatch(getUsers(data))
-        return
+        return data
     }
 }
 
@@ -41,18 +39,18 @@ export const getSingleUserThunk = (userId) => async (dispatch) => {
     }
 }
 
-export const editUserThunk = (formData, userId) => async (dispatch) => {
-    const response = await fetch(`/api/users/${userId}`, {
-        method: 'PUT',
-        body: formData
-    })
-    if (response.ok) {
-        const data = await response.json()
-        dispatch(editUser(data));
-        return data
-    }
+// export const editUserThunk = (formData, userId) => async (dispatch) => {
+//     const response = await fetch(`/api/users/${userId}`, {
+//         method: 'PUT',
+//         body: formData
+//     })
+//     if (response.ok) {
+//         const data = await response.json()
+//         dispatch(editUser(data));
+//         return data
+//     }
 
-}
+// }
 
 
 const initialState = {
@@ -65,8 +63,13 @@ const initialState = {
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case LOAD_USERS: {
+            // const newState = { ...state, allUser: {} }
+            // action.users.forEach((user) => {
+            //     newState.allUser[user.id] = user
+            // })
+            // return newState
             const newState = {...state }; 
-            newState.allUser = action.users
+            newState.allUser = action.payload
             return newState
         }
         case LOAD_USER: {
@@ -74,10 +77,10 @@ export default function reducer(state = initialState, action) {
             newState.singleUser = action.user
             return newState
         }
-        case EDIT_USER: {
-            const newState = {...state}
-            newState.allUser[action.userId] = action.userId
-        }
+        // case EDIT_USER: {
+        //     const newState = {...state}
+        //     newState.allUser[action.userId] = action.userId
+        // }
 
         default:
             return state;

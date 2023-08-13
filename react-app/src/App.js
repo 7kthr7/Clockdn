@@ -8,6 +8,8 @@ import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import HomePage from "./components/Feed";
 import AllUser from "./components/ManageUser/AllUser";
+import SingleUser from "./components/ManageUser/UserProfile";
+import UserProfile from "./components/ManageUser/UserProfile";
 
 function App() {
   const dispatch = useDispatch();
@@ -37,6 +39,16 @@ function App() {
             <AllUser/>
             </ProtectedRoute>
           </Route>
+          <Route path="/profile">
+          <ProtectedRoute>
+            <UserProfile/>
+            </ProtectedRoute>
+          </Route>
+          {/* <Route path="/users/:userId">
+          <ProtectedRoute>
+            <SingleUser/>
+            </ProtectedRoute>
+          </Route> */}
          
         </Switch>
       )}
