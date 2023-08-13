@@ -18,7 +18,12 @@ function Navigation({ isLoaded }){
 			{isLoaded && sessionUser && (
 				<li>
 					<NavLink exact to = "/feed"> FEED </NavLink>
+				<li>
+				<NavLink exact to = "/profile"> PROFILE </NavLink>
+					
 				</li>
+				</li>
+			
 
 				
 			)}
