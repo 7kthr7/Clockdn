@@ -8,6 +8,7 @@ import "./style.css"
 
 import { getCommentsThunk } from "../../store/comment";
 import { getLikesThunk } from "../../store/likes";
+import CreateComment from "../Comments/CreateComment";
 
 const PostCard = () => {
     const dispatch = useDispatch()
@@ -28,9 +29,10 @@ const PostCard = () => {
     // Delete Button get's passed here
 
     useEffect(() => {
-        dispatch(getPostsThunk())
+        
         dispatch(getCommentsThunk())
         dispatch(getLikesThunk())
+        dispatch(getPostsThunk())
     }, [dispatch])
     console.log("COMMENTS DISPATCH-------->:", dispatch(getCommentsThunk));
     
@@ -97,12 +99,16 @@ const PostCard = () => {
                                         <p className="coment-user-name"> {comment.first_name} {comment.last_name} </p>
                                         <p className="comment-created-at"> {comment.created_at}</p>
                                         <p className="comment-body"> {comment.body}</p>
+
                                     </div>
                                 ))}
                         </div>
+                        <OpenModalButton buttonText='Comment' modalComponent={<CreateComment postId={post.id}/>} /> 
+
                     </div>
                 ))}
             <div>
+                
                 {/* <OpenModalButton buttonText='Delete Pin' modalComponent={<DeleteSinglePin postId={post.id}/>} /> */}
             </div>
             </div>
