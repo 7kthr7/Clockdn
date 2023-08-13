@@ -14,10 +14,13 @@ function Navigation({ isLoaded }){
 				<NavLink exact to="/">Home</NavLink>
 				{/* <img src={logo} style={{ width: '50px', height: '50px' }} /> */}
 			</li>
-			{isLoaded && (
+			{isLoaded && sessionUser && (
 				<li>
 					<ProfileButton user={sessionUser} />
+					<NavLink exact to = "/feed"> FEED </NavLink>
 				</li>
+
+				
 			)}
 		</ul>
 	);

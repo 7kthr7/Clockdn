@@ -1,13 +1,16 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import OpenModalButton from '../OpenModalButton'
-import { getPostsThunk, getSinglePostThunk } from "../../store/post";
+import { getPostsThunk} from "../../store/post";
 import EditPost from "../Post/EditPost";
 import DeletePost from "../Post/DeletePost";
 import "./style.css"
 
 import { getCommentsThunk } from "../../store/comment";
 import { getLikesThunk } from "../../store/likes";
+import CreateComment from "../Comments/CreateComment";
+import EditComment from "../Comments/EditComment";
+import DeleteComment from "../Comments/DeleteComment";
 
 const PostCard = () => {
     const dispatch = useDispatch()
@@ -28,9 +31,10 @@ const PostCard = () => {
     // Delete Button get's passed here
 
     useEffect(() => {
-        dispatch(getPostsThunk())
+        
         dispatch(getCommentsThunk())
         dispatch(getLikesThunk())
+        dispatch(getPostsThunk())
     }, [dispatch])
     console.log("COMMENTS DISPATCH-------->:", dispatch(getCommentsThunk));
     
@@ -86,9 +90,16 @@ const PostCard = () => {
                             <h1>COMMENTS:</h1>
                             {comments
                                 .filter((comment) => comment.post_id === post.id)
-                                .reverse()
                                 .map((comment) => (
                                     <div key={comment.id} >
+                                        {comment.user_id === user.id && (
+                 <OpenModalButton buttonText='Edit Comment' modalComponent={<EditComment commentId={comment.id}/>} /> 
+
+                )}
+                {comment.user_id === user.id && (
+                 <OpenModalButton buttonText='Delete Comment' modalComponent={<DeleteComment commentId={comment.id}/>} /> 
+
+                )}
                                         <img
                                             src={comment.profile_image}
                                             className="comment-user-profile-picture"
@@ -97,12 +108,16 @@ const PostCard = () => {
                                         <p className="coment-user-name"> {comment.first_name} {comment.last_name} </p>
                                         <p className="comment-created-at"> {comment.created_at}</p>
                                         <p className="comment-body"> {comment.body}</p>
+
                                     </div>
                                 ))}
                         </div>
+                        <OpenModalButton buttonText='Comment' modalComponent={<CreateComment postId={post.id}/>} /> 
+
                     </div>
                 ))}
             <div>
+                
                 {/* <OpenModalButton buttonText='Delete Pin' modalComponent={<DeleteSinglePin postId={post.id}/>} /> */}
             </div>
             </div>

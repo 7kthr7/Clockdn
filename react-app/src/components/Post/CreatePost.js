@@ -12,6 +12,9 @@ const CreatePost = () => {
     const [body, setBody] = useState('');
     const [post_images, setPost_images] = useState(null);
 
+
+    
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 

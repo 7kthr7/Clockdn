@@ -7,6 +7,7 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import HomePage from "./components/Feed";
+import AllUser from "./components/ManageUser/AllUser";
 
 function App() {
   const dispatch = useDispatch();
@@ -29,6 +30,11 @@ function App() {
           <Route path="/feed">
           <ProtectedRoute>
             <HomePage/>
+            </ProtectedRoute>
+          </Route>
+          <Route path="/user">
+          <ProtectedRoute>
+            <AllUser/>
             </ProtectedRoute>
           </Route>
          

@@ -20,7 +20,8 @@ def get_comments():
     comments = [comment.to_dict() for comment in all_comments]
     print('IS THIS EVERYTHING  ----------->', comments)
 
- 
+  
+     
     
     return comments, 200
 
@@ -70,39 +71,37 @@ def create_comment(post_id):
 
         db.session.add(new_comment)
         db.session.commit()
-        return jsonify(new_comment.to_dict()), 201
+        return new_comment.to_dict(), 201
     
+
+
 
 
 ## Update user's comments for a post 
 
-
-@comment_routes.route('/<int:id>', methods=['PUT'])
+@comment_routes.route('/edit/<int:id>', methods=['PUT'])
 @login_required
 def update_comment(id):
-    edit_comment = Comment.query.get(id)
+#     comment = Comment.query.get(comment_id)
+#     data = request.get_json()
 
-    
-    if edit_comment.id != id:
-            return {'message': 'comment not found'}, 404
-    if edit_comment.user_id != current_user.id:
-        return {'message': 'Unauthorized.'}, 401
-    
+#     if comment:
+#         comment.body = data['body']
 
-
-    form = CommentForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
+#         db.session.commit()
+#         return comment.to_dict()
+#     return {'Message': 'Comment was not successfully edited'}
 
 
-    if form.validate_on_submit():
-        edit_comment.body = form.data['body']
-        edit_comment.updated_at = datetime.now()
+    comment = Comment.query.get(id)
+   
+    data = request.form
+    body = data.get('body')
+
+    if body:
+        comment.body = body
         db.session.commit()
-
-        return edit_comment.to_dict(), 200
-
-    return {'message': form.errors}, 401
-
+        return comment.to_dict()
 
 
 
