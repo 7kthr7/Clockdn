@@ -1,25 +1,3 @@
-// import { useDispatch, useSelector } from "react-redux";
-// import { useState } from "react";
-// import { editUserThunk} from "../../store/user";
-// import { useModal } from "../../context/Modal";
-
-// const EditUser = ({ userId }) => {
-//     const dispatch = useDispatch();
-//     const user = Object.values(useSelector((state) => state.user.singleUser))
-
-//  const [firstName, setFirstName] = useState(user.first_name);
-// 	const [lastName, setLastName] = useState(user.last_name);
-// 	const [email, setEmail] = useState(user.email);
-// 	const [city, setCity] = useState(user.city);
-// 	const [state, setState] = useState(user.state);
-// 	const [occupation, setOccupation] = useState(user.occupation);
-// 	const [biography, setBiography] = useState(user.biography);
-// 	const [profileImage, setProfileImage] = useState(user.profile_image);
-
-
-// }
-
-
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { editUserThunk} from "../../store/session";

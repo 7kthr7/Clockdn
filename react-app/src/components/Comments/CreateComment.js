@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createCommentThunk, getCommentsThunk } from '../../store/comment';
 import { useModal } from '../../context/Modal';
 
-
 const CreateComment = ({ postId }) => {
     const dispatch = useDispatch();
     const { closeModal } = useModal()
