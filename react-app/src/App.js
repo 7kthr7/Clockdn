@@ -33,14 +33,14 @@ function App() {
             <HomePage/>
             </ProtectedRoute>
           </Route>
-          <Route path="/user/:userId">
-          <ProtectedRoute>
-            <ViewUserProfile/>
-            </ProtectedRoute>
-          </Route>
           <Route path="/profile">
           <ProtectedRoute>
             <UserProfile/>
+            </ProtectedRoute>
+          </Route>
+          <Route path="/user/:userId">
+          <ProtectedRoute>
+            <ViewUserProfile/>
             </ProtectedRoute>
           </Route>
           {/* <Route path="/users/:userId">

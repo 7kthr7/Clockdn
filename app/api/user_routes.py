@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from flask_login import login_required
+from flask_login import login_required, current_user
 from app.models import User, db
 # from app.forms import EditUserForm
 
@@ -43,12 +43,6 @@ def user(id):
     return user.to_dict()
 
 
-## Edit User
-#   - Similar to sign up
-#   - Keep original input
-#   - Remove images from aws 
- 
-
 @user_routes.route('/<int:id>', methods=['PUT'])
 @login_required
 def edit_user(id):
@@ -83,8 +77,6 @@ def edit_user(id):
         return user.to_dict()
     return {'Message': 'User Information was successfully updated'}
 
-## Delete User
-#   - Exactly like python project delete user 
 
 @user_routes.route('/<int:id>', methods=['Delete'])
 @login_required
@@ -96,3 +88,67 @@ def delete_user(id):
     db.session.commit()
 
     return {'User Successfully Deleted': id}
+
+
+@user_routes.route('/<int:id>/follow', methods=['POST'])
+@login_required
+def follow(id):
+
+    try:
+        user_to_follow = User.query.get(id)
+        
+        # Check if the user exists
+        if not user_to_follow:
+            return {'errors': 'User not found'}, 404
+
+        # Ensure the current user isn't trying to follow themselves
+        if current_user.id == user_to_follow.id:
+            return {'errors': 'You cannot follow yourself'}, 400
+        
+        # Check if the user is already being followed
+        if current_user.is_following(user_to_follow):
+            return {'errors': 'You are already following this user'}, 400
+
+        current_user.follow(user_to_follow)
+        db.session.commit()
+
+        return jsonify({
+            'message': 'Successfully followed the user',
+            'user': current_user.to_dict()
+        })
+
+    except Exception as e:
+        db.session.rollback()
+        return {'errors': 'Error occurred during the follow operation', 'message': str(e)}, 500
+
+
+@user_routes.route('/<int:id>/unfollow', methods=['DELETE'])
+@login_required
+def unfollow(id):
+
+    try:
+        user_to_unfollow = User.query.get(id)
+        
+        # Check if the user exists
+        if not user_to_unfollow:
+            return {'errors': 'User not found'}, 404
+
+        # Ensure the current user isn't trying to unfollow themselves
+        if current_user.id == user_to_unfollow.id:
+            return {'errors': 'You cannot unfollow yourself'}, 400
+        
+        # Check if the user is currently being followed
+        if not current_user.is_following(user_to_unfollow):
+            return {'errors': 'You are not following this user'}, 400
+
+        current_user.unfollow(user_to_unfollow)
+        db.session.commit()
+
+        return jsonify({
+            'message': 'Successfully unfollowed the user',
+            'user': current_user.to_dict()
+        })
+
+    except Exception as e:
+        db.session.rollback()
+        return {'errors': 'Error occurred during the unfollow operation', 'message': str(e)}, 500
