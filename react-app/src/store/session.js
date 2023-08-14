@@ -11,8 +11,6 @@ const removeUser = () => ({
 	type: REMOVE_USER,
 });
 
-
-
 export const authenticate = () => async (dispatch) => {
 	const response = await fetch("/api/auth/", {
 		headers: {
@@ -128,8 +126,6 @@ export const deleteUserThunk = (userId) => async (dispatch) => {
 	}
 	return response
 }
-
-
 
 
 // export const editUserThunk = (firstName, lastName, email, city, state, occupation, biography, profileImage, password) => async (dispatch) => {

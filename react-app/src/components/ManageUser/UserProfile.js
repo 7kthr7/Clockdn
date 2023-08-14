@@ -3,6 +3,8 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import EditProfile from "./EditProfile";
 import OpenModalButton from '../OpenModalButton'
 import DeleteProfile from "./DeleteUser";
+import PostCard from "../PostCard"
+
 
 const UserProfile = () => {
 
@@ -26,6 +28,7 @@ const UserProfile = () => {
              <OpenModalButton buttonText={'Delete User'} modalComponent={<DeleteProfile userId={user.id} />}
             />
 
+{/* <PostCard/> */}
 
 
         </div>

@@ -24,23 +24,36 @@ def get_like():
 @like_routes.route('/user')
 @login_required
 def get_like_user():
-
-
+     
     user_id = current_user.id
-    user_likes = Like.query.filter_by(user_id=user_id).all()
-    posts = [like.post_id for like in user_likes]  
-    liked_posts = Post.query.filter(Post.id.in_(posts)).all()
-    post_details = {post.id: post.to_dict() for post in liked_posts}
+    liked_posts = db.session.query(Like, Post).join(Post, Post.id == Like.post_id).filter(Like.user_id == user_id).all()
 
     likes_with_posts = [
         {
             'like_id': like.id,
-            'post': post_details[like.post_id]
+            'post': post.to_dict()
         }
-        for like in user_likes
+        for like, post in liked_posts
     ]
 
     return {'likes_with_posts': likes_with_posts}, 200
+
+
+    # user_id = current_user.id
+    # user_likes = Like.query.filter_by(user_id=user_id).all()
+    # posts = [like.post_id for like in user_likes]  
+    # liked_posts = Post.query.filter(Post.id.in_(posts)).all()
+    # post_details = {post.id: post.to_dict() for post in liked_posts}
+
+    # likes_with_posts = [
+    #     {
+    #         'like_id': like.id,
+    #         'post': post_details[like.post_id]
+    #     }
+    #     for like in user_likes
+    # ]
+
+    # return {'likes_with_posts': likes_with_posts}, 200
  
 
 @like_routes.route('/<int:post_id>',  methods= ['POST'])

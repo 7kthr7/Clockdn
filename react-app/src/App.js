@@ -7,9 +7,8 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import HomePage from "./components/Feed";
-import AllUser from "./components/ManageUser/AllUser";
-import SingleUser from "./components/ManageUser/UserProfile";
 import UserProfile from "./components/ManageUser/UserProfile";
+import ViewUserProfile from "./components/ManageUser/SingleUser";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,9 +33,9 @@ function App() {
             <HomePage/>
             </ProtectedRoute>
           </Route>
-          <Route path="/user">
+          <Route path="/user/:userId">
           <ProtectedRoute>
-            <AllUser/>
+            <ViewUserProfile/>
             </ProtectedRoute>
           </Route>
           <Route path="/profile">
