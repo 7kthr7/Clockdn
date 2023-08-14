@@ -11,18 +11,18 @@ function Navigation({ isLoaded }){
 	return (
 		<ul>
 			<li>
-				<NavLink exact to="/">Home</NavLink>
+				<NavLink exact to="/feed">Home</NavLink>
 				{/* <img src={logo} style={{ width: '50px', height: '50px' }} /> */}
 			<ProfileButton user={sessionUser} />
 			</li>
 			{isLoaded && sessionUser && (
-				<li>
-					<NavLink exact to = "/feed"> FEED </NavLink>
+				
+	
 				<li>
 				<NavLink exact to = "/profile"> PROFILE </NavLink>
 					
 				</li>
-				</li>
+				
 			
 
 				

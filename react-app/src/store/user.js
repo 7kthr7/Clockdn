@@ -1,86 +1,10 @@
-// const LOAD_USERS = '/user/LOAD_USERS'
-// const LOAD_USER = '/user/LOAD_USER'
-// const LOAD_LIKES = '/user/LOAD_LIKES'
 
-// const getUsers = (payload) => ({
-//     type: LOAD_USERS,
-//     payload
-// })
-
-// const getUser = (user) => ({
-//     type: LOAD_USER,
-//     user
-
-// })
-// const getUserLikes = (likes) => ({
-//     type: LOAD_LIKES,
-//     likes
-
-// })
-
-// export const getUserThunk = () => async (dispatch) => {
-//     const response = await fetch("/api/users/");
-
-//     if (response.ok) {
-//         const data = await response.json();
-//         dispatch(getUsers(data))
-//         return data
-//     }
-// }
-
-// export const getSingleUserThunk = (userId) => async (dispatch) => {
-//     const response = await fetch(`/api/users/${userId}`)
-
-//     if (response.ok) {
-//         const data = await response.json()
-//         dispatch(getUser(data))
-//     }
-// }
-
-// export const getUserLikesThunk = () => async (dispatch) => {
-//     const response = await fetch("/api/like/user")
-
-//     if (response.ok) {
-//         const data = await response.json()
-//         dispatch(getUserLikes(data))
-//     }
-// }
-
-// const initialState = {
-//     allUser: {},
-//     singleUser: {},
-//     userActivity: []
-// }
-
-// export default function reducer(state = initialState, action) {
-//     switch (action.type) {
-//         case LOAD_USERS: {
-//             const newState = {...state }; 
-//             newState.allUser = action.payload
-//             return newState
-//         }
-//         case LOAD_USER: {
-//             const newState = { ...state, allUser: {}, singleUser: {}}
-//             newState.singleUser = action.user
-//             return newState
-//         }
-//         case LOAD_LIKES: {
-//             return {
-//                 ...state,
-//                 userActivity: action.payload.likes
-//             }
-//         }
-
-
-//         default:
-//             return state;
-
-//     }
-// }
 
 const LOAD_USERS = '/user/LOAD_USERS';
 const LOAD_USER = '/user/LOAD_USER';
 const LOAD_LIKES = '/user/LOAD_LIKES';
+const CREATE_FOLLOW = '/user/CREATE_FOLLOW'
+const DELETE_FOLLOW = '/user/DELETE_FOLLOW'
 
 const getUsers = (users) => ({
     type: LOAD_USERS,
@@ -96,6 +20,16 @@ const getUserLikes = (likes) => ({
     type: LOAD_LIKES,
     payload: likes
 });
+
+const followUser = (userId) => ({
+    type: CREATE_FOLLOW,
+    payload: userId
+})
+const unfollowUser = (userId) => ({
+    type: DELETE_FOLLOW,
+    payload: userId
+})
+
 
 export const getUserThunk = () => async (dispatch) => {
     const response = await fetch("/api/users/");
@@ -130,6 +64,34 @@ export const getUserLikesThunk = () => async (dispatch) => {
         console.error('Failed to fetch user likes.');
     }
 };
+
+export const followUserThunk = (userId) => async (dispatch) => {
+    const response = await fetch(`/api/users/${userId}/follow`, {
+        method: 'POST',
+        headers: {
+			"Content-Type": "application/json",
+		},
+        body: userId 
+    })
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(followUser(userId))
+        return data
+    }
+}
+export const unfollowUserThunk = (userId) => async (dispatch) => {
+    const response = await fetch(`/api/users/${userId}/unfollow`, {
+        method: 'DELETE',
+    })
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(unfollowUser(userId))
+        return data
+    }
+}
+
+
+
 
 const initialState = {
     allUser: {},
