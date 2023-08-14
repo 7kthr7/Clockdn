@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
+import HomePage from '../Feed';
 // import logo from '../../Images/Logo.png'
 
 function Navigation({ isLoaded }){
@@ -11,6 +12,7 @@ function Navigation({ isLoaded }){
 	return (
 		<ul>
 			<li>
+				{/* <HomePage/> */}
 				<NavLink exact to="/feed">Home</NavLink>
 				{/* <img src={logo} style={{ width: '50px', height: '50px' }} /> */}
 			<ProfileButton user={sessionUser} />
