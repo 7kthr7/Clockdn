@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useLocation } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
@@ -9,26 +9,33 @@ import Navigation from "./components/Navigation";
 import HomePage from "./components/Feed";
 import UserProfile from "./components/ManageUser/UserProfile";
 import ViewUserProfile from "./components/ManageUser/SingleUser";
+import SplashPage from "./components/SplashPage";
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+  const location = useLocation();
+
+
   useEffect(() => {
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
   return (
-    <>
+    <div className={location.pathname === "/" ? "nav-wrapper splash-page" : "nav-wrapper"}>
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
+           <Route exact path="/">
+              <SplashPage />
+            </Route>
           <Route path="/login" >
             <LoginFormPage />
           </Route>
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          <Route path="/feed">
+          <Route path="/home">
           <ProtectedRoute>
             <HomePage/>
             </ProtectedRoute>
@@ -51,7 +58,7 @@ function App() {
          
         </Switch>
       )}
-    </>
+   </div>
   );
 }
 

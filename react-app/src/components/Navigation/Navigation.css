@@ -1,7 +1,108 @@
-.profile-dropdown {
-  position: absolute;
+
+
+
+/* ------NAVBAR---------- */
+
+.navigation-bar{
+  position: relative;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  display: flex;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  max-width: 1128;
+  align-items: center;
+  padding-top: 12px;
+  padding-bottom: 16px;
+  border: 1px solid blue;
 }
 
-.hidden {
-  display: none;
+/* ---------NAV-RIGHT-SIDE-------*/
+
+.icons-login-container {
+  display: flex;
+  max-width: 1128;
+}
+
+
+/* --------LOGIN/SIGNUP BUTTONS----------- */
+.profile-navigation {
+  display: flex;
+  /* border: 2px blue solid; */
+}
+.profile-navigation button{
+  background-color: transparent;
+  color: #3E8867;
+  height: min-content;
+  min-height: 50px;
+  border-radius: 24px;
+  margin-left: 20px;
+  border: 1px solid #3E8867;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-left: 24px;
+  padding-right: 24px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in, color 0.3s ease-in; 
+}
+#join-now button {
+  border: 0px black;
+}
+.profile-navigation button:hover {
+  background-color: rgba(62, 136, 103, 0.1); 
+  color: #2C684B;  
+}
+
+/* --------NAVIGATION-ICONS */
+.navigation-icons{  
+  display: flex;
+  justify-content: space-evenly;
+  width: 250px;
+  height: auto;
+  border-right: 2px solid rgba(62, 136, 103, 0.3);  
+}
+.material-symbols-sharp {
+  color: #525f58;
+  font-size: 35px; 
+  transition: font-size 0.3s ease-in-out; 
+  cursor: pointer;
+}
+.material-symbols-sharp:hover {
+  font-size: 40px;
+}
+.read-icon{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 50px;
+}
+.read-icon h3{
+  color: #525f58;
+  margin-top: 0px;
+  font-size: 16px;
+  font-weight: 100;
+  font-family: 'monospace';
+  transition: font-size 0.3s ease-in-out; 
+
+}
+
+/* --------LOGO---------- */
+
+.logo {
+  width: 160px;
+  height: auto;
+  cursor: pointer;
+
+}
+
+/* --------MEDIA-QUERIES------- */
+
+@media (max-width: 720px) {
+  .navigation-icons {
+      display: none;
+  }
 }

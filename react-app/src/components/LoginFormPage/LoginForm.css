@@ -1,0 +1,40 @@
+.login-form-splash {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+ 
+}
+
+.login-form-splash input {
+    margin-top: 5px;
+    height: 20px;
+    width: 350px;
+    padding: 10px;
+    border: 1px solid #112515;
+    border-radius: 5px;
+}
+.login-form-splash label {
+    display: flex;
+    flex-direction: column;
+    margin-top: 35px; 
+  }
+
+  .login-form-splash button {
+    margin-top: 55px;
+    width: 350px;
+    height: 45px;
+    padding-top: 15px;
+    padding-bottom: 20px;
+    border-radius: 20px;
+    font-size: 18px;
+    color: white;
+    background-color: #3E8867;
+    border: 0px;
+  }
+
+
+  
