@@ -59,33 +59,32 @@ def create_post():
     upload = {'url': None} 
 
     if form.validate_on_submit():
-            
-            image = form.data["post_images"] 
+        image = form.data["post_images"] 
+        if image:
             image.filename = get_unique_filename(image.filename)
             upload = upload_file_to_s3(image)
             print(upload)
 
             if "url" not in upload:
-                return  upload['errors']
-       
+                return upload['errors']
          
-    print("Form data - title:----------->", form.title.data)
-    print("Form data - body:------------>", form.body.data)
+        print("Form data - title:----------->", form.title.data)
+        print("Form data - body:------------>", form.body.data)
 
-
-    new_post = Post(
-        
-        title=form.title.data,
-        body=form.body.data,
-        post_images=upload['url'],  
-        user_id=current_user.id,
-        created_at=datetime.now(),
-        updated_at=datetime.now()
+        new_post = Post(
+            title=form.title.data,
+            body=form.body.data,
+            post_images=upload['url'] if image else None,  
+            user_id=current_user.id,
+            created_at=datetime.now(),
+            updated_at=datetime.now()
         )
 
-    db.session.add(new_post)
-    db.session.commit()
-    return new_post.to_dict(), 201
+        db.session.add(new_post)
+        db.session.commit()
+        return new_post.to_dict(), 201
+    else:       
+        return {"errors": form.errors}, 400
 
    
 ### User post

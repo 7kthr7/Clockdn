@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { createPostThunk } from '../../store/post';
 import { useModal } from '../../context/Modal';
@@ -11,6 +11,27 @@ const CreatePost = () => {
     const [title, setTitle] = useState("");
     const [body, setBody] = useState('');
     const [post_images, setPost_images] = useState(null);
+    const [errors, setErrors] = useState([]);
+	const [frontendErrors, setFrontendErrors] = useState({})
+
+
+	useEffect(() => {
+		const frontendErrors = {}
+
+		if (!body.length) {
+			frontendErrors.body = "A body is required to make a post"
+		}
+		if (body.length < 500) {
+			frontendErrors.body = "Post must be less than 500 characters"
+		}
+		if (body.length < 5) {
+			frontendErrors.body = "Post must be greater than 5 characters"
+		}
+		
+		setFrontendErrors(frontendErrors)
+	}, [body])
+
+
 
 
     
@@ -41,7 +62,11 @@ const CreatePost = () => {
 
 
             <form method='POST' encType='multipart/form-data' onSubmit={handleSubmit}>
-                
+            <ul>
+					{errors.map((error, idx) => (
+						<li key={idx}>{error}</li>
+					))}
+				</ul>
                 
                     <label>
                         Title
