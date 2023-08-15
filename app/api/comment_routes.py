@@ -53,7 +53,7 @@ def get_comment_user():
 ## Create comments for a post 
 
 @comment_routes.route('/<int:post_id>', methods = ['POST'])
-@login_required
+# @login_required
 def create_comment(post_id):
     form = CommentForm()
     form.csrf_token.data = request.cookies.get('csrf_token')

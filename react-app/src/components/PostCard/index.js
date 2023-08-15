@@ -118,8 +118,8 @@ const PostCard = () => {
 
                                     </div>
                                 ))}
+                                <OpenModalButton buttonText='Comment' modalComponent={<CreateComment postId={post.id} />} />
                         </div>
-                        <OpenModalButton buttonText='Comment' modalComponent={<CreateComment postId={post.id} />} />
 
                     </div>
                 ))}
