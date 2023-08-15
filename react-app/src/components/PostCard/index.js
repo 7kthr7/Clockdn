@@ -68,12 +68,16 @@ const PostCard = () => {
 
                             <p className="post-title"> {post.title}</p>
                             <p className="post-body" >{post.body}</p>
+                            {post.post_images &&(
+
+                            
                             <img
                                 src={post.post_images}
                                 style={{ width: '250px', height: '250px', border: '1px solid pink' }}
                                 alt="Post Images"
                                 className="post-media"
                             />
+                            )}
                         </div>
                         <div className="post-likes" >
                             <LikeToggle postId={post.id} />
@@ -93,34 +97,34 @@ const PostCard = () => {
                         </div>
                         <div className="post-comment-wrapper" >
                             <h1>COMMENTS:</h1>
-                            {comments
-                                .filter((comment) => comment.post_id === post.id)
-                                .map((comment) => (
-                                    <div key={comment.id} >
-                                        {comment.user_id === user.id && (
-                                            <OpenModalButton buttonText='Edit Comment' modalComponent={<EditComment commentId={comment.id} />} />
-
-                                        )}
-                                        {comment.user_id === user.id && (
-                                            <OpenModalButton buttonText='Delete Comment' modalComponent={<DeleteComment commentId={comment.id} />} />
-
-                                        )}
-                                        <div onClick={() => handleProfilePage(comment.user_id)}>
-                                        <img
-                                            src={comment.profile_image}
-                                            className="comment-user-profile-picture"
-                                            style={{ border: '1px solid orange', width: '20px', height: '20px' }}
-                                        />
-                                        <p className="coment-user-name"> {comment.first_name} {comment.last_name} </p>
-                                        </div>
-                                        <p className="comment-created-at"> {comment.created_at}</p>
-                                        <p className="comment-body"> {comment.body}</p>
-
-                                    </div>
-                                ))}
                                 <OpenModalButton buttonText='Comment' modalComponent={<CreateComment postId={post.id} />} />
                         </div>
 
+                        {comments
+                            .filter((comment) => comment.post_id === post.id)
+                            .map((comment) => (
+                                <div key={comment.id} >
+                                    {comment.user_id === user.id && (
+                                        <OpenModalButton buttonText='Edit Comment' modalComponent={<EditComment commentId={comment.id} />} />
+        
+                                    )}
+                                    {comment.user_id === user.id && (
+                                        <OpenModalButton buttonText='Delete Comment' modalComponent={<DeleteComment commentId={comment.id} />} />
+        
+                                    )}
+                                    <div onClick={() => handleProfilePage(comment.user_id)}>
+                                    <img
+                                        src={comment.profile_image}
+                                        className="comment-user-profile-picture"
+                                        style={{ border: '1px solid orange', width: '20px', height: '20px' }}
+                                    />
+                                    <p className="coment-user-name"> {comment.first_name} {comment.last_name} </p>
+                                    </div>
+                                    <p className="comment-created-at"> {comment.created_at}</p>
+                                    <p className="comment-body"> {comment.body}</p>
+        
+                                </div>
+                            ))}
                     </div>
                 ))}
                 <div>

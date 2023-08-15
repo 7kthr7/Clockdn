@@ -10,7 +10,7 @@ class Post(db.Model):
         
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=True)
-    body = db.Column(db.String(1000), nullable=False) 
+    body = db.Column(db.Text(2000), nullable=False) 
     post_images = db.Column(db.String, nullable=True)
     created_at = db.Column(db.Date, default=datetime.now())
     updated_at = db.Column(db.Date, default=datetime.now())

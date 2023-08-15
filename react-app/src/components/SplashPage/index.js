@@ -12,10 +12,10 @@ function SplashPage() {
 
 
   if (sessionUser) return <Redirect to="/home" />;
-  const handleOnClick = async (e) => {
-    e.preventDefault();
-    history.push('/signup')
-  }
+//   const handleOnClick = async (e) => {
+//     e.preventDefault();
+//     history.push('/signup')
+//   }
 
     return (
         <div className="splash-page" >
@@ -26,9 +26,9 @@ function SplashPage() {
                 </div>
                 <div className="log-in-section">
                     <LoginFormPage />
-                    <h2>---------- or ----------</h2>
-                    <button className="join-now-splash"
-                    onClick={handleOnClick}> New to Clockdn? Join now</button>
+                   
+                    {/* <button className="join-now-splash"
+                    onClick={handleOnClick}> New to Clockdn? Join now</button> */}
                 </div>
                 </div>
                 <div className="splash-page-image">
