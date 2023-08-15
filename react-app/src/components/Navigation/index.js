@@ -18,15 +18,18 @@ function Navigation({ isLoaded }) {
 	const handleLogoClick = () => {
 		history.push('/');
 	};
-	const handleIconClick = () => {
+	const handleLogIn = () => {
 		history.push('/login');
+	};
+	const handleSignUp = () => {
+		history.push('/signup');
 	};
 
 
 	return (
 		<nav className='navigation-bar'>
 
-			<NavLink exact to="/" onClick={handleLogoClick}>
+			<NavLink exact to="/" onClick={handleLogIn}>
 				<img
 					src={logo}
 					className='logo'
@@ -39,7 +42,7 @@ function Navigation({ isLoaded }) {
 			<div className='icons-login-container'>
 			
 				
-			<div className='navigation-icons' onClick={handleIconClick}>
+			<div className='navigation-icons' onClick={handleLogIn}>
 				<div className='read-icon'>
 				<span class="material-symbols-sharp">
 					newsmode
@@ -61,20 +64,11 @@ function Navigation({ isLoaded }) {
 			</div>
 			
 			<div className='profile-navigation'>
-				<div id='join-now'>
-			<OpenModalButton
-			 
-              buttonText="Join Now"
-              onItemClick={closeModal}
-              modalComponent={<SignupFormModal />}		  
-            />
+				<div id='join-now' >
+					<button onClick={handleSignUp}>Join Now</button>
+			
 			</div>
-			<OpenModalButton
-              buttonText="Log In"
-              onItemClick={closeModal}
-              modalComponent={<LoginFormModal />}
-			  
-            />
+			<button onClick={handleLogIn}>Log In</button>
 			</div>
 			</div>
 			)}
