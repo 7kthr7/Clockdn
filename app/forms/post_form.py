@@ -7,6 +7,6 @@ from ..api.aws_helpers import ALLOWED_EXTENSIONS
 
 class PostForm(FlaskForm):
     title = StringField('title')
-    body = TextAreaField('body', validators=[DataRequired(), Length(min=5, max=1000)])
+    body = TextAreaField('body', validators=[DataRequired(), Length(min=5, max=2000)])
     post_images = FileField('post_images', validators=[ FileAllowed(list(ALLOWED_EXTENSIONS))])
 

@@ -68,12 +68,16 @@ const PostCard = () => {
 
                             <p className="post-title"> {post.title}</p>
                             <p className="post-body" >{post.body}</p>
+                            {post.post_images &&(
+
+                            
                             <img
                                 src={post.post_images}
                                 style={{ width: '250px', height: '250px', border: '1px solid pink' }}
                                 alt="Post Images"
                                 className="post-media"
                             />
+                            )}
                         </div>
                         <div className="post-likes" >
                             <LikeToggle postId={post.id} />

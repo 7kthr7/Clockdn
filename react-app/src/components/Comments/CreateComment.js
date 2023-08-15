@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createCommentThunk, getCommentsThunk } from '../../store/comment';
 import { useModal } from '../../context/Modal';
@@ -7,7 +7,9 @@ const CreateComment = ({ postId }) => {
     const dispatch = useDispatch();
     const { closeModal } = useModal()
     const [body, setBody] = useState('')
-    const user = useSelector(state => state.session.user)
+    const [frontendErrors, setFrontendErrors] = useState({})
+
+    // const user = useSelector(state => state.session.user)
 
 
     const posts = Object.values(useSelector((state) => state.post.allPosts))
@@ -15,6 +17,23 @@ const CreateComment = ({ postId }) => {
 
     console.log('SINGLE POST FROM ALL POST STATE-->', postDetail)
     console.log('POST ID AND OCCUPATION OF SINGLE POST -->', postId)
+
+    useEffect(() => {
+        const frontendErrors = {}
+
+
+        if (body.length > 1000) {
+            frontendErrors.body = "Comment must be less than 100 characters"
+        }
+        
+
+        setFrontendErrors(frontendErrors)
+    }, [body])
+
+    let disable = body.length === 0 || body.length > 1000;
+
+
+
 
 
     const handleSubmit = async (e) => {
@@ -42,7 +61,7 @@ const CreateComment = ({ postId }) => {
                         />
                     </label>
 
-                    <button type='submit'>Create Comment</button>
+                    {body && <button disabled={disable} type='submit'>Create Comment</button>}
             </form>
 
         </div>
