@@ -74,6 +74,11 @@ function SignupFormModal() {
 			]);
 		}
 	};
+
+	const handleOnClick = async (e) => {
+		e.preventDefault();
+		history.push('/login')
+	  }
 	
 
 	return (
@@ -191,6 +196,9 @@ function SignupFormModal() {
 
 
 				<button type="submit">Sign Up</button>
+				<button className="join-now-splash"
+                    onClick={handleOnClick}>Already have an account? Log-In</button>
+               
 				{(imageLoading)&& <p>Loading...</p>}
 			</form>
 		</>

@@ -3,7 +3,7 @@ import { login } from "../../store/session";
 import * as sessionActions from "../../store/session";
 
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 
 import './LoginForm.css';
@@ -11,7 +11,8 @@ import './LoginForm.css';
 
 function LoginFormPage() {
   const dispatch = useDispatch();
-  const { closeModal } = useModal();
+  // const { closeModal } = useModal();
+  const history = useHistory()
   const sessionUser = useSelector((state) => state.session.user);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -53,6 +54,11 @@ function LoginFormPage() {
       setErrors(data);
     }
   };
+
+  const handleOnClick = async (e) => {
+    e.preventDefault();
+    history.push('/signup')
+  }
 
 
   return (
@@ -99,6 +105,10 @@ function LoginFormPage() {
         <button onClick={demoSignIn}>Demo User</button>
 
         <button type="submit">Log In</button>
+
+        <h2>---------- or ----------</h2>
+        <button className="join-now-splash"
+                    onClick={handleOnClick}> New to Clockdn? Join now</button>
       
         </div>
       </form>
