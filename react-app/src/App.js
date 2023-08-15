@@ -22,7 +22,6 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div className={location.pathname === "/" ? "site-wrapper splash-page" : "site-wrapper"}>
     <div className={location.pathname === "/" ? "nav-wrapper splash-page" : "nav-wrapper"}>
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
@@ -60,7 +59,6 @@ function App() {
         </Switch>
       )}
    </div>
-    </div>
   );
 }
 

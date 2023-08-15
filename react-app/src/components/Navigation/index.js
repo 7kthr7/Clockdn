@@ -26,15 +26,19 @@ function Navigation({ isLoaded }) {
 	return (
 		<nav className='navigation-bar'>
 
-			<NavLink exact to="/home" onClick={handleLogoClick}>
+			<NavLink exact to="/" onClick={handleLogoClick}>
 				<img
 					src={logo}
 					className='logo'
 				/>
 			</NavLink>
 			{!sessionUser && (
+				
+				
 			
 			<div className='icons-login-container'>
+			
+				
 			<div className='navigation-icons' onClick={handleIconClick}>
 				<div className='read-icon'>
 				<span class="material-symbols-sharp">
