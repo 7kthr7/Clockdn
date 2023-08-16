@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createCommentThunk, getCommentsThunk } from '../../store/comment';
 import { useModal } from '../../context/Modal';
 
-const CreateComment = ({ postId }) => {
+const CreateComment = ({ postId, allComments }) => {
     const dispatch = useDispatch();
     const { closeModal } = useModal()
     const [body, setBody] = useState('')
@@ -51,6 +51,7 @@ const CreateComment = ({ postId }) => {
 
     return (
         <div>
+             
             <form method='PUT' encType='multipart/form-data' onSubmit={handleSubmit}>
             <label>
                         Comment

@@ -28,6 +28,7 @@ class Comment(db.Model):
             'first_name':self.user.first_name,
             'last_name':self.user.last_name,
             'profile_image':self.user.profile_image,
+            'occupation': self.user.occupation,
             # 'user': self.user.to_dict(),
             'created_at': self.created_at,
             'updated_at': self.updated_at

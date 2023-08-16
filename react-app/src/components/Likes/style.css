@@ -1,0 +1,13 @@
+
+
+
+/* Style for the not-liked state */
+.material-symbols-sharp.not-liked {
+   color:#2C684B
+  
+}
+
+.material-symbols-sharp.liked {
+    font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 100, 'opsz' 48;
+    color: #2C684B;
+  }

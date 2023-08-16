@@ -1,7 +1,7 @@
 /* --------------Start-Post-Button--------------- */
 
 .start-post-wrapper {
-    border: 2px solid blue;
+    /* border: 2px solid blue; */
     display: flex;
     flex-direction: column;
     height: 100px;

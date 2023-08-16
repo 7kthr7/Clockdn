@@ -2,6 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { editPostThunk, getPostsThunk } from "../../store/post";
 import { useModal } from "../../context/Modal";
+import OpenModalButton from "../OpenModalButton";
+import DeletePost from "./DeletePost";
 // import { useParams } from 'react-router-dom'
 
 
@@ -81,6 +83,9 @@ const EditPost = ({ postId }) => {
                             </label>
                      
                         <button type='submit'>Edit Post</button>
+                        <OpenModalButton buttonText={'Delete Post'}
+                 modalComponent={<DeletePost postId={postDetail.id} />}
+                    />
                     </form>
                 </div>
             );
