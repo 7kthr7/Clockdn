@@ -4,7 +4,7 @@ import { getLikesThunk, createLikeThunk, deleteLikeThunk } from "../../store/lik
 
 const LikeToggle = ({ postId }) => {
     const dispatch = useDispatch();
-    const likes = useSelector(state => state.likes.allLikes);
+    const likes = Object.values(useSelector(state => state.likes.allLikes));
     const currentUser = useSelector(state => state.session.user);
 
     // Check if the user has already liked this post

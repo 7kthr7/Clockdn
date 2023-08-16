@@ -28,4 +28,7 @@
     align-items: center;
     flex-direction: column;
     background-color: #f3f2ef;
+    margin-left: 10px;
+    margin-right: 10px;
+    border: 1px solid black;
 }

@@ -10,6 +10,7 @@ import HomePage from "./components/Feed";
 import UserProfile from "./components/ManageUser/UserProfile";
 import ViewUserProfile from "./components/ManageUser/SingleUser";
 import SplashPage from "./components/SplashPage";
+// import UserActivity from "./components/ManageUser/UserActivity";
 
 function App() {
   const dispatch = useDispatch();
@@ -43,6 +44,7 @@ function App() {
           <Route path="/profile">
           <ProtectedRoute>
             <UserProfile/>
+            {/* <UserActivity/> */}
             </ProtectedRoute>
           </Route>
           <Route path="/user/:userId">

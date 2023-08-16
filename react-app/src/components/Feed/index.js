@@ -1,8 +1,8 @@
 import React from "react"
 import CreatePost from "../Post/CreatePost"
-import PostCard from "../PostCard"
 import OpenModalButton from '../OpenModalButton'
 import './style.css'
+import PostFeed from "../PostCard"
 
 
 
@@ -10,7 +10,7 @@ const HomePage = () => {
 
 
     return (
-        <div id="home-page" style={{ border: "10px solid black" }}>
+        <div id="home-page">
             <div className="start-post-wrapper">
                 <div className="start-post-button">
                     <OpenModalButton
@@ -20,7 +20,7 @@ const HomePage = () => {
                     />
                 </div>
             </div>
-            <PostCard />
+            <PostFeed />
         </div>
     )
 }
