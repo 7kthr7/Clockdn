@@ -1,10 +1,10 @@
 .login-form-splash {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 10px;
     margin-bottom: 20px;
  
 }
@@ -14,7 +14,7 @@
     height: 20px;
     width: 350px;
     padding: 10px;
-    border: 1px solid #112515;
+    /* border: 1px solid #112515; */
     border-radius: 5px;
 }
 .login-form-splash label {
@@ -24,9 +24,9 @@
   }
 
   .login-form-splash button {
-    margin-top: 55px;
+    margin-top: 40px;
     width: 350px;
-    height: 45px;
+    height: 48px;
     padding-top: 15px;
     padding-bottom: 20px;
     border-radius: 20px;
@@ -34,6 +34,11 @@
     color: white;
     background-color: #3E8867;
     border: 0px;
+    cursor: pointer;
+  }
+
+  .login-form-splash button:hover{
+    background-color: rgb(29, 89, 62); 
   }
 
 

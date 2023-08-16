@@ -107,8 +107,9 @@ function LoginFormPage() {
         <button type="submit">Log In</button>
 
         <h2>---------- or ----------</h2>
-        <button className="join-now-splash"
-                    onClick={handleOnClick}> New to Clockdn? Join now</button>
+  
+        <div className="join-now-splash" 
+                    onClick={handleOnClick}> New to Clockdn? Join now</div>
       
         </div>
       </form>

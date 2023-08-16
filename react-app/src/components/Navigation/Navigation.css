@@ -8,18 +8,20 @@
   flex-wrap: wrap;
   justify-content: space-between;
   display: flex;
-  margin-top: 10px;
-  margin-left: 10px;
-  margin-right: 10px;
+  /* margin-top: 10px;
+  margin-left: 40px;
+  margin-right: 40px; */
   max-width: 1128;
   align-items: center;
   padding-top: 12px;
+  padding-left: 30px;
+  padding-right: 30px;
   padding-bottom: 16px;
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
+  background-color: rgb(255, 255, 255);
 }
 
 /* ---------NAV-RIGHT-SIDE-------*/
-
 .icons-login-container {
   display: flex;
   max-width: 1128;
@@ -41,8 +43,8 @@
   border: 1px solid #3E8867;
   padding-top: 12px;
   padding-bottom: 12px;
-  padding-left: 24px;
-  padding-right: 24px;
+  padding-left: 20px;
+  padding-right: 18px;
   text-align: center;
   font-size: 16px;
   font-weight: 600;
@@ -96,12 +98,13 @@
   width: 160px;
   height: auto;
   cursor: pointer;
+ 
 
 }
 
 /* --------MEDIA-QUERIES------- */
 
-@media (max-width: 720px) {
+@media (max-width: 768px) {
   .navigation-icons {
       display: none;
   }
