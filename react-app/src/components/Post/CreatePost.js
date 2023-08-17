@@ -59,6 +59,7 @@ const CreatePost = () => {
   const file = e.target.files[0];
   
   if (file) {
+    setPost_images(file)
     const reader = new FileReader();
     
     reader.onloadend = () => {
@@ -115,6 +116,7 @@ const handleImageRemove = () => {
                         <input
                             className="hidden-input"
                             type='file'
+                            // onChange={(e) => setPost_images(e.target.files[0])}
                             onChange={handleImageChange}
                             accept='.jpg, .jpeg, .png, .gif'
                         // name='post_images'

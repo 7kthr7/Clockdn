@@ -26,7 +26,8 @@ const demoSignIn = async (e) => {
     e.preventDefault();
     const email = "demo_lition@aa.io"
     const password = "password"
-    dispatch(login(email, password));
+    await dispatch(login(email, password));
+    history.push('/')
 }
 
 const handleSubmit = async (e) => {
@@ -50,9 +51,9 @@ const handleSubmit = async (e) => {
 
     if (Object.keys(newFrontendErrors).length === 0) {
         const data = await dispatch(login(email, password));
-        // if (data) {
-        //     setErrors(data);
-        // }
+        if (data) {
+            setErrors(data);
+        }
        
     }
 };
