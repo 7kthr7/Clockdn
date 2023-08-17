@@ -1,0 +1,6 @@
+.start-post-wrapper{
+    border: 1px solid purple;
+    display: flex;
+    flex-direction: row;
+}
+

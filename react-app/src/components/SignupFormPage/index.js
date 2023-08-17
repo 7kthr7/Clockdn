@@ -83,13 +83,16 @@ function SignupFormModal() {
 
 	return (
 		<>
-			<h1>Sign Up</h1>
-			<form  method='POST' encType="multipart/form-data" onSubmit={handleSubmit}>
+			{/* <h1>Sign Up</h1> */}
+			<form className="sign-up-wrapper" method='POST' encType="multipart/form-data" onSubmit={handleSubmit}>
 				<ul>
 					{errors.map((error, idx) => (
 						<li key={idx}>{error}</li>
 					))}
 				</ul>
+				<div className="sign-up-form-splash">
+					<h2>Make every second count</h2>
+					<div className="sign-up-name">
 				<label>
 					First Name
 					<input
@@ -108,6 +111,7 @@ function SignupFormModal() {
 						required
 					/>
 				</label>
+				</div>
 				<label>
 					Email
 					<input
@@ -117,6 +121,7 @@ function SignupFormModal() {
 						required
 					/>
 				</label>
+				<div className="sign-up-location">
 				<label>
 					City
 					<input
@@ -135,6 +140,7 @@ function SignupFormModal() {
 						required
 					/>
 				</label>
+				</div>
 		
 				<label>
 					Occupation
@@ -146,12 +152,12 @@ function SignupFormModal() {
 					/>
 				</label>
 				<label>
-					About Me
-					<input
-						type="text"
+					About Me (Optional)
+					<textarea
+						id="sign-up-biography"
 						value={biography}
 						onChange={(e) => setBiography(e.target.value)}
-						required
+						
 					/>
 				</label>
 
@@ -172,6 +178,7 @@ function SignupFormModal() {
 					</label>
 				
 				</div>
+				<div className="sign-up-password">
 
 				<label>
 					Password
@@ -192,14 +199,17 @@ function SignupFormModal() {
 					/>
 				</label>
 
-			
+				</div>
 
 
 				<button type="submit">Sign Up</button>
-				<button className="join-now-splash"
-                    onClick={handleOnClick}>Already have an account? Log-In</button>
+				<h2>---------- or ----------</h2>
+
+				<div className="join-now-splash"
+                    onClick={handleOnClick}>Already have an account? Log-In</div>
                
 				{(imageLoading)&& <p>Loading...</p>}
+				</div>
 			</form>
 		</>
 	);

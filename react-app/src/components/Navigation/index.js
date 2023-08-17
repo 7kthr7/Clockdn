@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink, useHistory, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import OpenModalButton from "../OpenModalButton";
 import SignupFormModal from "../SignupFormModal";
@@ -12,7 +12,8 @@ import logo from '../../assets/clockdnLogo.png'
 function Navigation({ isLoaded }) {
 	const sessionUser = useSelector(state => state.session.user);
 	const history = useHistory();
-	const { closeModal } = useModal();
+	const location = useLocation();
+
 
 
 	const handleLogoClick = () => {
@@ -24,73 +25,76 @@ function Navigation({ isLoaded }) {
 	const handleSignUp = () => {
 		history.push('/signup');
 	};
+    const isSignupPage = location.pathname === '/signup';
+	const isLoginPage = location.pathname === '/login';
+
+    const navClassName = isSignupPage || isLoginPage ? 'navigation-bar signup-nav' : 'navigation-bar';
 
 
 	return (
-		<nav className='navigation-bar'>
+        <nav className={navClassName}>
+            <NavLink exact to="/" onClick={handleLogIn}>
+                <img
+                    src={logo}
+                    className='logo'
+                />
+            </NavLink>
 
-			<NavLink exact to="/" onClick={handleLogIn}>
-				<img
-					src={logo}
-					className='logo'
-				/>
-			</NavLink>
-			{!sessionUser && (
-				
-				
-			
-			<div className='icons-login-container'>
-			
-				
-			<div className='navigation-icons' onClick={handleLogIn}>
-				<div className='read-icon'>
-				<span class="material-symbols-sharp">
-					newsmode
-				</span>
-				<h3>read</h3>
-				</div>
-				<div className='read-icon'>
-				<span class="material-symbols-sharp">
-					edit_square
-				</span>
-				<h3>write</h3>
-				</div>
-				<div className='read-icon'>
-				<span class="material-symbols-sharp">
-					diversity_3
-				</span>
-				<h3>connect</h3>
-				</div>
-			</div>
-			
-			<div className='profile-navigation'>
-				<div id='join-now' >
-					<button onClick={handleSignUp}>Join Now</button>
-			
-			</div>
-			<button onClick={handleLogIn}>Log In</button>
-			</div>
-			</div>
-			)}
-			
+            {!isSignupPage && !isLoginPage && (
+                <>
+                    {!sessionUser && (
+                        <div className='icons-login-container'>
+                            <div className='navigation-icons' onClick={handleLogIn}>
+                                <div className='read-icon'>
+                                    <span class="material-symbols-sharp">
+                                        newsmode
+                                    </span>
+                                    <h3>read</h3>
+                                </div>
+                                <div className='read-icon'>
+                                    <span class="material-symbols-sharp">
+                                        edit_square
+                                    </span>
+                                    <h3>write</h3>
+                                </div>
+                                <div className='read-icon'>
+                                    <span class="material-symbols-sharp">
+                                        diversity_3
+                                    </span>
+                                    <h3>connect</h3>
+                                </div>
+                            </div>
+                            <div className='profile-navigation'>
+                                <div id='join-now' >
+                                    <button onClick={handleSignUp}>Join Now</button>
+                                </div>
+                                <button onClick={handleLogIn}>Log In</button>
+                            </div>
+                        </div>
+                    )}
+                    {isLoaded && sessionUser && (
+                        <>
+                            <div className='search-bar-navigation'>
+                            <ProfileButton user={sessionUser} />
 
-			{isLoaded && sessionUser && (
-				<>
-				
-		 <ProfileButton user={sessionUser} /> 
-				
-				
-				<NavLink exact to="/profile"> PROFILE </NavLink>
+                            </div>
+                            <div className='search-nav' >
+                             <label >
+                    
+                    <input
+                    placeholder='search connections'
+                        
+                    />
+                </label>
+                </div>
 
-
-				</>
-
-
-
-			)}
-		</nav>
-
-	);
+                            </>
+                    )}
+                    
+                </>
+            )}
+        </nav>
+    );
 }
 
 export default Navigation;

@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { createPostThunk } from '../../store/post';
 import { useModal } from '../../context/Modal';
 // import OpenModalButton from '../OpenModalButton'
+import './CreatePost.css'
 
 
 const CreatePost = () => {
@@ -50,7 +51,7 @@ const CreatePost = () => {
     };
 
     return (
-        <div>
+        <div className='create-post-wrapper'>
 
             <h3>NEW POST FORM</h3>
             {/* <OpenModalButton
