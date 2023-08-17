@@ -1,23 +1,23 @@
 /* ------NAVBAR---------- */
 
+
 .navigation-bar {
+  /* border: 2px blue solid; */
   background-color: white;
   /* position: relative; */
   position: sticky;
-  top: 0;
   flex-wrap: wrap;
   justify-content: space-between;
   display: flex;
-  /* margin-top: 10px;
-  margin-left: 40px;
+  top: 0;
+  margin-top: -8px;
+  /* margin-left: 40px;
   margin-right: 40px; */
   max-width: 1128;
   align-items: center;
   padding-top: 8px;
-  /* padding-left: 30px; */
-  padding-right: 30px;
-  padding-bottom: 6px;
-  z-index: 1000;
+  padding-bottom: 0px;
+  z-index: 999;
   /* border: 1px solid #f3f2ef; */
   /* background-color: rgb(255, 255, 255); */
 }
@@ -45,7 +45,7 @@
 border: .5px solid black;
 border-radius: 6px;
 height: 30px;
-width: 400px;
+width: 320px;
 /* position: fixed; */
 /* position: relative; */
 
@@ -312,4 +312,22 @@ top: 90%;
   .navigation-icons {
     display: none;
   }
+}
+
+@media (max-width: 990px) {
+  .search-nav {
+    width: 10%;
+  }
+}
+
+@media (max-width: 850px) {
+  .search-nav input {
+    display: none;
+    
+  }
+}
+
+@media (max-width: 960px) {
+  .search-nav input {
+width: 250px;  }
 }

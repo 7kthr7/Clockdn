@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createCommentThunk, getCommentsThunk } from '../../store/comment';
 import { useModal } from '../../context/Modal';
+import './CreateComment.css'
+
 
 const CreateComment = ({ postId, allComments }) => {
     const dispatch = useDispatch();
@@ -50,23 +52,22 @@ const CreateComment = ({ postId, allComments }) => {
     };
 
     return (
-        <div>
-             
+        <div className="comment-form-wrapper">
             <form method='PUT' encType='multipart/form-data' onSubmit={handleSubmit}>
-            <label>
-                        Comment
-                        <textarea
-                            type='text'
-                            value={body}
-                            onChange={(e) => setBody(e.target.value)}
-                        />
-                    </label>
-
-                    {body && <button disabled={disable} type='submit'>Create Comment</button>}
+                <label className="comment-label">
+                    Comment
+                    <textarea
+                        className="comment-textarea"
+                        type='text'
+                        value={body}
+                        onChange={(e) => setBody(e.target.value)}
+                    />
+                </label>
+    
+                {body && <button disabled={disable} className="submit-comment" type='submit'>Create Comment</button>}
             </form>
-
         </div>
-    )
+    );
 
 }
 export default CreateComment

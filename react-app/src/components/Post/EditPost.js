@@ -39,18 +39,19 @@ const EditPost = ({ postId }) => {
         dispatch(getPostsThunk())
     }
     return (
-                <div>
+                <div className='create-post-wrapper'>
                       
                     <h3>EDIT POST FORM</h3>
                   
                     <form method='PUT' encType='multipart/form-data' onSubmit={handleSubmit}>
-                        <div>
+                        <div className='create-post-user'>
                             {postDetail.first_name} {postDetail.last_name}
                             <img
                             src={postDetail.profile_image}
                             style={{ width: "40px", height: "50px" }}
                             />
                         </div>
+                        <div className='form-content'>
                                    
                             <label>
                                 Title
@@ -86,6 +87,7 @@ const EditPost = ({ postId }) => {
                         <OpenModalButton buttonText={'Delete Post'}
                  modalComponent={<DeletePost postId={postDetail.id} />}
                     />
+                    </div>
                     </form>
                 </div>
             );

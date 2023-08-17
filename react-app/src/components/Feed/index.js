@@ -24,14 +24,44 @@ const HomePage = () => {
                         modalComponent={<CreatePost />}
                     />
                 </div>
-                <span className="material-symbols-outlined">image</span>
+                <div id="pencil-icon">
                 <span className="material-symbols-outlined">edit</span>
+                </div>
+                {/* <div>
+                <span className="material-symbols-outlined">image</span>
+                </div> */}
             </div>
     
             <div className="content-row">
                 <div className="left-section">
-                    <h3>User Profile</h3>
+                    <div className="left-section-top">
+                    <img 
+                    alt="Background Image"
+                    />
+                    <img
+                    src={user.profile_image}
+                    style={{ width: "100px", height: "100px" }}  
+                    />
+                    <h3>{user.first_name}{user.last_name}</h3>
+                    <p>{user.occupation}</p>
+                    </div>
+                    <div className="left-section-middle">
+                        {/* {user.following} */}
+
+
+                    </div>
+                
+                
+                
+                
                 </div>
+
+
+
+
+
+
+
                 <div className="center-feed">
                     <PostFeed />
                 </div>

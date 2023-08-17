@@ -21,39 +21,41 @@ function LoginFormPage() {
 
 
   
-  useEffect(() => {
-    const frontendErrors = {}
-    
-    const email_validation = email.split("").find((el) => el === "@")
-    
-    if (!email_validation) {
-      frontendErrors.email = "Email required to log in."
-    }
-    if (!password) {
-      frontendErrors.password = "Password is required to log in."
-    }
-    
-    setFrontendErrors(frontendErrors)
-  }, [email, password])
-  
-  if (sessionUser) return <Redirect to="/" />;
 
-
-  const demoSignIn = async (e) => {
+const demoSignIn = async (e) => {
     e.preventDefault();
     const email = "demo_lition@aa.io"
     const password = "password"
-    dispatch(login(email, password ));
-     
-  }
+    dispatch(login(email, password));
+}
 
-  const handleSubmit = async (e) => {
+const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = await dispatch(login(email, password));
-    if (data) {
-      setErrors(data);
+
+    const newFrontendErrors = {}; // Temporary error object
+    
+    const email_validation = email.split("").find((el) => el === "@");
+    
+    if (!email) {
+        newFrontendErrors.email = "The email or password entered are invalid.";
     }
-  };
+    if (!email_validation) {
+        newFrontendErrors.email = "The email or password entered are invalid.";
+    }
+    if (!password) {
+        newFrontendErrors.password = "The email or password entered are invalid.";
+    }
+
+    setFrontendErrors(newFrontendErrors); 
+
+    if (Object.keys(newFrontendErrors).length === 0) {
+        const data = await dispatch(login(email, password));
+        // if (data) {
+        //     setErrors(data);
+        // }
+       
+    }
+};
 
   const handleOnClick = async (e) => {
     e.preventDefault();
@@ -65,12 +67,9 @@ function LoginFormPage() {
     <>
       {/* <h1>Log In</h1> */}
       <form onSubmit={handleSubmit}>
-        {/* <ul>
-          {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
-          ))}
-        </ul> */}
+        
         <div className="login-form-splash">
+        
        
 
         <label>
@@ -91,25 +90,26 @@ function LoginFormPage() {
             required
           />
         </label>
+
         <div className='errors-and-login'>
-          {frontendErrors.email && email.length > 0 && (
+          {frontendErrors.email && email.length < 0 && (
             <p className='on-submit-errors'>{frontendErrors.email}</p>
-          )}
+            )}
           {frontendErrors.password && password.length > 0 && (
             <p className='on-submit-errors'>{frontendErrors.password}</p>
-          )}
-          <p>
-            {errors.map((error, idx) => (
-              <p className='on-submit-errors' key={idx}>{error}</p>
-            ))}
-          </p>
+            )}
+          {errors.length ? (
+            <span>
+          The email or password entered are invalid.
+          </span>
+        ) : null}
+         
         </div>
+  
         <button onClick={demoSignIn}>Demo User</button>
-
         <button type="submit">Log In</button>
 
         <h2>---------- or ----------</h2>
-  
         <div className="join-now-splash" 
                     onClick={handleOnClick}> New to Clockdn? Join now</div>
       

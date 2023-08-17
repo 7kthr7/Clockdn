@@ -1,15 +1,16 @@
 /* --------------Start-Post-Button--------------- */
 
 .start-post-wrapper {
-    border: 2px solid blue;
+    border: .5px solid rgba(0, 0, 0, 0.204);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: row;
-    height: 120px;
+    height: 100px;
     width: 450px;
-    margin-top: 18px;
+    margin-top: 10px;
     align-items:center;
     background-color: white;
-    border-radius: 20px;
+    border-radius: 10px;
 
 }
 .start-post-image img{
@@ -18,10 +19,10 @@
     object-fit: cover;
     border-radius: 100%;
     margin-left: 10px;
-    margin-top: 12px;
+    margin-top: -28px;
 }
 
-/* .start-post-button button{
+.start-post-button button{
     border-radius: 35px;
     width: 350px;
     height: 50px;
@@ -31,49 +32,40 @@
     flex-grow: 1;
     cursor: pointer;
     margin-left: 10px;
-    margin-top: 14px;
+    margin-top: -22px;
+    margin-bottom: 18px;
     text-align: left;
-    padding-left: 20px;
+    padding-left: 40px;
 
     
-} */
+}
 
 /* ---------------Home Page --------------- */
-/* #home-page{
+#home-page{
     display: flex;
     align-items: center;
     flex: 1 30px;
     flex-direction: column;
     background-color: #f3f2ef;
     width: 100%;
-    margin-left: 10px;
-    margin-right: 10px;
-    border: 1px solid black;
-} */
+}
 
 /* ---------------left-section --------------- */
 
-/* .left-section{
-    border: 1px black solid;
-    height: 400px;
-    position: absolute;;
-} */
 
 #home-page {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center; /* This centers the start-post-wrapper */
-    padding: 20px; /* You can adjust as per your needs */
     background-color: #f3f2ef ;
 }
 
-.start-post-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 80%; /* Adjust as per your needs */
-    margin-bottom: 20px; /* Spacing between start-post-wrapper and the content row */
+#pencil-icon{
+    position: absolute;
+    margin-left: 80px;
+    margin-bottom: 28px;
+    transform: scaleX(-1);
 }
 
 .content-row {
@@ -89,5 +81,13 @@
 }
 
 .center-feed {
-    /* flex: 1;  */
+    flex: 1; 
+
 }
+.left-section-top{
+    border-bottom: 1px solid darkblue;
+}
+
+
+
+

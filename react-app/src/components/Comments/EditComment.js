@@ -32,18 +32,19 @@ const EditComment = ({ commentId }) => {
     };
 
     return (
-        <div>
+        <div className="comment-form-wrapper">
             <form method='PUT' encType='multipart/form-data' onSubmit={handleSubmit}>
-            <label>
+            <label className="comment-label">
                         Comment
                         <textarea
+                        className="comment-textarea"
                             type='text'
                             value={body}
                             onChange={(e) => setBody(e.target.value)}
                         />
                     </label>
 
-                    <button type='submit'>Edit Comment</button>
+                     <button className="submit-comment" type='submit'>Edit your Comment</button>
             </form>
 
         </div>
