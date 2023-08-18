@@ -15,7 +15,7 @@ const HomePage = () => {
     return (
         <div id="home-page">
             
-            {/* <div className="start-post-wrapper">
+            <div className="start-post-wrapper">
                 <div className="start-post-image">
                     <img src={user.profile_image} alt="Profile" />
                 </div>
@@ -27,36 +27,39 @@ const HomePage = () => {
                 </div>
                 <div id="pencil-icon">
                 <span className="material-symbols-outlined">edit</span>
-                </div> */}
+                </div>
                 {/* <div>
                 <span className="material-symbols-outlined">image</span>
                 </div> */}
+                </div>
             
     
-            {/* <div className="content-row">
+            <div className="content-row">
                 <div className="left-section">
                     
                     
-                    <div className="left-section-top">
-                        <div id="left-background-image">
+                <div className="left-section-top">
+                    <div id="left-background-image">
                     <img 
                     
-                    alt="Background Image"
+                    // alt="Background Image"
                     />
-                    </div>
-                    <div className="left-profile-image">
+                </div>
+                <div className="left-profile-image">
                     <img
                     src={user.profile_image}
                      
                     />
 
-                    </div>
+                </div>
                     <h3>{user.first_name}{user.last_name}</h3>
                     <p>{user.occupation}</p>
                     </div>
-                     */}
+                </div>
+                </div>
                     
-{/*                     
+                    
+                    
                     <div className="left-section-middle">
 
 
@@ -65,7 +68,7 @@ const HomePage = () => {
                 
                 
                 
-                </div> */}
+               
 
 
 
@@ -76,10 +79,39 @@ const HomePage = () => {
                 <div className="center-feed">
                     <PostFeed />
                 </div>
-                {/* <div className="right-section">
-                <h3>News Article</h3>
+
+
+
+                <div className="right-section">
+                    
+                    
+                    <div className="news-articles">
+                <h3>Clockdn News</h3>
+                <li>
+                    New's link One
+                </li>
+                <li>
+                    New's Link two
+                </li>
+                <li>
+                    New's Link three
+                </li>
+                <li>
+                    New's Link four
+                </li>
+                <li>
+                    New's Link five
+                </li>
                 </div>
-            </div> */}
+                
+                
+                
+                
+                <div className="right-section-two">
+                    <h3> SECTION TWO </h3>
+                </div>
+                </div>
+            
         </div>
     );
     

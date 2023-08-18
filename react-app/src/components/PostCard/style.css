@@ -79,7 +79,6 @@
     cursor: pointer;
     color: #000000bd;
     width: fit-content;
-    border: 1px solid green;
 }
 
 .post-user-name:hover {
