@@ -14,6 +14,7 @@ const HomePage = () => {
 
     return (
         <div id="home-page">
+            
             <div className="start-post-wrapper">
                 <div className="start-post-image">
                     <img src={user.profile_image} alt="Profile" />
@@ -34,17 +35,28 @@ const HomePage = () => {
     
             <div className="content-row">
                 <div className="left-section">
+                    
+                    
                     <div className="left-section-top">
+                        <div id="left-background-image">
                     <img 
+                    
                     alt="Background Image"
                     />
+                    </div>
+                    <div className="left-profile-image">
                     <img
                     src={user.profile_image}
-                    style={{ width: "100px", height: "100px" }}  
+                     
                     />
+
+                    </div>
                     <h3>{user.first_name}{user.last_name}</h3>
                     <p>{user.occupation}</p>
                     </div>
+                    
+                    
+                    
                     <div className="left-section-middle">
                         {/* {user.following} */}
 

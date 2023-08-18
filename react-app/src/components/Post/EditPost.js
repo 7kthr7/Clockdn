@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
-import { editPostThunk, getPostsThunk } from "../../store/post";
+import { useState, useRef, useEffect } from "react";
+import { editPostThunk} from "../../store/post";
 import { useModal } from "../../context/Modal";
 import OpenModalButton from "../OpenModalButton";
 import DeletePost from "./DeletePost";
@@ -25,44 +25,56 @@ const EditPost = ({ postId }) => {
     const [body, setBody] = useState(postDetail.body);
     const [post_images, setPost_images] = useState(postDetail.post_images);
     const [imagePreview, setImagePreview] = useState(postDetail.post_images);
-    const [removeImageFlag, setRemoveImageFlag] = useState(false);
+    const { closeModal } = useModal()
+    const imageInputRef = useRef(null);
+    const fileReader = new FileReader();
 
+    useEffect(() => {
+        // Cleanup FileReader to prevent memory leaks
+        return () => {
+            fileReader.abort();
+        };
+    }, []);
 
-    const { closeModal } = useModal();
+    fileReader.onloadend = () => {
+        setImagePreview(fileReader.result);
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-
         const newPost = new FormData();
-        newPost.append('title', title)
-        newPost.append('body', body)
-        newPost.append('post_images', post_images)
+        newPost.append('title', title);
+        newPost.append('body', body);
+        if (post_images !== null) {
+            newPost.append('post_images', post_images);
+        }
 
-
-        dispatch(editPostThunk(newPost, postDetail.id));
-        closeModal();
-        dispatch(getPostsThunk())
+        // Handle potential error during dispatch
+        try {
+            await dispatch(editPostThunk(newPost, postDetail.id));
+            closeModal();
+            // Removed getPostsThunk() for efficiency
+        } catch (error) {
+            console.error("Failed to edit post:", error);
+        }
     }
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
-
         if (file) {
-            const reader = new FileReader();
-
-            reader.onloadend = () => {
-                setImagePreview(reader.result);
-            }
-
-            reader.readAsDataURL(file);
+            setPost_images(file);
+            fileReader.readAsDataURL(file);
         }
     };
 
     const handleImageRemove = () => {
-        setPost_images(null);
+        setPost_images("remove_image");
         setImagePreview(null);
-
+        // Reset the input field
+        if (imageInputRef.current) {
+            imageInputRef.current.value = '';
+        }
     };
 
 
@@ -104,14 +116,14 @@ const EditPost = ({ postId }) => {
 
                         <label>
 
-                            <input
-                                className="hidden-input"
-                                type='file'
-                                // onChange={(e) => setPost_images(e.target.files[0])}
-                                onChange={handleImageChange}
-                                accept='.jpg, .jpeg, .png, .gif'
-                            // name='post_images'
-                            />
+                        <input
+                            ref={imageInputRef}
+                            className="hidden-input"
+                            type='file'
+                            onChange={handleImageChange}
+                            accept='.jpg, .jpeg, .png, .gif'
+                            aria-label="Upload image"
+                        />
                             <span
                                 className="material-symbols-outlined"
                                 onClick={() => document.querySelector('.hidden-input')}
@@ -123,8 +135,7 @@ const EditPost = ({ postId }) => {
                         {imagePreview && (
                             <>
                                 <img src={imagePreview} alt="Preview" />
-                                <button id='remove-image-button' onClick={handleImageRemove}>X</button>
-                            </>
+                                <button id='remove-image-button' onClick={handleImageRemove} aria-label="Remove image">X</button>                            </>
                         )}
 
                         <div className="edit-form-button" >
