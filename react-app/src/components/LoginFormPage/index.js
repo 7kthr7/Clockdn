@@ -50,7 +50,7 @@ const handleSubmit = async (e) => {
     setFrontendErrors(newFrontendErrors); 
 
     if (Object.keys(newFrontendErrors).length === 0) {
-        const data = await dispatch(login(email, password));
+        const data = dispatch(login(email, password));
         if (data) {
             setErrors(data);
         }

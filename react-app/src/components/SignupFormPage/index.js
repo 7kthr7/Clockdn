@@ -57,8 +57,8 @@ function SignupFormModal() {
 		if (password.length < 6) {
 			newFrontendErrors.password = "Password must be at least 6 characters"
 		}
-		if (confirmPassword.length < 6) {
-			newFrontendErrors.confirmPassword = "Confirm Password is required"
+		if (confirmPassword != password) {
+			newFrontendErrors.confirmPassword = "Password must match"
 		}
 		setFrontendErrors(newFrontendErrors)
 
@@ -90,17 +90,25 @@ function SignupFormModal() {
 				</ul>
 				<div className="sign-up-form-splash">
 					<h2>Make every second count</h2>
+					{frontendErrors.firstName && <p className='on-submit-errors'>{frontendErrors.firstName}</p>}
+					{frontendErrors.lastName &&  <p className='on-submit-errors'>{frontendErrors.lastName}</p>}
+					{frontendErrors.city &&  <p className='on-submit-errors'>{frontendErrors.city}</p>}
+					{frontendErrors.state &&  <p className='on-submit-errors'>{frontendErrors.state}</p>}
+					{frontendErrors.password &&  <p className='on-submit-errors'>{frontendErrors.password}</p>}
+					{frontendErrors.confirmPassword &&  <p className='on-submit-errors'>{frontendErrors.confirmPassword}</p>}
+					{frontendErrors.email &&  <p className='on-submit-errors'>{frontendErrors.email}</p>}
+
 					<div className="sign-up-name">
 						<label>
 							First Name
+
 							<input
 								type="text"
 								value={firstName}
 								onChange={(e) => setFirstName(e.target.value)}
-								required
+						
 							/>
 						</label>
-						{frontendErrors.firstName && firstName.length > 0 && <p className='on-submit-errors'>{frontendErrors.firstName}</p>}
 
 						<label>
 							Last Name
@@ -108,10 +116,9 @@ function SignupFormModal() {
 								type="text"
 								value={lastName}
 								onChange={(e) => setLastName(e.target.value)}
-								required
+							
 							/>
 						</label>
-						{frontendErrors.lastName && lastName.length > 0 && <p className='on-submit-errors'>{frontendErrors.lastName}</p>}
 
 					</div>
 					<label>
@@ -120,10 +127,10 @@ function SignupFormModal() {
 							type="text"
 							value={email}
 							onChange={(e) => setEmail(e.target.value)}
-							required
+							
 						/>
 					</label>
-					{frontendErrors.email && email.length > 0 && <p className='on-submit-errors'>{frontendErrors.email}</p>}
+					{/* {frontendErrors.email && email.length > 0 && <p className='on-submit-errors'>{frontendErrors.email}</p>} */}
 
 					<div className="sign-up-location">
 						<label>
@@ -132,10 +139,9 @@ function SignupFormModal() {
 								type="text"
 								value={city}
 								onChange={(e) => setCity(e.target.value)}
-								required
+								
 							/>
 						</label>
-						{frontendErrors.city && city.length > 0 && <p className='on-submit-errors'>{frontendErrors.city}</p>}
 
 						<label>
 							State
@@ -143,10 +149,9 @@ function SignupFormModal() {
 								type="text"
 								value={state}
 								onChange={(e) => setState(e.target.value)}
-								required
+							
 							/>
 						</label>
-						{frontendErrors.state && state.length < 0 && <p className='on-submit-errors'>{frontendErrors.state}</p>}
 
 					</div>
 
@@ -156,7 +161,7 @@ function SignupFormModal() {
 							type="text"
 							value={occupation}
 							onChange={(e) => setOccupation(e.target.value)}
-							required
+							
 						/>
 					</label>
 					<label>
@@ -190,7 +195,7 @@ function SignupFormModal() {
 								type="password"
 								value={password}
 								onChange={(e) => setPassword(e.target.value)}
-								required
+							
 							/>
 						</label>
 
@@ -200,7 +205,7 @@ function SignupFormModal() {
 								type="password"
 								value={confirmPassword}
 								onChange={(e) => setConfirmPassword(e.target.value)}
-								required
+								
 							/>
 						</label>
 
@@ -208,7 +213,6 @@ function SignupFormModal() {
 					</div>
 
 					
-{frontendErrors.email && <p className='on-submit-errors'>{frontendErrors.email}</p>}
 
 					<button type="submit">Sign Up</button>
 					<h2>---------- or ----------</h2>
