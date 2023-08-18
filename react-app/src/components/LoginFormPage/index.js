@@ -30,34 +30,33 @@ const demoSignIn = async (e) => {
     history.push('/')
 }
 
+useEffect(() => {
+  const frontendErrors = {}
+  
+  const email_validation = email.split("").find((el) => el === "@")
+  
+  if (!email_validation) {
+    frontendErrors.email = "Email required to log in."
+  }
+  if (!password) {
+    frontendErrors.password = "Password is required to log in."
+  }
+  
+  setFrontendErrors(frontendErrors)
+}, [email, password])
+
+if (sessionUser) return <Redirect to="/" />;
+
+
+
+
 const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const newFrontendErrors = {}; // Temporary error object
-    
-    const email_validation = email.split("").find((el) => el === "@");
-    
-    if (!email) {
-        newFrontendErrors.email = "The email or password entered are invalid.";
-    }
-    if (!email_validation) {
-        newFrontendErrors.email = "The email or password entered are invalid.";
-    }
-    if (!password) {
-        newFrontendErrors.password = "The email or password entered are invalid.";
-    }
-
-    setFrontendErrors(newFrontendErrors); 
-
-    if (Object.keys(newFrontendErrors).length === 0) {
-        const data = dispatch(login(email, password));
-        if (data) {
-            setErrors(data);
-        }
-       
-    }
+  e.preventDefault();
+  const data = await dispatch(login(email, password));
+  if (data) {
+    setErrors(data);
+  }
 };
-
   const handleOnClick = async (e) => {
     e.preventDefault();
     history.push('/signup')
@@ -70,16 +69,28 @@ const handleSubmit = async (e) => {
       <form onSubmit={handleSubmit}>
         
         <div className="login-form-splash">
-        
-       
 
+        
+        <div className='errors-and-login'>
+          {frontendErrors.email && email.length > 0 && (
+            <p className='on-submit-errors'>{frontendErrors.email}</p>
+          )}
+          {frontendErrors.password && password.length > 0 && (
+            <p className='on-submit-errors'>{frontendErrors.password}</p>
+          )}
+          <p>
+            {errors.length > 0 &&  (
+              <p className='on-submit-errors'> Invalid Credentials</p>
+            )}
+          </p>
+        </div>
         <label>
           Email
           <input
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required
+            
           />
         </label>
         <label>
@@ -88,29 +99,15 @@ const handleSubmit = async (e) => {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required
+            
           />
         </label>
 
-        <div className='errors-and-login'>
-          {frontendErrors.email && email.length < 0 && (
-            <p className='on-submit-errors'>{frontendErrors.email}</p>
-            )}
-          {frontendErrors.password && password.length > 0 && (
-            <p className='on-submit-errors'>{frontendErrors.password}</p>
-            )}
-          {errors.length ? (
-            <span>
-          The email or password entered are invalid.
-          </span>
-        ) : null}
-         
-        </div>
-  
+        
+        <h2>---------- or ----------</h2>
         <button onClick={demoSignIn}>Demo User</button>
         <button type="submit">Log In</button>
 
-        <h2>---------- or ----------</h2>
         <div className="join-now-splash" 
                     onClick={handleOnClick}> New to Clockdn? Join now</div>
       

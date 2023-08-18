@@ -83,10 +83,7 @@ function SignupFormModal() {
 			{/* <h1>Sign Up</h1> */}
 			<form className="sign-up-wrapper" method='POST' encType="multipart/form-data" onSubmit={handleSubmit}>
 				<ul>
-				{errors.map((error, index) => (
-    <p key={index} className='on-submit-errors'>{error}</p>
-	
-))}
+				
 				</ul>
 				<div className="sign-up-form-splash">
 					<h2>Make every second count</h2>
