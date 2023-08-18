@@ -23,7 +23,7 @@ const DeleteComment = ({ commentId }) => {
             <button onClick={ handleSubmit } className="confirm-delete"> Yes Delete Comment</button>
             <button onClick={ closeModal } className="cancel-delete"> No Keep Comment</button>
         
-         <button onClick= { handleSubmit } > Yes Delete </button>
+         {/* <button onClick= { handleSubmit } > Yes Delete </button> */}
 
          </div>
             </div>

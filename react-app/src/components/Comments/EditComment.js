@@ -5,6 +5,7 @@ import { useModal } from '../../context/Modal';
 import OpenModalButton from "../OpenModalButton";
 
 import DeleteComment from './DeleteComment';
+import "./EditComment.css"
 
 
 const EditComment = ({ commentId }) => {
@@ -35,28 +36,37 @@ const EditComment = ({ commentId }) => {
     };
 
     return (
-        <div className="comment-form-wrapper">
+        <div className="edit-comment-form-wrapper">
             <form method='PUT' encType='multipart/form-data' onSubmit={handleSubmit}>
-            <label className="comment-label">
-                        Comment
-                        <textarea
-                        className="comment-textarea"
-                            type='text'
-                            value={body}
-                            onChange={(e) => setBody(e.target.value)}
-                        />
-                    </label>
 
-                     
-                    <button className="submit-comment" type='submit'>Edit your Comment</button>
-                    <OpenModalButton buttonText={'Delete Post'} 
-                            modalComponent={<DeleteComment commentId={commentDetail.id} />}
-                        />
-            
+                <div className='comment-input-wrapper'>
+                <img
+                    src={user.profile_image}
+                    style={{ width: "35px", height: "35px",borderRadius: "100%"}}
+                />
+                
+                <label className="comment-label">
+                    <textarea
+                        className="edit-comment-textarea"
+                        type='text'
+                        value={body}
+                        onChange={(e) => setBody(e.target.value)}
+                        placeholder='Add a comment...'
+                    />
+                </label>
+                </div>
+    <div className="edit-buttons">
+        
+                {body && <button  className="edit-submit-comment" type='submit'>Create Comment</button>}
+           <div id="delete-submit-comment">
+            <OpenModalButton buttonText={'Delete Comment'} 
+                    modalComponent={<DeleteComment commentId={commentDetail.id} />}
+                />
+                </div>
+                </div>
             </form>
-
         </div>
-    )
-
+    );
+    
 }
 export default EditComment

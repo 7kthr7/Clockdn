@@ -76,8 +76,8 @@ const SinglePostCard = ({ post, postComments, user }) => {
                                             className="comment-user-profile-picture"
                                         />
                                         <p id="coment-user-name"> {comment.first_name} {comment.last_name} </p>
-                                        <p id="comment-user-occupation" >{comment.occupation}</p>
                                     </div>
+                                        <p id="comment-user-occupation" >{comment.occupation}</p>
                                     {/* <p id="comment-created-at"> {comment.created_at}</p> */}
                                     <p id="comment-body"> {comment.body}</p>
                                     <div className="edit-comment">
