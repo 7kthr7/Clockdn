@@ -3,6 +3,7 @@
 const LOAD_USERS = '/user/LOAD_USERS';
 const LOAD_USER = '/user/LOAD_USER';
 const LOAD_LIKES = '/user/LOAD_LIKES';
+const LOAD_COMMENT = '/user/LOAD_COMMENT'
 const CREATE_FOLLOW = '/user/CREATE_FOLLOW'
 const DELETE_FOLLOW = '/user/DELETE_FOLLOW'
 
@@ -20,6 +21,11 @@ const getUserLikes = (likes) => ({
     type: LOAD_LIKES,
     payload: likes
 });
+
+const getUserComments = (comments) => ({
+    type: LOAD_COMMENT, 
+    payload: comments
+})
 
 const followUser = (userId) => ({
     type: CREATE_FOLLOW,
@@ -64,6 +70,18 @@ export const getUserLikesThunk = () => async (dispatch) => {
         console.error('Failed to fetch user likes.');
     }
 };
+
+export const getUserCommentsThunk = () => async (dispatch) => {
+    const response = await fetch("/api/comment/user");
+
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(getUserComments(data));
+    } else {
+        console.error('Failed to fetch user Comments.');
+    }
+};
+
 
 export const followUserThunk = (userId) => async (dispatch) => {
     const response = await fetch(`/api/users/${userId}/follow`, {
@@ -114,6 +132,12 @@ export default function reducer(state = initialState, action) {
             };
         }
         case LOAD_LIKES: {
+            return {
+                ...state,
+                userActivity: action.payload
+            };
+        }
+        case LOAD_COMMENT: {
             return {
                 ...state,
                 userActivity: action.payload

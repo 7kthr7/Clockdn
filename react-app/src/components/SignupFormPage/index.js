@@ -22,184 +22,203 @@ function SignupFormModal() {
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [errors, setErrors] = useState([]);
 	const [frontendErrors, setFrontendErrors] = useState({})
-	const { closeModal } = useModal();
 
 	console.log('PROFILE IMAGE--->', profileImage)
 
-	useEffect(() => {
-		const frontendErrors = {}
-
-		if (firstName.length < 2) {
-			frontendErrors.firstName = "First Name is required"
-		}
-		if (lastName.length < 2) {
-			frontendErrors.lastName = "Last Name is required"
-		}
-		if (email.length < 2) {
-			frontendErrors.email = "Email is required"
-		}
-		if (city.length < 2) {
-			frontendErrors.city = "city is required"
-		}
-		if (state.length < 0) {
-			frontendErrors.state = "First Name is required"
-		}
-		
-		if (password.length < 6) {
-			frontendErrors.password = "Password must be at least 6 characters"
-		}
-		if (confirmPassword.length < 2) {
-			frontendErrors.confirmPassword = "Confirm Password is required"
-		}
-		setFrontendErrors(frontendErrors)
-	}, [ firstName, lastName, email, city, state, occupation, biography, profileImage, password, confirmPassword])
-
-
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		
-		
 
-		if (password === confirmPassword) {
+		const newFrontendErrors = {}
+
+		const email_validation = email.split("").find((el) => el === "@");
+
+
+		if (!firstName) {
+			newFrontendErrors.firstName = "First Name is required"
+		}
+		if (!lastName) {
+			newFrontendErrors.lastName = "Last Name is required"
+		}
+		if (!email) {
+			newFrontendErrors.email = "Email is required"
+		}
+		
+		if (!email_validation) {
+			newFrontendErrors.email = "Email is required";
+		}
+		
+		if (!city) {
+			newFrontendErrors.city = "city is required"
+		}
+		if (!state) {
+			newFrontendErrors.state = "State is required"
+		}
+
+		if (password.length < 6) {
+			newFrontendErrors.password = "Password must be at least 6 characters"
+		}
+		if (confirmPassword != password) {
+			newFrontendErrors.confirmPassword = "Password must match"
+		}
+		setFrontendErrors(newFrontendErrors)
+
+		if (Object.keys(newFrontendErrors).length === 0) {
 			const data = await dispatch(signUp(firstName, lastName, email, city, state, occupation, biography, profileImage, password));
 			if (data) {
 				setErrors(data);
-			} else {
-				closeModal();
-				history.push('/')
 			}
-		} else {
-			setErrors([
-				"Confirm Password field must be the same as the Password field",
-			]);
 		}
 	};
+
+
 
 	const handleOnClick = async (e) => {
 		e.preventDefault();
 		history.push('/login')
-	  }
-	
+	}
+
 
 	return (
 		<>
-			<h1>Sign Up</h1>
-			<form  method='POST' encType="multipart/form-data" onSubmit={handleSubmit}>
+			{/* <h1>Sign Up</h1> */}
+			<form className="sign-up-wrapper" method='POST' encType="multipart/form-data" onSubmit={handleSubmit}>
 				<ul>
-					{errors.map((error, idx) => (
-						<li key={idx}>{error}</li>
-					))}
+				
 				</ul>
-				<label>
-					First Name
-					<input
-						type="text"
-						value={firstName}
-						onChange={(e) => setFirstName(e.target.value)}
-						required
-					/>
-				</label>
-				<label>
-					Last Name
-					<input
-						type="text"
-						value={lastName}
-						onChange={(e) => setLastName(e.target.value)}
-						required
-					/>
-				</label>
-				<label>
-					Email
-					<input
-						type="text"
-						value={email}
-						onChange={(e) => setEmail(e.target.value)}
-						required
-					/>
-				</label>
-				<label>
-					City
-					<input
-						type="text"
-						value={city}
-						onChange={(e) => setCity(e.target.value)}
-						required
-					/>
-				</label>
-				<label>
-					State
-					<input
-						type="text"
-						value={state}
-						onChange={(e) => setState(e.target.value)}
-						required
-					/>
-				</label>
-		
-				<label>
-					Occupation
-					<input
-						type="text"
-						value={occupation}
-						onChange={(e) => setOccupation(e.target.value)}
-						required
-					/>
-				</label>
-				<label>
-					About Me
-					<input
-						type="text"
-						value={biography}
-						onChange={(e) => setBiography(e.target.value)}
-						required
-					/>
-				</label>
+				<div className="sign-up-form-splash">
+					<h2>Make every second count</h2>
+					{frontendErrors.firstName && <p className='on-submit-errors'>{frontendErrors.firstName}</p>}
+					{frontendErrors.lastName &&  <p className='on-submit-errors'>{frontendErrors.lastName}</p>}
+					{frontendErrors.city &&  <p className='on-submit-errors'>{frontendErrors.city}</p>}
+					{frontendErrors.state &&  <p className='on-submit-errors'>{frontendErrors.state}</p>}
+					{frontendErrors.password &&  <p className='on-submit-errors'>{frontendErrors.password}</p>}
+					{frontendErrors.confirmPassword &&  <p className='on-submit-errors'>{frontendErrors.confirmPassword}</p>}
+					{frontendErrors.email &&  <p className='on-submit-errors'>{frontendErrors.email}</p>}
 
+					<div className="sign-up-name">
+						<label>
+							First Name
 
-
-
-				
-				<div >
-					<label >
-					<input
+							<input
+								type="text"
+								value={firstName}
+								onChange={(e) => setFirstName(e.target.value)}
 						
-						
-						type="file"
-						onChange={(e) => setProfileImage(e.target.files[0])}
-						accept=".jpg, .jpeg, .png"
-						
-					/>
+							/>
+						</label>
+
+						<label>
+							Last Name
+							<input
+								type="text"
+								value={lastName}
+								onChange={(e) => setLastName(e.target.value)}
+							
+							/>
+						</label>
+
+					</div>
+					<label>
+						Email
+						<input
+							type="text"
+							value={email}
+							onChange={(e) => setEmail(e.target.value)}
+							
+						/>
 					</label>
-				
+					{/* {frontendErrors.email && email.length > 0 && <p className='on-submit-errors'>{frontendErrors.email}</p>} */}
+
+					<div className="sign-up-location">
+						<label>
+							City
+							<input
+								type="text"
+								value={city}
+								onChange={(e) => setCity(e.target.value)}
+								
+							/>
+						</label>
+
+						<label>
+							State
+							<input
+								type="text"
+								value={state}
+								onChange={(e) => setState(e.target.value)}
+							
+							/>
+						</label>
+
+					</div>
+
+					<label>
+						Occupation
+						<input
+							type="text"
+							value={occupation}
+							onChange={(e) => setOccupation(e.target.value)}
+							
+						/>
+					</label>
+					<label>
+						About Me (Optional)
+						<textarea
+							id="sign-up-biography"
+							value={biography}
+							onChange={(e) => setBiography(e.target.value)}
+
+						/>
+					</label>
+
+					<div >
+						<label >
+							<input
+
+
+								type="file"
+								onChange={(e) => setProfileImage(e.target.files[0])}
+								accept=".jpg, .jpeg, .png"
+
+							/>
+						</label>
+
+					</div>
+					<div className="sign-up-password">
+
+						<label>
+							Password
+							<input
+								type="password"
+								value={password}
+								onChange={(e) => setPassword(e.target.value)}
+							
+							/>
+						</label>
+
+						<label>
+							Confirm Password
+							<input
+								type="password"
+								value={confirmPassword}
+								onChange={(e) => setConfirmPassword(e.target.value)}
+								
+							/>
+						</label>
+
+
+					</div>
+
+					
+
+					<button type="submit">Sign Up</button>
+					<h2>---------- or ----------</h2>
+
+					<div className="join-now-splash"
+						onClick={handleOnClick}>Already have an account? Log-In</div>
+
+					{(imageLoading) && <p>Loading...</p>}
 				</div>
-
-				<label>
-					Password
-					<input
-						type="password"
-						value={password}
-						onChange={(e) => setPassword(e.target.value)}
-						required
-					/>
-				</label>
-				<label>
-					Confirm Password
-					<input
-						type="password"
-						value={confirmPassword}
-						onChange={(e) => setConfirmPassword(e.target.value)}
-						required
-					/>
-				</label>
-
-			
-
-
-				<button type="submit">Sign Up</button>
-				<button className="join-now-splash"
-                    onClick={handleOnClick}>Already have an account? Log-In</button>
-               
-				{(imageLoading)&& <p>Loading...</p>}
 			</form>
 		</>
 	);

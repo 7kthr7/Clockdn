@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { editCommentThunk, getCommentsThunk } from '../../store/comment';
 import { useModal } from '../../context/Modal';
+import OpenModalButton from "../OpenModalButton";
+
+import DeleteComment from './DeleteComment';
+import "./EditComment.css"
 
 
 const EditComment = ({ commentId }) => {
@@ -32,22 +36,37 @@ const EditComment = ({ commentId }) => {
     };
 
     return (
-        <div>
+        <div className="edit-comment-form-wrapper">
             <form method='PUT' encType='multipart/form-data' onSubmit={handleSubmit}>
-            <label>
-                        Comment
-                        <textarea
-                            type='text'
-                            value={body}
-                            onChange={(e) => setBody(e.target.value)}
-                        />
-                    </label>
 
-                    <button type='submit'>Edit Comment</button>
+                <div className='comment-input-wrapper'>
+                <img
+                    src={user.profile_image}
+                    style={{ width: "35px", height: "35px",borderRadius: "100%"}}
+                />
+                
+                <label className="comment-label">
+                    <textarea
+                        className="edit-comment-textarea"
+                        type='text'
+                        value={body}
+                        onChange={(e) => setBody(e.target.value)}
+                        placeholder='Add a comment...'
+                    />
+                </label>
+                </div>
+    <div className="edit-buttons">
+        
+           <div id="delete-submit-comment">
+            <OpenModalButton buttonText={'Delete Comment'} 
+                    modalComponent={<DeleteComment commentId={commentDetail.id} />}
+                />
+                </div>
+                {body && <button  className="edit-submit-comment" type='submit'>Edit Comment</button>}
+                </div>
             </form>
-
         </div>
-    )
-
+    );
+    
 }
 export default EditComment

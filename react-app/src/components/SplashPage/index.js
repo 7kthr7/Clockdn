@@ -1,9 +1,11 @@
+import React from "react";
 import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import "./Splash.css";
 import LoginFormPage from "../LoginFormPage";
 import { useHistory } from 'react-router-dom';
 import splashOne from '../../assets/splash4.png'
+import splashTwo from '../../assets/splashTwo.gif'
 
 
 function SplashPage() {
@@ -22,21 +24,25 @@ function SplashPage() {
             <div className="first-section">
                 <div className="first-section-left">
                 <div className="splash-page-tag-line">
-                    <h1>It's Time for New Connections, It's Time for Clockdn.</h1>
+                    <p>It's Time For New Connections</p>
+                    <p> It's Time For Clockdn.</p>
                 </div>
                 <div className="log-in-section">
                     <LoginFormPage />
-                   
-                    {/* <button className="join-now-splash"
-                    onClick={handleOnClick}> New to Clockdn? Join now</button> */}
                 </div>
                 </div>
                 <div className="splash-page-image">
                     <img
                         src={splashOne}
                     />
-                    
+                </div>
+            </div>
 
+            <div className="second-section-splash">
+                <div className="splash-page-image-two">
+                    <img
+                    src={splashTwo}
+                    />
                 </div>
 
             </div>

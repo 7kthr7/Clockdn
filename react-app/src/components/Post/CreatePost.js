@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from "react-redux";
+
 import { useDispatch } from 'react-redux';
 import { createPostThunk } from '../../store/post';
 import { useModal } from '../../context/Modal';
 // import OpenModalButton from '../OpenModalButton'
+import './CreatePost.css'
 
 
 const CreatePost = () => {
@@ -13,7 +16,10 @@ const CreatePost = () => {
     const [post_images, setPost_images] = useState(null);
     const [errors, setErrors] = useState([]);
     const [frontendErrors, setFrontendErrors] = useState({})
+    const [imagePreview, setImagePreview] = useState(null);
 
+
+    const sessionUser = useSelector((state) => state.session.user);
 
 
     let disable = false;
@@ -49,56 +55,91 @@ const CreatePost = () => {
         closeModal();
     };
 
+    const handleImageChange = (e) => {
+  const file = e.target.files[0];
+  
+  if (file) {
+    setPost_images(file)
+    const reader = new FileReader();
+    
+    reader.onloadend = () => {
+      setImagePreview(reader.result);
+    }
+    
+    reader.readAsDataURL(file);
+  }
+};
+
+const handleImageRemove = () => {
+    setPost_images(null);
+    setImagePreview(null);
+  };
+
     return (
-        <div>
-
-            <h3>NEW POST FORM</h3>
-            {/* <OpenModalButton
-                    buttonText="Start a post"
-                    modalComponent={<CreatePost />}
-                    className = "start-post-button"
-                /> */}
-
-
+        <div className='create-post-wrapper'>
 
             <form method='POST' encType='multipart/form-data' onSubmit={handleSubmit}>
-                {/* <ul>
-					{errors.map((error, idx) => (
-						<li key={idx}>{error}</li>
-					))}
-				</ul> */}
 
-                <label>
-                    Title (Optional)
-                    <textarea
+<div className='create-post-user'>
+                <img
+                src={sessionUser.profile_image}
+                />
+                <h3>{sessionUser.first_name}{sessionUser.last_name}</h3>
+
+</div>
+<div className='form-content'>
+
+                <label id='title-post'>
+                   
+                    <input
                         type='text'
+                        placeholder='Title (Optional)'
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                     />
                 </label>
 
 
-                <label>
-                    Body
+                <label id='body-post'>
+                   
                     <textarea
                         value={body}
                         onChange={(e) => setBody(e.target.value)}
+                        placeholder='What do you want to say?'
                         required
                     />
                 </label>
+                    <div className='post-image-button-section'>
+
+                    <label>
+
+                        <input
+                            className="hidden-input"
+                            type='file'
+                            // onChange={(e) => setPost_images(e.target.files[0])}
+                            onChange={handleImageChange}
+                            accept='.jpg, .jpeg, .png, .gif'
+                        // name='post_images'
+                        />
+                        <span
+                            className="material-symbols-outlined"
+                            onClick={() => document.querySelector('.hidden-input')}
+                        >
+                            image
+                        </span>
+                        Image (Optional)
+                        </label>
+                        {imagePreview && (
+                            <>
+                                <img src={imagePreview} alt="Preview" />
+                                <button id='remove-image-button' onClick={handleImageRemove}>X</button>
+                            </>
+                        )}
 
 
-                <label>
-                    Image (Optional)
-                    <input
-                        type='file'
-                        onChange={(e) => setPost_images(e.target.files[0])}
-                        accept='.jpg, .jpeg, .png, .gif'
-                        name='post_images'
-                    />
-                </label>
 
-                <button disabled={Object.keys(frontendErrors).length > 0} type='submit'>Create Post</button>
+                <button className="post-form-button" disabled={Object.keys(frontendErrors).length > 0} type='submit'>Create Post</button>
+                </div>
                 <div className='post-errors'>
                     {frontendErrors.body && body.length > 0 && (
                         <p className='on-submit-errors'>{frontendErrors.body}</p>
@@ -109,6 +150,7 @@ const CreatePost = () => {
                             <p className='on-submit-errors' key={idx}>{error}</p>
                         ))}
                     </p>
+                </div>
                 </div>
             </form>
         </div>

@@ -104,9 +104,18 @@ def update_post(id):
     title = data.get('title')
     body = data.get('body')
     post_images = request.files.get('post_images')
+    remove_image_request = data.get('post_images')  # check here
 
+    
     if post:
-        if post_images:
+        # Check if 'remove_image' is received from frontend
+        if remove_image_request == 'remove_image':
+            if post.post_images:
+                remove_file_from_s3(post.post_images)
+            post.post_images = None  # remove the image link from the database
+        
+        # Upload new image logic
+        elif post_images:
             if post.post_images:
                 remove_file_from_s3(post.post_images)
 
@@ -128,9 +137,6 @@ def update_post(id):
         return post.to_dict()
 
     return {'message': 'Post not found'}, 404
-
-    
-
 
 
 ### delete post 

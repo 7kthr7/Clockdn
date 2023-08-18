@@ -21,39 +21,48 @@ function LoginFormPage() {
 
 
   
-  useEffect(() => {
-    const frontendErrors = {}
-    
-    const email_validation = email.split("").find((el) => el === "@")
-    
-    if (!email_validation) {
-      frontendErrors.email = "Email required to log in."
-    }
-    if (!password) {
-      frontendErrors.password = "Password is required to log in."
-    }
-    
-    setFrontendErrors(frontendErrors)
-  }, [email, password])
-  
-  if (sessionUser) return <Redirect to="/" />;
 
-
-  const demoSignIn = async (e) => {
+const demoSignIn = async (e) => {
     e.preventDefault();
     const email = "demo_lition@aa.io"
     const password = "password"
-    dispatch(login(email, password ));
-     
+    await dispatch(login(email, password));
+    history.push('/')
+}
+
+
+
+if (sessionUser) return <Redirect to="/" />;
+
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  const newFrontendErrors = {}; // Temporary error object
+
+  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
+  if (!email) {
+      newFrontendErrors.email = "Email required to log in.";
+  } else if (!emailRegex.test(email)) {
+      newFrontendErrors.email = "Invalid email format.";
+  }
+  
+  if (!password) {
+      newFrontendErrors.password = "Password required to log in.";
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const data = await dispatch(login(email, password));
-    if (data) {
-      setErrors(data);
-    }
-  };
+  setFrontendErrors(newFrontendErrors); 
+
+  if (Object.keys(newFrontendErrors).length === 0) {
+      setErrors({});
+      const data = await dispatch(login(email, password));
+  if (data) {
+    setErrors(data);
+      } 
+  }
+};
+
 
   const handleOnClick = async (e) => {
     e.preventDefault();
@@ -65,19 +74,30 @@ function LoginFormPage() {
     <>
       {/* <h1>Log In</h1> */}
       <form onSubmit={handleSubmit}>
-        {/* <ul>
-          {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
-          ))}
-        </ul> */}
+        
         <div className="login-form-splash">
+
+        
+        <div className='errors-and-login'>
+          {frontendErrors.email && email.length > 0 && (
+            <p className='on-submit-errors'>{frontendErrors.email}</p>
+          )}
+          {frontendErrors.password  && (
+            <p className='on-submit-errors'>{frontendErrors.password}</p>
+          )}
+          <p>
+            {errors.length > 0 &&  (
+              <p className='on-submit-errors'> Invalid Credentials</p>
+            )}
+          </p>
+        </div>
         <label>
           Email
           <input
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required
+            
           />
         </label>
         <label>
@@ -86,29 +106,17 @@ function LoginFormPage() {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required
+            
           />
         </label>
-        <div className='errors-and-login'>
-          {frontendErrors.email && email.length > 0 && (
-            <p className='on-submit-errors'>{frontendErrors.email}</p>
-          )}
-          {frontendErrors.password && password.length > 0 && (
-            <p className='on-submit-errors'>{frontendErrors.password}</p>
-          )}
-          <p>
-            {errors.map((error, idx) => (
-              <p className='on-submit-errors' key={idx}>{error}</p>
-            ))}
-          </p>
-        </div>
-        <button onClick={demoSignIn}>Demo User</button>
 
+        
+        <h2>---------- or ----------</h2>
+        <button onClick={demoSignIn}>Demo User</button>
         <button type="submit">Log In</button>
 
-        <h2>---------- or ----------</h2>
-        <button className="join-now-splash"
-                    onClick={handleOnClick}> New to Clockdn? Join now</button>
+        <div className="join-now-splash" 
+                    onClick={handleOnClick}> New to Clockdn? Join now</div>
       
         </div>
       </form>

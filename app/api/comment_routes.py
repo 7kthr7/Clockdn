@@ -43,7 +43,7 @@ def get_comment_user():
     comments_with_posts = [
         {
             'comment_id': comment.id,
-            'post': post_details[comment.post]
+            'post_id': post_details[comment.post_id]
         }
         for comment in user_comment
     ]

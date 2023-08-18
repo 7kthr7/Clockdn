@@ -1,48 +1,76 @@
-import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useEffect, useReducer, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import SinglePostDisplay from "../PostCard/SinglePostDisplay";
+import { getUserCommentsThunk, getUserLikesThunk, getUserThunk } from "../../store/user";
 import EditProfile from "./EditProfile";
-import OpenModalButton from '../OpenModalButton'
+import OpenModalButton from '../OpenModalButton';
 import DeleteProfile from "./DeleteUser";
-import PostCard from "../PostCard"
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import './UserProfile.css'
 
 
 const UserProfile = () => {
+    const dispatch = useDispatch();
+    const history = useHistory();
 
-    // const singleUser = useSelector((state) => state.user.singleUser)
     const user = useSelector((state) => state.session.user);
+    const allUser = Object.values(useSelector(state => state.user.allUser))
+    // const comments = Object.values(useSelector(state => state.comment.allComments));
+    // const commentsWithPosts = useSelector((state) => state.user.userActivity.comments_with_posts);
+    // const likesForPosts = Object.values(useSelector(state => state.user.userActivity));
+    // const likes = Object.values(useSelector(state => state.likes.allLikes))
+
+    const currentUserFollowingIds = user.following.map(followedUser => followedUser.id);
+    const usersNotFollowed = allUser.filter(usr => !currentUserFollowingIds.includes(usr.id) && usr.id !== user.id);
+    
+    const usersToDisplay = usersNotFollowed.slice(0, 3);
+    useEffect(() => {
+        dispatch(getUserCommentsThunk())
+        dispatch(getUserThunk())
+    }, [dispatch])
 
 
 
 
     return (
-        <div>
-            <div>
-                <img src={user.profile_image} style={{ width: "40px", height: "50px" }} />
+        <div className="profile-page">
+            <div className="first-section-user">
+                <div className="background-image-user">
+                    <div className="edit-delete-user">
+                        <OpenModalButton modalComponent={<EditProfile userId={user.id} />}>
+                            <span className="material-symbols-outlined">edit</span>
+                        </OpenModalButton>
+                    </div>
+                </div>
+                <div className="user-information">
+                    <img src={user.profile_image} />
+                    <h2>
+                        {user.first_name}{user.last_name}
+                    </h2>
+                    <p>{user.occupation}</p>
+                    <p>{user.city}, {user.state}</p>
+                    <p>{user.biography}</p>
+                </div>
             </div>
-            <div> {user.first_name} {user.last_name}</div>
-            <div>{user.occupation}</div>
-            <div>{user.city}, {user.state}</div>
-            <div> {user.biography}</div>
-            <OpenModalButton buttonText={'Edit User'} modalComponent={<EditProfile userId={user.id} />}
-            />
-             <OpenModalButton buttonText={'Delete User'} modalComponent={<DeleteProfile userId={user.id} />}
-            />
 
-{/* <PostCard/> */}
 
+            <div className="second-section">
+                    <h2>Suggested connections for you</h2>
+                <div className="second-section-content">
+                    {usersToDisplay.map((user) => (
+                        <div key={user.id}>
+                            <img
+                                src={user.profile_image}
+                                
+                            />
+                            <p>{user.first_name} {user.last_name}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
 
         </div>
-    )
-
+    );
 }
-export default UserProfile
 
-
-
-
-
-
-
-
-
-
+export default UserProfile;

@@ -3,9 +3,11 @@ import { useState } from "react";
 import { editUserThunk} from "../../store/session";
 import { useModal } from "../../context/Modal";
 import { getUserThunk } from "../../store/user";
+import DeleteProfile from "./DeleteUser";
+import OpenModalButton from "../OpenModalButton";
 
 
-const EditProfile = ({ userId }) => {
+const EditProfile = (props) => {
     const dispatch = useDispatch();
     const { closeModal } = useModal();
     const user = useSelector(state => state.session.user);
@@ -142,6 +144,12 @@ const EditProfile = ({ userId }) => {
 
 
                 <button type='submit'>Edit User</button>
+                <OpenModalButton buttonText={'Delete User'}
+                 modalComponent={<DeleteProfile userId={user.id} />}
+                    />
+
+<button onClick={props.onClose}>Close</button>
+
             </form>
 
         </div>

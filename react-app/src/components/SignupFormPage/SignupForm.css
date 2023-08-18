@@ -1,0 +1,83 @@
+.sign-up-wrapper{
+    position: relative;
+    height: 960px;
+
+}
+
+/* .sign-up-form-splash h2{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+} */
+
+.sign-up-form-splash {
+    /* border: 1px solid black; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 8px;
+    position: relative;
+    margin-top: -30px;
+    margin-left: 50px;
+}
+
+#sign-up-biography {
+    height: 60px;
+}
+
+.sign-up-form-splash input, .sign-up-form-splash textarea {
+    margin-top: 5px;
+    height: 18px;
+    width: 280px;
+    padding: 8px;
+    border: 1px rgba(0, 0, 0) solid; 
+    border-radius: 5px;
+}
+.sign-up-form-splash label, .sign-up-form-splash textarea {
+    display: flex;
+    flex-direction: column;
+    margin-top: 14px; 
+  }
+
+  .sign-up-form-splash button {
+    margin-top: 40px;
+    width: 350px;
+    height: 48px;
+    padding-top: 15px;
+    padding-bottom: 20px;
+    border-radius: 20px;
+    font-size: 18px;
+    color: white;
+    background-color: #3E8867;
+    border: 0px;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+
+  .sign-up-form-splash button:hover{
+    background-color: rgb(29, 89, 62); 
+  }
+
+
+  .sign-up-name, .sign-up-location, .sign-up-password{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .sign-up-name input, .sign-up-location input, .sign-up-password input{
+    display: flex;
+    flex-direction: row;
+    width: 126px;
+    align-items: center;
+    gap: 2px;
+  
+  }
+
+  .sign-up-name label, .sign-up-location label {
+    display: flex;
+    flex-direction: column;
+    margin-top: 14px; 
+    align-items: flex-start;
+  }
+
