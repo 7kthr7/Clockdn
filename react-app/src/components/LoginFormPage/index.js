@@ -30,33 +30,40 @@ const demoSignIn = async (e) => {
     history.push('/')
 }
 
-useEffect(() => {
-  const frontendErrors = {}
-  
-  const email_validation = email.split("").find((el) => el === "@")
-  
-  if (!email_validation) {
-    frontendErrors.email = "Email required to log in."
-  }
-  if (!password) {
-    frontendErrors.password = "Password is required to log in."
-  }
-  
-  setFrontendErrors(frontendErrors)
-}, [email, password])
+
 
 if (sessionUser) return <Redirect to="/" />;
 
 
-
-
 const handleSubmit = async (e) => {
   e.preventDefault();
-  const data = await dispatch(login(email, password));
+
+  const newFrontendErrors = {}; // Temporary error object
+
+  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
+  if (!email) {
+      newFrontendErrors.email = "Email required to log in.";
+  } else if (!emailRegex.test(email)) {
+      newFrontendErrors.email = "Invalid email format.";
+  }
+  
+  if (!password) {
+      newFrontendErrors.password = "Password required to log in.";
+  }
+
+  setFrontendErrors(newFrontendErrors); 
+
+  if (Object.keys(newFrontendErrors).length === 0) {
+      setErrors({});
+      const data = await dispatch(login(email, password));
   if (data) {
     setErrors(data);
+      } 
   }
 };
+
+
   const handleOnClick = async (e) => {
     e.preventDefault();
     history.push('/signup')
@@ -75,7 +82,7 @@ const handleSubmit = async (e) => {
           {frontendErrors.email && email.length > 0 && (
             <p className='on-submit-errors'>{frontendErrors.email}</p>
           )}
-          {frontendErrors.password && password.length > 0 && (
+          {frontendErrors.password  && (
             <p className='on-submit-errors'>{frontendErrors.password}</p>
           )}
           <p>
