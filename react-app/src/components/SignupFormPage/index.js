@@ -24,52 +24,54 @@ function SignupFormModal() {
 	const [frontendErrors, setFrontendErrors] = useState({})
 
 	console.log('PROFILE IMAGE--->', profileImage)
+	// const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+  
+	// if (!email) {
+	// 	newFrontendErrors.email = "Email required to log in.";
+	// } else if (!emailRegex.test(email)) {
+	// 	newFrontendErrors.email = "Invalid email format.";
+	// }
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-
+	  
 		const newFrontendErrors = {}
 
-		const email_validation = email.split("").find((el) => el === "@");
-
-
-		if (!firstName) {
+		if (firstName.length < 2) {
 			newFrontendErrors.firstName = "First Name is required"
 		}
-		if (!lastName) {
+		if (lastName.length < 2) {
 			newFrontendErrors.lastName = "Last Name is required"
 		}
-		if (!email) {
+		if (email.length < 2) {
 			newFrontendErrors.email = "Email is required"
 		}
-		
-		if (!email_validation) {
-			newFrontendErrors.email = "Email is required";
-		}
-		
-		if (!city) {
+		if (city.length < 2) {
 			newFrontendErrors.city = "city is required"
 		}
-		if (!state) {
-			newFrontendErrors.state = "State is required"
+		if (state.length < 0) {
+			newFrontendErrors.state = "First Name is required"
 		}
-
+		
 		if (password.length < 6) {
 			newFrontendErrors.password = "Password must be at least 6 characters"
 		}
-		if (confirmPassword != password) {
-			newFrontendErrors.confirmPassword = "Password must match"
+		if (confirmPassword.length < 2) {
+			newFrontendErrors.confirmPassword = "Confirm Password is required"
 		}
 		setFrontendErrors(newFrontendErrors)
+	//  [ firstName, lastName, email, city, state, occupation, biography, profileImage, password, confirmPassword])
 
 		if (Object.keys(newFrontendErrors).length === 0) {
+			setErrors({});
 			const data = await dispatch(signUp(firstName, lastName, email, city, state, occupation, biography, profileImage, password));
 			if (data) {
-				setErrors(data);
+		  setErrors(data);
+			}  else {
+				history.push('/')
 			}
 		}
-	};
-
+	  };
 
 
 	const handleOnClick = async (e) => {
@@ -87,13 +89,13 @@ function SignupFormModal() {
 				</ul>
 				<div className="sign-up-form-splash">
 					<h2>Make every second count</h2>
-					{frontendErrors.firstName && <p className='on-submit-errors'>{frontendErrors.firstName}</p>}
-					{frontendErrors.lastName &&  <p className='on-submit-errors'>{frontendErrors.lastName}</p>}
-					{frontendErrors.city &&  <p className='on-submit-errors'>{frontendErrors.city}</p>}
-					{frontendErrors.state &&  <p className='on-submit-errors'>{frontendErrors.state}</p>}
-					{frontendErrors.password &&  <p className='on-submit-errors'>{frontendErrors.password}</p>}
-					{frontendErrors.confirmPassword &&  <p className='on-submit-errors'>{frontendErrors.confirmPassword}</p>}
-					{frontendErrors.email &&  <p className='on-submit-errors'>{frontendErrors.email}</p>}
+					{frontendErrors.firstName && ( <p className='on-submit-errors'>{frontendErrors.firstName}</p>)}
+					{frontendErrors.lastName && ( <p className='on-submit-errors'>{frontendErrors.lastName}</p>)}
+					{frontendErrors.city &&  (<p className='on-submit-errors'>{frontendErrors.city}</p>)}
+					{frontendErrors.state && ( <p className='on-submit-errors'>{frontendErrors.state}</p>)}
+					{frontendErrors.password && ( <p className='on-submit-errors'>{frontendErrors.password}</p>)}
+					{frontendErrors.confirmPassword && ( <p className='on-submit-errors'>{frontendErrors.confirmPassword}</p>)}
+					{frontendErrors.email && ( <p className='on-submit-errors'>{frontendErrors.email}</p>)}
 
 					<div className="sign-up-name">
 						<label>
