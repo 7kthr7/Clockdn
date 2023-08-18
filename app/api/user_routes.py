@@ -46,6 +46,9 @@ def user(id):
 @user_routes.route('/<int:id>', methods=['PUT'])
 @login_required
 def edit_user(id):
+
+#query the User table for the id in the param
+ #get the information in the database for the id being requested   
     user = User.query.get(id)
     data = request.form
     first_name = data.get('first_name')
@@ -56,6 +59,7 @@ def edit_user(id):
     city = data.get('city')
     state = data.get('state')  
 
+#aws boiler plate and conditionals for editing a profile picture
     if user:
         if profile_image:
             remove_file_from_s3(user.profile_image)
@@ -65,6 +69,8 @@ def edit_user(id):
             user.profile_image = upload['url']
             if "url" not in upload:
                 return {'error': upload['errors']}
+            
+    #set the edited information to the attributes in the User table, commit, jsonify         
 
         user.first_name = first_name
         user.last_name = last_name
@@ -94,61 +100,59 @@ def delete_user(id):
 @login_required
 def follow(id):
 
-    try:
+    #querying through users to follow by id from param from the User Table and setting it to variable 
         user_to_follow = User.query.get(id)
         
-        # Check if the user exists
+    #checking if that userId even exits
         if not user_to_follow:
             return {'errors': 'User not found'}, 404
 
-        # Ensure the current user isn't trying to follow themselves
+    #checking to see if the userId being searched isn't the current user
         if current_user.id == user_to_follow.id:
             return {'errors': 'You cannot follow yourself'}, 400
         
-        # Check if the user is already being followed
+    #check the is_following function in the User table is a truthy
+    #meaning if the id of the user being searched for is not already in the connections table
         if current_user.is_following(user_to_follow):
             return {'errors': 'You are already following this user'}, 400
 
+    #if the above conditional is not a truthy 
+    #add the user_to_follow id that is searched for into the followed attribute in the User Table
         current_user.follow(user_to_follow)
         db.session.commit()
-
-        return jsonify({
+    #to_dict so it's a serialized and the response is a json
+        return {
             'message': 'Successfully followed the user',
             'user': current_user.to_dict()
-        })
+        }
 
-    except Exception as e:
-        db.session.rollback()
-        return {'errors': 'Error occurred during the follow operation', 'message': str(e)}, 500
-
+  
 
 @user_routes.route('/<int:id>/unfollow', methods=['DELETE'])
 @login_required
 def unfollow(id):
 
-    try:
+    #query database for the user being requested
         user_to_unfollow = User.query.get(id)
         
-        # Check if the user exists
+    #checking if the userId even exists
         if not user_to_unfollow:
             return {'errors': 'User not found'}, 404
 
-        # Ensure the current user isn't trying to unfollow themselves
+    #checking to see if the currentUser is not the same as the id being requested
         if current_user.id == user_to_unfollow.id:
             return {'errors': 'You cannot unfollow yourself'}, 400
         
-        # Check if the user is currently being followed
+    #checking to see if the is_following function is a falsy
+    #if it is a falsy this means the users are not following each other and can't unfollow
         if not current_user.is_following(user_to_unfollow):
             return {'errors': 'You are not following this user'}, 400
 
+    #if that conditional comes back a truthy then the user can unfollow and we remove the id from the followed attribute
         current_user.unfollow(user_to_unfollow)
         db.session.commit()
 
-        return jsonify({
+        return {
             'message': 'Successfully unfollowed the user',
             'user': current_user.to_dict()
-        })
-
-    except Exception as e:
-        db.session.rollback()
-        return {'errors': 'Error occurred during the unfollow operation', 'message': str(e)}, 500
+        }
