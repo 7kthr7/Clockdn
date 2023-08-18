@@ -64,10 +64,10 @@ const CreateComment = ({ postId, allComments }) => {
         newComment.append('body', body);
        
 
-        setBody("");
-      dispatch(createCommentThunk( postDetail.id, newComment,));
+        await setBody("");
+    dispatch(createCommentThunk( postDetail.id, newComment,));
         // closeModal();
-    dispatch(getCommentsThunk())
+    // dispatch(getCommentsThunk())
 
     };
     // document.querySelector('.comment-textarea').addEventListener('input', function() {
