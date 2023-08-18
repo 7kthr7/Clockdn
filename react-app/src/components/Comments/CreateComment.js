@@ -11,7 +11,7 @@ const CreateComment = ({ postId, allComments }) => {
     const [body, setBody] = useState('')
     const [frontendErrors, setFrontendErrors] = useState({})
 
-    // const user = useSelector(state => state.session.user)
+    const user = useSelector(state => state.session.user)
 
 
     const posts = Object.values(useSelector((state) => state.post.allPosts))
@@ -35,7 +35,25 @@ const CreateComment = ({ postId, allComments }) => {
     let disable = body.length === 0 || body.length > 1000;
 
 
-
+    useEffect(() => {
+        // Function to adjust textarea height
+        const handleTextareaInput = function() {
+            this.style.height = 'auto';           // Reset height to auto to shrink if text is removed
+            this.style.height = (this.scrollHeight) + 'px';  // Set the height to the content's scroll height
+        };
+        
+        const textareaElement = document.querySelector('.comment-textarea');
+        if (textareaElement) {
+            textareaElement.addEventListener('input', handleTextareaInput);
+        }
+    
+        // Cleanup
+        return () => {
+            if (textareaElement) {
+                textareaElement.removeEventListener('input', handleTextareaInput);
+            }
+        };
+    }, []); 
 
 
     const handleSubmit = async (e) => {
@@ -50,19 +68,32 @@ const CreateComment = ({ postId, allComments }) => {
         closeModal();
         dispatch(getCommentsThunk())
     };
+    // document.querySelector('.comment-textarea').addEventListener('input', function() {
+    //     this.style.height = 'auto';           // Reset height to auto to shrink if text is removed
+    //     this.style.height = (this.scrollHeight) + 'px';  // Set the height to the content's scroll height
+    // });
+    
 
     return (
         <div className="comment-form-wrapper">
             <form method='PUT' encType='multipart/form-data' onSubmit={handleSubmit}>
+
+                <div className='comment-input-wrapper'>
+                <img
+                    src={user.profile_image}
+                    style={{ width: "35px", height: "35px",borderRadius: "100%"}}
+                />
+                
                 <label className="comment-label">
-                    Comment
                     <textarea
                         className="comment-textarea"
                         type='text'
                         value={body}
                         onChange={(e) => setBody(e.target.value)}
+                        placeholder='Add a comment...'
                     />
                 </label>
+                </div>
     
                 {body && <button disabled={disable} className="submit-comment" type='submit'>Create Comment</button>}
             </form>

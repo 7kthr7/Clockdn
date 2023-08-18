@@ -5,7 +5,7 @@ import EditPost from "../Post/EditPost";
 // import DeletePost from "../Post/DeletePost";
 import CreateComment from "../Comments/CreateComment";
 import EditComment from "../Comments/EditComment";
-import DeleteComment from "../Comments/DeleteComment";
+// import DeleteComment from "../Comments/DeleteComment";
 import LikeToggle from "../Likes/index";
 import "./style.css"
 
@@ -43,64 +43,59 @@ const SinglePostCard = ({ post, postComments, user }) => {
                 {post.post_images && (
                     <img
                         src={post.post_images}
-                        style={{ height: '250px', border: '1px solid pink' }}
+                        // style={{ paddingRight: '250px', border: '1px solid pink' }}
                         alt="Post Images"
                         className="post-media"
                     />
                 )}
 
+
+
+
+                <div className="bottom-section-post">
+
                 <div className="post-like-toggle">
                     <LikeToggle postId={post.id} />
-                 
+                    
+                    
+                    {/* <OpenModalButton buttonText='Comment' modalComponent={<CreateComment postId={post.id} />} /> */}
+
                 </div>
 
-
-                <div className="post-comment-wrapper" >
-                                  
+                
+                    <div className="post-comment-wrapper" >
+                        
+                    
                         {postComments
                             .filter((comment) => comment.post_id === post.id)
                             .map((comment) => (
-                                <div key={comment.id} >
-                                    
+                                <div key={comment.id} className="single-comment">
                                     <div onClick={() => handleProfilePage(comment.user_id)}>
-
-                                    <img
-                                        src={comment.profile_image}
-                                        className="comment-user-profile-picture"
-                                    />
-
-
-
-
-
-
-                                    <p id="coment-user-name"> {comment.first_name} {comment.last_name} </p>
-                                   <p id="comment-user-occupation" >{comment.occupation}</p>
-                                   
+                                        <img
+                                            src={comment.profile_image}
+                                            className="comment-user-profile-picture"
+                                        />
+                                        <p id="coment-user-name"> {comment.first_name} {comment.last_name} </p>
+                                        <p id="comment-user-occupation" >{comment.occupation}</p>
                                     </div>
-
-
-
                                     {/* <p id="comment-created-at"> {comment.created_at}</p> */}
                                     <p id="comment-body"> {comment.body}</p>
                                     <div className="edit-comment">
-                                    {comment.user_id === user.id && (
-                                        <OpenModalButton buttonText='Edit Comment' modalComponent={<EditComment commentId={comment.id} />} />
-        
-                                    )}
-                                    {comment.user_id === user.id && (
-                                        <OpenModalButton buttonText='Delete Comment' modalComponent={<DeleteComment commentId={comment.id} />} />
-        
-                                    )}
+                                        {comment.user_id === user.id && (
+                                            <OpenModalButton buttonText='...' modalComponent={<EditComment commentId={comment.id} />} />
+                                        )}
+                                        {/* {comment.user_id === user.id && (
+                                            <OpenModalButton buttonText='Delete Comment' modalComponent={<DeleteComment commentId={comment.id} />} />
+                                        )} */}
                                     </div>
-        
                                 </div>
+                                
                             ))}
-                            <OpenModalButton buttonText='Comment' modalComponent={<CreateComment postId={post.id} />} />
-
-                            </div>
+                            <CreateComment postId={post.id} />
+                           {/* <button > <CreateComment postId={post.id} /></button> <CreateComment postId={post.id} /> */}
+                    </div>
+                </div>
             </div>
-
 
         </div>
     );

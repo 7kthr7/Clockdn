@@ -30,16 +30,18 @@ const LikeToggle = ({ postId }) => {
     };
 
     return (
-        <div>
+        <div class="like-toggle-button">
             <span className={`material-symbols-sharp ${liked ? 'liked' : 'not-liked'}`} onClick={LikeUnlike}> 
                 favorite
             </span>
             {/* <ViewLikes postId={postId} likesArr={likesArr} onClick={() => setShowLikes(true)} />
             {showLikes && <LikesModal postId={postId} likesArr={likesArr} onClose={() => setShowLikes(false)} />} */}
+            <div className="view-likes-button">
             <OpenModalButton 
                 buttonText={<ViewLikes postId={postId} likesArr={likesArr} />} 
                 modalComponent={<LikesModal postId={postId} likesArr={likesArr} />}
             />
+            </div>
         </div>
     );
 }
@@ -52,12 +54,12 @@ const LikeToggle = ({ postId }) => {
 
         if (allLikes.length === 1) {
             const oneLike = allLikes[0];
-            return <p onClick={onClick}>{oneLike.first_name} {oneLike.last_name} liked this post</p>;
+            return <span onClick={onClick}>{oneLike.first_name} {oneLike.last_name} liked this post</span>;
         }
 
         const firstLike = allLikes[0];
         const likeCount = allLikes.length - 1
-        return <p onClick={onClick}> Liked by {firstLike.first_name} {firstLike.last_name} and {likeCount} others</p>;
+        return <span onClick={onClick}> Liked by {firstLike.first_name} {firstLike.last_name} and {likeCount} others</span>;
     };
 
     

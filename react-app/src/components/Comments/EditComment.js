@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { editCommentThunk, getCommentsThunk } from '../../store/comment';
 import { useModal } from '../../context/Modal';
+import OpenModalButton from "../OpenModalButton";
+
+import DeleteComment from './DeleteComment';
 
 
 const EditComment = ({ commentId }) => {
@@ -44,7 +47,12 @@ const EditComment = ({ commentId }) => {
                         />
                     </label>
 
-                     <button className="submit-comment" type='submit'>Edit your Comment</button>
+                     
+                    <button className="submit-comment" type='submit'>Edit your Comment</button>
+                    <OpenModalButton buttonText={'Delete Post'} 
+                            modalComponent={<DeleteComment commentId={commentDetail.id} />}
+                        />
+            
             </form>
 
         </div>

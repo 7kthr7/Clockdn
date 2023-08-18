@@ -2,13 +2,14 @@
 
 
 .feed-page {
+    display: flex;
     position: relative;
     flex-direction: column;
     width: 580px;
     height: auto;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 40px;
     background-color: #f3f2ef;
 }
 
@@ -17,6 +18,7 @@
 .posts-wrapper{
     /* border: 1.5px solid rgb(255, 0, 0); */
     position: relative;
+    padding-top: 2px;
     
 
    
@@ -28,35 +30,42 @@
     background-color: white;
     border-radius: 10px;
     width: 450px;
-    height: fit-content 
+    height: fit-content;
+    padding-bottom: 20px;
 }
 
 /*  ------- EDIT POST */
 .edit-post{
+    position: absolute;
     display: flex;
+    left: 85%;
     margin-left: 10px;
     margin-right: 10px;
     justify-content: flex-end;
-    border-bottom: .5px solid rgba(27, 50, 34, 0.175);
     color:  #32473c; 
+    /* padding-top: -8px; */
 }
 
 .edit-post button{
     border: none;
     font-size: 30px;
-    border-radius: 100%;
+    /* border-radius: 100%; */
     cursor: pointer;
     background-color: white;
+    /* margin-top: -2px; */
+    /* height: 20px; */
+    /* padding-top: -2px; */
+
 }
 
 /*  ------- POST USER IMAGE */
 .profile-image-post{
-    width: 60px;
-    height: 60px;
+    width: 55px;
+    height: 55px;
     border-radius: 100%;
     object-fit: cover;
     cursor: pointer;
-    margin-top: 10px;
+    margin-top: 8px;
     margin-left: 10px;
 }
 
@@ -68,6 +77,8 @@
     font-weight: 580;
     font-size: 18px; 
     cursor: pointer;
+    color: #000000bd;
+    width: fit-content;
 }
 
 .post-user-name:hover {
@@ -88,10 +99,11 @@
 /*  ------- POST TITLE*/
 .post-title{
     position: relative;
-    font-size: 20px;
+    font-size: 18px;
     margin-top:-70px;
-    font-weight: bolder;
-    text-align: center;
+    font-weight: bold;
+    text-align: start;
+    margin-left: 10px;
     /* font-family: monospace; */
 }
 
@@ -105,23 +117,61 @@
 
 /*  ------- POST IMAGES*/
 
-.post-media{
-    width: 100%;
-    object-fit: cover;
-    height: 450px;
-    
+.post-media  {
+    width: 95%;
+    height: 350px;
+    /* object-fit: cover; */
+    /* height: 450px; */
+    padding-bottom: 20px;
+    /* border-bottom: 1px solid rgba(0, 0, 0, 0.267); */
+    /* margin-left: 10px;
+    margin-right: 10px; */
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
+/* .post-media img {
+    height: 250px;
+} */
+
 .post-like-toggle{
-    margin-left: 10px;
+    /* margin-left: 10px; */
+    margin-right: 0px;
+    display: flex;
+    gap: 190px;
+    padding-bottom: 2px;
+    border-bottom: .5px solid rgba(0, 0, 0, 0.116);
+    padding-left: 10px;  
+}
+
+.post-like-toggle button {
+    background-color: white;
+    border: 0px;
+    cursor: pointer;
+
+}
+
+.post-like-toggle button:hover {
+    text-decoration: underline;
 }
 
 /*  ------- POST COMMENTS*/
 
 .post-comment-wrapper{
-    border: teal 2px solid;
-    margin-left: 10px;
+    /* border: teal 2px solid; */
+    /* margin-left: 10px; */
+    /* padding-left: 10px; */
+    padding-top: 10px;
+   
 }
+
+.single-comment{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.116);
+    padding-left: 10px;
+
+}
+
+
 
 
 .comment-user-profile-picture{
@@ -153,8 +203,26 @@
 }
 
 
-.edit-comment{
-    border-top:  .5px solid rgba(27, 50, 34, 0.175);
+.edit-comment button{
+    margin-top: -95px;
+    left: 88%;
+    /* top: 4%; */
+    position: absolute;
+    border-bottom:  .5px solid rgba(27, 50, 34, 0.175);
+    border: none;
+    font-size: 30px;
+    /* border-radius: 100%; */
+    cursor: pointer;
+    background-color: white;
+    /* margin-top: -2px; */
+    /* height: 20px; */
+    /* padding-top: -2px; */
+
+
+}
+
+.bottom-section-post{
+    /* border: 1px solid fuchsia; */
 }
 
 
