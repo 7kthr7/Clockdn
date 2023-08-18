@@ -66,14 +66,9 @@ const CreateComment = ({ postId, allComments }) => {
 
         await setBody("");
     dispatch(createCommentThunk( postDetail.id, newComment,));
-        // closeModal();
-    // dispatch(getCommentsThunk())
 
     };
-    // document.querySelector('.comment-textarea').addEventListener('input', function() {
-    //     this.style.height = 'auto';           // Reset height to auto to shrink if text is removed
-    //     this.style.height = (this.scrollHeight) + 'px';  // Set the height to the content's scroll height
-    // });
+   
     
 
     return (
@@ -89,6 +84,7 @@ const CreateComment = ({ postId, allComments }) => {
                 <label className="comment-label">
                     <textarea
                         className="comment-textarea"
+                        row = {9}
                         type='text'
                         value={body}
                         onChange={(e) => setBody(e.target.value)}

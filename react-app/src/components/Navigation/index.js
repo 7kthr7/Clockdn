@@ -1,10 +1,7 @@
 import React from 'react';
 import { NavLink, useHistory, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import OpenModalButton from "../OpenModalButton";
-import SignupFormModal from "../SignupFormModal";
-import LoginFormModal from "../LoginFormModal";
-import { useModal } from "../../context/Modal";
+
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
 import logo from '../../assets/clockdnLogo.png'

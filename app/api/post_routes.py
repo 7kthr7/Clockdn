@@ -8,28 +8,32 @@ from flask_login import login_required, current_user
 post_routes = Blueprint('post', __name__)
 
 
-#### All post
-# - Get all posts including comments, likes, and the user it belongs t0
-
 @post_routes.route('/feed')
 @login_required
 def get_posts():
     
+#query the Post table for all posts
     all_posts = Post.query.all()
+
+#loop through the list of posts and return each post as a dictionary 
     post_detail = [post.to_dict() for post in all_posts]
 
     return post_detail
 
-## - Get posts by Id
 
 @post_routes.route('/<int:post_id>')
 @login_required
 def get_post(post_id):
-    
+
+#query the Post table for the id requested in the URL    
     post = Post.query.get(post_id)
 
+#if that id exists turn it into a dictionary
     if post:
         singlePost = post.to_dict()
+
+#from the singlepost at the user_id attribute return the information related to the user 
+#there is a one to many relationship between Users and Posts  
 
     user = post.user
     singlePost['user_id'] = {
@@ -39,16 +43,8 @@ def get_post(post_id):
         'occupation': user.occupation,
         'profile_image': user.profile_image
     }
-
-
     return singlePost
 
-
-### Create post
-# - Similar to sign up  
-     # image_url = upload['url']
-    # else:
-    #         image_url = None
 
 
 @post_routes.route('/feed/new', methods = ['POST'])
@@ -57,6 +53,8 @@ def create_post():
     form = PostForm()
     form.csrf_token.data = request.cookies.get('csrf_token')
     upload = {'url': None} 
+
+#aws biolerplate for post_images
 
     if form.validate_on_submit():
         image = form.data["post_images"] 
@@ -71,6 +69,8 @@ def create_post():
         print("Form data - title:----------->", form.title.data)
         print("Form data - body:------------>", form.body.data)
 
+    #create a new instance for the Post table using the PostForm class
+
         new_post = Post(
             title=form.title.data,
             body=form.body.data,
@@ -79,10 +79,14 @@ def create_post():
             created_at=datetime.now(),
             updated_at=datetime.now()
         )
+    #append the new_post instance into the db
+    # turn the instance into a dictionary(serialize)
 
         db.session.add(new_post)
         db.session.commit()
         return new_post.to_dict(), 201
+    
+    #if errors return the form errors/validations
     else:       
         return {"errors": form.errors}, 400
 
@@ -98,23 +102,26 @@ def create_post():
 
 def update_post(id):
 
-    
+#query Post table for id being requested
+#grab the information from the db 
     post = Post.query.get(id)
     data = request.form
     title = data.get('title')
     body = data.get('body')
     post_images = request.files.get('post_images')
-    remove_image_request = data.get('post_images')  # check here
+#in the front end if an remove_image_request is being made grab the post_image that is already in the db
+    remove_image_request = data.get('post_images')
 
     
     if post:
-        # Check if 'remove_image' is received from frontend
+#in the front end there is a 'remove_image function' that deletes the image from db
         if remove_image_request == 'remove_image':
             if post.post_images:
                 remove_file_from_s3(post.post_images)
-            post.post_images = None  # remove the image link from the database
+#if the image is removed then let aws know there is no URL and set the post.post_images to None
+            post.post_images = None  
         
-        # Upload new image logic
+#if the image is not being removed and just replaced set the new image to the new url
         elif post_images:
             if post.post_images:
                 remove_file_from_s3(post.post_images)
@@ -126,6 +133,8 @@ def update_post(id):
                 return {'error': upload['errors']}
 
             post.post_images = upload['url']
+
+#if title or body return the new information and commit it to db
 
         if title:
             post.title = title
@@ -139,11 +148,13 @@ def update_post(id):
     return {'message': 'Post not found'}, 404
 
 
-### delete post 
+
 
 @post_routes.route('/<int:id>', methods=['Delete'])
 @login_required
 def delete_post(id):
+
+#delete postId being requested from the db after quering and checking if exists
     post = Post.query.get(id)
     if post.id:
 
