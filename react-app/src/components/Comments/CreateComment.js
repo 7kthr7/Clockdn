@@ -47,7 +47,7 @@ const CreateComment = ({ postId, allComments }) => {
             textareaElement.addEventListener('input', handleTextareaInput);
         }
     
-        // Cleanup
+        //Cleanup
         return () => {
             if (textareaElement) {
                 textareaElement.removeEventListener('input', handleTextareaInput);
@@ -64,9 +64,11 @@ const CreateComment = ({ postId, allComments }) => {
         newComment.append('body', body);
        
 
-        dispatch(createCommentThunk( postDetail.id, newComment,));
-        closeModal();
-        dispatch(getCommentsThunk())
+        setBody("");
+      dispatch(createCommentThunk( postDetail.id, newComment,));
+        // closeModal();
+    dispatch(getCommentsThunk())
+
     };
     // document.querySelector('.comment-textarea').addEventListener('input', function() {
     //     this.style.height = 'auto';           // Reset height to auto to shrink if text is removed
@@ -76,7 +78,7 @@ const CreateComment = ({ postId, allComments }) => {
 
     return (
         <div className="comment-form-wrapper">
-            <form method='PUT' encType='multipart/form-data' onSubmit={handleSubmit}>
+            <form method='POST' encType='multipart/form-data' onSubmit={handleSubmit}>
 
                 <div className='comment-input-wrapper'>
                 <img

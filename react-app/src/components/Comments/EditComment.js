@@ -57,12 +57,12 @@ const EditComment = ({ commentId }) => {
                 </div>
     <div className="edit-buttons">
         
-                {body && <button  className="edit-submit-comment" type='submit'>Create Comment</button>}
            <div id="delete-submit-comment">
             <OpenModalButton buttonText={'Delete Comment'} 
                     modalComponent={<DeleteComment commentId={commentDetail.id} />}
                 />
                 </div>
+                {body && <button  className="edit-submit-comment" type='submit'>Edit Comment</button>}
                 </div>
             </form>
         </div>
