@@ -6,7 +6,7 @@ import EditPost from "../Post/EditPost";
 import CreateComment from "../Comments/CreateComment";
 import EditComment from "../Comments/EditComment";
 import DeleteComment from "../Comments/DeleteComment";
-import LikeToggle from "../Likes";
+import LikeToggle from "../Likes/index";
 import "./style.css"
 
 const SinglePostCard = ({ post, postComments, user }) => {
