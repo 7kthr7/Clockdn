@@ -9,13 +9,8 @@
 
 .comment-form-wrapper {
     padding-left: 10px;
-
-    /* background-color: #f6f8fa; */
-    /* padding: 20px; */
     border-radius: 8px;
-    /* box-shadow: 0 0 15px rgba(0, 0, 0, 0.05); */
     max-width: 400px;
-    /* margin: 20px 0;  */
 }
 
 .comment-label {
@@ -23,7 +18,7 @@
     height: fit-content;
     display: block;
     margin-bottom: 10px;
-    font-weight: 500; /* Slightly bold */
+    font-weight: 500; 
     font-size: 15px;
     color: #333;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -31,20 +26,18 @@
 
 .comment-textarea {
     word-wrap: break-word;
-overflow-wrap: break-word;
+    overflow-wrap: break-word;
     width: 100%;
     padding-top: 8px;
     padding-left: 20px;
     border: 1px solid #e1e4e8;
     border-radius: 4px;
     font-size: 14px;
-    height: fit-content;
+    height: 150px;
     color: #24292e;
-    resize: none; 
-    overflow-y: hidden; 
-
+    overflow-y: scroll;
+    scroll-behavior: smooth;
     box-sizing: border-box; 
-
 }
 
 .comment-textarea:focus {
@@ -63,14 +56,14 @@ overflow-wrap: break-word;
     border-radius: 4px;
     font-size: 14px;
     cursor: pointer;
-    transition: background-color 0.2s ease; /* Smooth background transition */
+    transition: background-color 0.2s ease; 
 }
 
 .submit-comment:hover {
-    background-color:  #2C684B; /* A bit darker green on hover */
+    background-color:  #2C684B; 
 }
 
 .submit-comment:disabled {
-    background-color: #b0d5b4; /* Lighter green if button is disabled */
-    cursor: not-allowed; /* Indicate that it's not clickable */
+    background-color: #b0d5b4; 
+    cursor: not-allowed; 
 } 
