@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createCommentThunk, getCommentsThunk } from '../../store/comment';
 import './CreateComment.css'
 
-
 const CreateComment = ({ postId, allComments }) => {
     const dispatch = useDispatch();
     const [body, setBody] = useState('')
+    const [errors, setErrors] = useState([]);
     const [frontendErrors, setFrontendErrors] = useState({})
 
 
@@ -24,14 +24,15 @@ const CreateComment = ({ postId, allComments }) => {
     useEffect(() => {
         const frontendErrors = {}
         if (body.length > 500) {
-            frontendErrors.body = "Comment must be less than 1000 characters"
+            frontendErrors.body = "Comment must be less than 500 characters"
         }
         setFrontendErrors(frontendErrors)
     }, [body])
 
-    //if the body count is 0 or more than 1000 characters don't show the submit button
-    let disable = body.length === 0 || body.length > 500;
-
+    //if the body count is 0 or more than 500 characters don't show the submit button
+    let disable = false;
+    body.length > 500 || (disable = true);
+    
     //async event handler that executes when the form is submitted while not causing a full page refresh thanks to e.preventDefault
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -49,11 +50,11 @@ const CreateComment = ({ postId, allComments }) => {
         <div className="comment-form-wrapper">
             <form method='POST' encType='multipart/form-data' onSubmit={handleSubmit}>
                 <div className='comment-input-wrapper'>
-                <img
-                    src={user.profile_image}
-                    style={{ width: "35px", height: "35px",borderRadius: "100%"}}
-                />                
-                <label className="comment-label">
+                    <img
+                        src={user.profile_image}
+                        style={{ width: "35px", height: "35px",borderRadius: "100%"}}
+                    />                
+                    <label className="comment-label">
                     <textarea
                         className="comment-textarea"
                         row = {9}
@@ -62,9 +63,21 @@ const CreateComment = ({ postId, allComments }) => {
                         onChange={(e) => setBody(e.target.value)}
                         placeholder='Add a comment...'
                     />
-                </label>
+                    </label>
+                    
                 </div>  
-                {body && <button disabled={disable} className="submit-comment" type='submit'>Create Comment</button>}
+                {body && < button disabled={Object.keys(frontendErrors).length > 0} className="submit-comment" type='submit'>Create Comment</button>}
+                <div className='post-errors'>
+                    {frontendErrors.body && (
+                        <p className='on-submit-errors'>{frontendErrors.body}</p>
+                    )}
+
+                    <p>
+                        {errors.map((error, idx) => (
+                            <p className='on-submit-errors' key={idx}>{error}</p>
+                        ))}
+                    </p>
+                </div>  
             </form>
         </div>
     );

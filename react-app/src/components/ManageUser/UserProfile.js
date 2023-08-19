@@ -29,9 +29,6 @@ const UserProfile = () => {
         dispatch(getUserThunk())
     }, [dispatch])
 
-
-
-
     return (
         <div className="profile-page">
             <div className="first-section-user">

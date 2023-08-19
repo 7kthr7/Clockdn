@@ -32,7 +32,7 @@ const CreatePost = () => {
 
 
         if (body.length > 2000) {
-            frontendErrors.body = "Post must be less than 500 characters"
+            frontendErrors.body = "Post must be less than 2000 characters"
         }
         if (body.length < 5) {
             frontendErrors.body = ""

@@ -38,7 +38,7 @@ if (sessionUser) return <Redirect to="/" />;
 const handleSubmit = async (e) => {
   e.preventDefault();
 
-  const newFrontendErrors = {}; // Temporary error object
+  const newFrontendErrors = {}; 
 
   const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 

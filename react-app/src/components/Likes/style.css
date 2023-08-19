@@ -1,17 +1,11 @@
 
-
-
-/* Style for the not-liked state */
 .material-symbols-sharp.not-liked {
    color:#2C684B
-  
 }
-
 .material-symbols-sharp.liked {
     font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 100, 'opsz' 48;
     color: #2C684B;
   }
-
   .view-likes-button button{
    background-color: #ffffff;
    padding: 0;
@@ -22,13 +16,54 @@
    padding-bottom: 2px;
    cursor: pointer;
 }
-
 .view-likes-button button:hover {
    text-decoration: underline;
 }
-
 .like-toggle-button {
    display: flex;
    flex-direction: row;
    align-items: center;
 }
+
+.likes-modal{
+   width: 100%;
+   height: fit-content;
+   border-radius: 10px;
+}
+
+.user-liked{
+   border-bottom: .5px solid rgba(183, 189, 187, 0.479);
+   padding-left: 10px;
+   padding-right: 20px;
+   padding-top: 10px;
+   padding-bottom: 20px;
+   border-radius: 10px;
+
+
+}
+
+.user-liked img{
+   width: 60px;
+   height: 60px;
+   border-radius: 100%;
+}
+
+.user-liked h3 {
+   margin-top: 2px;
+   left: 25px;
+}
+.liked-modal-user{
+   display: flex;
+   flex-direction: row;
+}
+
+.liked-user-occupation{
+   display: flex;
+   flex-direction: column;
+   margin-left: 8px;
+}
+
+.liked-user-occupation p {
+   margin-top: -18px;
+}
+

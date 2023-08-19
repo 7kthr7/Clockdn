@@ -21,11 +21,14 @@ const DeleteProfile = ({ userId }) => {
     }
 
     return (
-        <div>
-        <button onClick={handleSubmit}>Yes Delete</button>
-        <button onClick={closeModal}>No Don't Delete</button>
+        <div className="delete-modal-wrapper">
+            <h3>you sure you want to delete your account?</h3>
+            <div className="delete-modal-buttons">
+        <button onClick={handleSubmit} className="confirm-delete">Yes, delete my account</button>
+        <button onClick={closeModal} className="cancel-delete">I want to keep my account</button>
+        </div>
         </div>
     )
-
+ 
 }
 export default DeleteProfile
