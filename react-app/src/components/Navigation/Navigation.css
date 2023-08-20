@@ -13,26 +13,26 @@
   margin-top: -8px;
   /* margin-left: 40px;
   margin-right: 40px; */
-  max-width: 1128;
+  /* max-width: 3000px; */
   align-items: center;
   padding-top: 8px;
   padding-bottom: 0px;
   z-index: 999;
-  /* border: 1px solid #f3f2ef; */
+  border: 1px solid #cf9e0c;
   /* background-color: rgb(255, 255, 255); */
 }
 
 /* ---------NAV-RIGHT-SIDE-------*/
 .icons-login-container {
   display: flex;
-  max-width: 1128;
+  max-width: 1026;
 }
 
 .search-bar-navigation{
   display: flex;
   flex-direction: row-reverse;
   position: relative;
-  left: 40%;
+  /* left: 40%; */
 }
 
 .search-nav{
@@ -316,11 +316,11 @@ top: 90%;
 
 @media (max-width: 990px) {
   .search-nav {
-    width: 10%;
+    width: 8%;
   }
 }
 
-@media (max-width: 850px) {
+ @media (max-width: 850px) {
   .search-nav input {
     display: none;
     
@@ -330,4 +330,4 @@ top: 90%;
 @media (max-width: 960px) {
   .search-nav input {
 width: 250px;  }
-}
+} 

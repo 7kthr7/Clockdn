@@ -210,3 +210,28 @@
     text-decoration: underline;
     color: rgba(16, 91, 47, 0.866);
 }
+
+
+/* @media (max-width: 1076px) {
+     .center-feed {
+        width: 80%;
+    }
+
+    .right-section {
+        display: none;
+    }
+}
+
+@media (min-width: 1026px) {
+    .user-left-section {
+        margin-left: 20%; 
+        width: 50%;
+    }
+} */
+
+@media (min-width: 1700px) {
+    .user-left-section {
+        margin-left: 20%; 
+        width: 50%;
+    }
+}
