@@ -6,6 +6,8 @@ import CreatePost from "../Post/CreatePost"
 import OpenModalButton from '../OpenModalButton'
 import './style.css'
 import PostFeed from "../PostCard"
+import Background from '../../assets/background.jpg'
+
 
 const HomePage = () => {
     function shuffleArray(array) {
@@ -63,7 +65,8 @@ const handleProfilePage = (userId) => {
             <div className="left-section">
                 <div className="left-section-top">
                     <div id="left-background-image">
-                        <img
+                    <img
+                            src={Background}
                         />
                     </div>
                     <div className="left-profile-image">

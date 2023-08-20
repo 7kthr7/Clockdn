@@ -84,6 +84,15 @@
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
 }
+
+#left-background-image img{
+    background-color: olivedrab;
+    object-fit: cover;
+    width: 100%;
+    height: 48px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
 .left-profile-image img{
     cursor: pointer;
     border-radius: 100%;

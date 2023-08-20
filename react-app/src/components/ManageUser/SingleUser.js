@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getSingleUserThunk } from '../../store/user'
-import Background from '../../assets/download.jpg'
+import Background from '../../assets/background.jpg'
 import './SingleUser.css'
 
 // import ToggleConnection from "../Connections";

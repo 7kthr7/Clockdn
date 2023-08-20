@@ -6,7 +6,7 @@ import EditProfile from "./EditProfile";
 import OpenModalButton from '../OpenModalButton';
 import DeleteProfile from "./DeleteUser";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import Background from '../../assets/download.jpg'
+import Background from '../../assets/background.jpg'
 
 import './SingleUser.css'
 
