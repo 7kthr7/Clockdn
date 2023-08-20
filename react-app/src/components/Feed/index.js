@@ -1,20 +1,46 @@
-import React from "react"
-import { useSelector } from "react-redux"
+import React, {useEffect} from "react"
+import { useSelector, useDispatch } from "react-redux"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
+import { getUserThunk } from "../../store/user"
 import CreatePost from "../Post/CreatePost"
 import OpenModalButton from '../OpenModalButton'
 import './style.css'
 import PostFeed from "../PostCard"
 
 const HomePage = () => {
-    const user = useSelector(state => state.session.user);
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+        }
+        return array;
+    }
+
+
+    const dispatch = useDispatch();
     const history = useHistory()
+
+    const user = useSelector(state => state.session.user);
+    const allUser = Object.values(useSelector(state => state.user.allUser))
+    const currentUserFollowingIds = user.following.map(followedUser => followedUser.id);
+    const usersNotFollowed = allUser.filter(usr => !currentUserFollowingIds.includes(usr.id) && usr.id !== user.id);
+    
+    const usersToDisplay = shuffleArray(usersNotFollowed).slice(0, 3);
+
+    useEffect(() => {
+        // dispatch(getUserCommentsThunk())
+        dispatch(getUserThunk())
+    }, [dispatch])
+
 
 const handleOnClick = (e) => {
     e.preventDefault()
     history.push('/profile')
 }
 
+const handleProfilePage = (userId) => {
+    history.push(`/user/${userId}`);
+};
 
 
     return (
@@ -80,10 +106,25 @@ const handleOnClick = (e) => {
                     <a href="https://blog.appacademy.io/famous-black-coders-and-software-engineers/" target="_blank" rel="noopener noreferrer">6 Black Software Engineers Who Are Changing the World</a>
                    
                 </div>
-                {/* <div className="right-section-two">
-                    <h3> SECTION TWO </h3>
-                </div> */}
+                <div className="right-section-two">
+                    <h3> Make Connections </h3>
+                   
+                    {usersToDisplay.map((user) => (
+                        <div key={user.id} className="right-section-two-content" onClick={() => handleProfilePage(user.id)}>
+                            <img
+                                src={user.profile_image}
+                                
+                            />
+                            <div className="right-user-info"> 
+                            <h3>{user.first_name} {user.last_name}</h3>
+                            <p>{user.occupation}</p>
+                            </div>
+                        </div>
+                    ))}
+                    
+                </div>
             </div>
+
         </div>
     );
 

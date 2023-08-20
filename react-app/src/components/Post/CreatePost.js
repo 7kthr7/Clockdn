@@ -34,12 +34,15 @@ const CreatePost = () => {
         if (body.length > 2000) {
             frontendErrors.body = "Post must be less than 2000 characters"
         }
-        if (body.length < 5) {
+        if (body.length < 1) {
             frontendErrors.body = ""
+        }
+        if (title.length > 100) {
+            frontendErrors.title = "Title must be less than 100 characters"
         }
 
         setFrontendErrors(frontendErrors)
-    }, [body])
+    }, [body, title])
 
 
     const handleSubmit = async (e) => {
@@ -143,6 +146,9 @@ const handleImageRemove = () => {
                 <div className='post-errors'>
                     {frontendErrors.body && body.length > 0 && (
                         <p className='on-submit-errors'>{frontendErrors.body}</p>
+                    )}
+                    {frontendErrors.title && title.length > 0 && (
+                        <p className='on-submit-errors'>{frontendErrors.title}</p>
                     )}
 
                     <p>
