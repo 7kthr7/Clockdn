@@ -5,6 +5,7 @@ import { useModal } from "../../context/Modal";
 import { getUserThunk } from "../../store/user";
 import DeleteProfile from "./DeleteUser";
 import OpenModalButton from "../OpenModalButton";
+import "./EditUser.css"
 
 
 const EditProfile = (props) => {
@@ -47,12 +48,12 @@ const EditProfile = (props) => {
 
 
     return (
-        <div className="sign-up-form-splash">
+        <>
 
-            <h3>Edit User Form</h3>
-
-            <form   method='PUT' encType='multipart/form-data' onSubmit={handleSubmit}>
-                <div className="sign-up-name">
+            <form  className="edit-wrapper" method='PUT' encType='multipart/form-data' onSubmit={handleSubmit}>
+        <h3>Edit User Form</h3>
+                <div className="edit-form-splash">
+                <div className="edit-name">
                     <label>
                         First Name
                         <input
@@ -71,6 +72,7 @@ const EditProfile = (props) => {
                             required
                         />
                     </label>
+                    </div>
                     <label>
                         Email
                         <input
@@ -80,7 +82,7 @@ const EditProfile = (props) => {
                             required
                         />
                     </label>
-                    <div className="sign-up-location">
+                    <div className="edit-location">
                     <label>
                         City
                         <input
@@ -113,7 +115,7 @@ const EditProfile = (props) => {
                     <label>
                         About Me
                         <input
-                        id="sign-up-biography"
+                        id="edit-biography"
                             type="text"
                             value={biography}
                             onChange={(e) => setBiography(e.target.value)}
@@ -137,7 +139,7 @@ const EditProfile = (props) => {
 
 
 
-                </div>
+               
 
                 <button type='submit'>Edit User</button>
                 <OpenModalButton buttonText={'Delete User'}
@@ -146,9 +148,10 @@ const EditProfile = (props) => {
 
 <button onClick={props.onClose}>Close</button>
 
-            </form>
-
         </div>
+            </form>
+            	</>
+
     )
 
 

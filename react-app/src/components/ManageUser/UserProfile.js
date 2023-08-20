@@ -6,7 +6,9 @@ import EditProfile from "./EditProfile";
 import OpenModalButton from '../OpenModalButton';
 import DeleteProfile from "./DeleteUser";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import './UserProfile.css'
+import Background from '../../assets/download.jpg'
+
+import './SingleUser.css'
 
 
 const UserProfile = () => {
@@ -30,8 +32,8 @@ const UserProfile = () => {
 
     const currentUserFollowingIds = user.following.map(followedUser => followedUser.id);
     const usersNotFollowed = allUser.filter(usr => !currentUserFollowingIds.includes(usr.id) && usr.id !== user.id);
-    
-    const usersToDisplay = shuffleArray(usersNotFollowed).slice(0, 3);
+
+    const usersToDisplay = shuffleArray(usersNotFollowed).slice(0, 5);
     useEffect(() => {
         dispatch(getUserCommentsThunk())
         dispatch(getUserThunk())
@@ -41,48 +43,83 @@ const UserProfile = () => {
         history.push(`/user/${userId}`);
     };
 
+    <div className="edit-delete-user">
+        <OpenModalButton modalComponent={<EditProfile userId={user.id} />}>
+            <span className="material-symbols-outlined">edit</span>
+        </OpenModalButton>
 
+
+    </div>
     return (
-        <div className="profile-page">
-            <div className="first-section-user">
-                <div className="background-image-user">
-                    <div className="edit-delete-user">
-                        <OpenModalButton modalComponent={<EditProfile userId={user.id} />}>
+        <div className="single-profile-page">
+
+            <div className="single-user-left-section">
+                <div className="single-first-section-user">
+                    <div className="single-background-image-user">
+                        <img
+                            src={Background}
+                        />
+                    </div>
+                   
+                    <div className="single-user-information">
+                        <img src={user.profile_image} />
+                        <div className="single-user-name-occupation">
+                            <h2>
+                                {user.first_name} {user.last_name}
+                                <OpenModalButton modalComponent={<EditProfile userId={user.id} />}>
                             <span className="material-symbols-outlined">edit</span>
                         </OpenModalButton>
+                            </h2>
+                            <p>{user.occupation}</p>
+                        </div>
+                        <p className="single-user-biography" >{user.biography}</p>
+                        <p className="single-user-location">{user.city}, {user.state}</p>
                     </div>
                 </div>
-                <div className="user-information">
-                    <img src={user.profile_image} />
-                    <div className="user-name-occupation">
-                    <h2>
-                        {user.first_name}{user.last_name}
-                    </h2>
-                    <p>{user.occupation}</p>
+
+                <div className="single-second-section">
+                    <h2>People you may know</h2>
+                    <div className="single-second-section-content">
+                        {usersToDisplay.map((user) => (
+                            <div key={user.id} onClick={() => handleProfilePage(user.id)}>
+                                <img
+                                    src={user.profile_image}
+
+                                />
+                                <p>{user.first_name} {user.last_name}</p>
+                            </div>
+                        ))}
                     </div>
-                    <p>{user.city}, {user.state}</p>
-                    <p>{user.biography}</p>
+                </div>
+                <div className="single-third-section">
+                    <h3>Recent Posts</h3>
+                    <p>Coming soon...</p>
+
                 </div>
             </div>
+            <div className="single-user-right-section">
+                <div className="right-section">
+                    <div className="news-articles">
+                        <h3>Clockdn News</h3>
+
+                        <a href="https://blog.appacademy.io/best-programming-languages-for-game-development/" target="_blank" rel="noopener noreferrer">5 Best Programming Languages for Game Development</a>
+
+                        <a href="https://blog.appacademy.io/what-is-javascript-used-for/" target="_blank" rel="noopener noreferrer">What Can You Do With JavaScript? 7 JavaScript Applications</a>
+
+                        <a href="https://blog.appacademy.io/best-programming-languages-for-ai-development/" target="_blank" rel="noopener noreferrer">6 Best Programming Languages for AI Development</a>
 
 
-            <div className="second-section">
-                    <h2>Suggested connections for you</h2>
-                <div className="second-section-content">
-                    {usersToDisplay.map((user) => (
-                        <div key={user.id} onClick={() => handleProfilePage(user.id)}>
-                            <img
-                                src={user.profile_image}
-                                
-                            />
-                            <p>{user.first_name} {user.last_name}</p>
-                        </div>
-                    ))}
+                        <a href="https://blog.appacademy.io/what-is-python-used-for/" target="_blank" rel="noopener noreferrer">What is Python Used For? 9 Applications & Examples</a>
+
+
+                        <a href="https://blog.appacademy.io/famous-black-coders-and-software-engineers/" target="_blank" rel="noopener noreferrer">6 Black Software Engineers Who Are Changing the World</a>
+
+                    </div>
                 </div>
             </div>
 
         </div>
     );
-}
+};
 
 export default UserProfile;

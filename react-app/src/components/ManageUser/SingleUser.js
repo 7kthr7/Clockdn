@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getSingleUserThunk } from '../../store/user'
 import Background from '../../assets/download.jpg'
-import './UserProfile.css'
+import './SingleUser.css'
 
 // import ToggleConnection from "../Connections";
 
@@ -61,31 +61,31 @@ const ViewUserProfile = () => {
     }
 
     return (
-        <div className="profile-page">
+        <div className="single-profile-page">
             
-            <div className="user-left-section">
-                <div className="first-section-user">
-                    <div className="background-image-user">
+            <div className="single-user-left-section">
+                <div className="single-first-section-user">
+                    <div className="single-background-image-user">
                         <img
                         src={Background}
                         />
                     </div>
-                    <div className="user-information">
+                    <div className="single-user-information">
                         <img src={user.profile_image} />
-                        <div className="user-name-occupation">
+                        <div className="single-user-name-occupation">
                             <h2>
                                 {user.first_name} {user.last_name}
                             </h2>
                             <p>{user.occupation}</p>
                         </div>
-                            <p className="user-biography" >{user.biography}</p>
-                            <p className="user-location">{user.city}, {user.state}</p>
+                            <p className="single-user-biography" >{user.biography}</p>
+                            <p className="single-user-location">{user.city}, {user.state}</p>
                     </div>
                 </div>
 
-                <div className="second-section">
+                <div className="single-second-section">
                         <h2>Recent Follows</h2>
-                    <div className="second-section-content">
+                    <div className="single-second-section-content">
                         {usersToDisplay.map((userr) => (
                             <div key={userr.id} >
                                 {/* <img
@@ -97,13 +97,13 @@ const ViewUserProfile = () => {
                         ))}
                     </div>
                 </div>
-                <div className="third-section">
+                <div className="single-third-section">
                     <h3>Recent Posts</h3>
                     <p>Coming soon...</p>
 
                 </div>
             </div>
-            <div className="user-right-section">
+            <div className="single-user-right-section">
             <div className="right-section">
                 <div className="news-articles">
                     <h3>Clockdn News</h3>
