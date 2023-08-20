@@ -47,12 +47,12 @@ const EditProfile = (props) => {
 
 
     return (
-        <div>
+        <div className="sign-up-form-splash">
 
             <h3>Edit User Form</h3>
 
-            <form method='PUT' encType='multipart/form-data' onSubmit={handleSubmit}>
-                <div>
+            <form   method='PUT' encType='multipart/form-data' onSubmit={handleSubmit}>
+                <div className="sign-up-name">
                     <label>
                         First Name
                         <input
@@ -80,6 +80,7 @@ const EditProfile = (props) => {
                             required
                         />
                     </label>
+                    <div className="sign-up-location">
                     <label>
                         City
                         <input
@@ -98,6 +99,7 @@ const EditProfile = (props) => {
                             required
                         />
                     </label>
+                    </div>
 
                     <label>
                         Occupation
@@ -111,6 +113,7 @@ const EditProfile = (props) => {
                     <label>
                         About Me
                         <input
+                        id="sign-up-biography"
                             type="text"
                             value={biography}
                             onChange={(e) => setBiography(e.target.value)}
@@ -135,13 +138,6 @@ const EditProfile = (props) => {
 
 
                 </div>
-
-
-
-
-
-
-
 
                 <button type='submit'>Edit User</button>
                 <OpenModalButton buttonText={'Delete User'}

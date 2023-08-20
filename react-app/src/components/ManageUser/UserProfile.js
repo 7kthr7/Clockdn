@@ -10,6 +10,14 @@ import './UserProfile.css'
 
 
 const UserProfile = () => {
+
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+        }
+        return array;
+    }
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -23,13 +31,15 @@ const UserProfile = () => {
     const currentUserFollowingIds = user.following.map(followedUser => followedUser.id);
     const usersNotFollowed = allUser.filter(usr => !currentUserFollowingIds.includes(usr.id) && usr.id !== user.id);
     
-    const usersToDisplay = usersNotFollowed.slice(0, 3);
+    const usersToDisplay = shuffleArray(usersNotFollowed).slice(0, 3);
     useEffect(() => {
         dispatch(getUserCommentsThunk())
         dispatch(getUserThunk())
     }, [dispatch])
 
-
+    const handleProfilePage = (userId) => {
+        history.push(`/user/${userId}`);
+    };
 
 
     return (
@@ -58,7 +68,7 @@ const UserProfile = () => {
                     <h2>Suggested connections for you</h2>
                 <div className="second-section-content">
                     {usersToDisplay.map((user) => (
-                        <div key={user.id}>
+                        <div key={user.id} onClick={() => handleProfilePage(user.id)}>
                             <img
                                 src={user.profile_image}
                                 

@@ -28,6 +28,31 @@ const EditPost = ({ postId }) => {
     const { closeModal } = useModal()
     const imageInputRef = useRef(null);
     const fileReader = new FileReader();
+    const [errors, setErrors] = useState([]);
+    const [frontendErrors, setFrontendErrors] = useState({})
+
+    
+    let disable = false;
+    body.length > 5 || (disable = true);
+    body || (disable = true);
+
+
+    useEffect(() => {
+        const frontendErrors = {}
+
+
+        if (body.length > 2000) {
+            frontendErrors.body = "Post must be less than 2000 characters"
+        }
+        if (body.length < 1) {
+            frontendErrors.body = ""
+        }
+        if (title.length > 100) {
+            frontendErrors.title = "Title must be less than 100 characters"
+        }
+
+        setFrontendErrors(frontendErrors)
+    }, [body, title])
 
     useEffect(() => {
         // Cleanup FileReader to prevent memory leaks
@@ -139,13 +164,26 @@ const EditPost = ({ postId }) => {
                         )}
 
                         <div className="edit-form-button" >
-                        <button   type='submit'>Edit Post</button>
-
+                        <button disabled={Object.keys(frontendErrors).length > 0}   type='submit'>Edit Post</button>
 
 
                         <OpenModalButton buttonText={'Delete Post'} 
                             modalComponent={<DeletePost postId={postDetail.id} />}
                         />
+                        <div className='post-errors'>
+                    {frontendErrors.body && body.length > 0 && (
+                        <p className='on-submit-errors'>{frontendErrors.body}</p>
+                    )}
+                    {frontendErrors.title && title.length > 0 && (
+                        <p className='on-submit-errors'>{frontendErrors.title}</p>
+                    )}
+
+                    <p>
+                        {errors.map((error, idx) => (
+                            <p className='on-submit-errors' key={idx}>{error}</p>
+                        ))}
+                    </p>
+                </div>
 
 </div>
                     </div>

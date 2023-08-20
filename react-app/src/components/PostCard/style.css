@@ -105,6 +105,8 @@
     text-align: start;
     margin-left: 10px;
     /* font-family: monospace; */
+    word-wrap: break-word;         
+    overflow-wrap: break-word; 
 }
 
 /*  ------- POST BODY*/
@@ -112,11 +114,11 @@
     margin-left: 10px;
     margin-right: 10px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    word-wrap: break-word;         /* Break long words if necessary */
-    overflow-wrap: break-word;    /* Same, but with better support */
-    max-width: 100%;              /* Ensure the comment doesn't exceed its container width */
-    box-sizing: border-box;       /* Ensure padding and borders are included in the width */
-    /* Add other desired styles like margin, padding, font, etc. */    font-size: 14px;
+    word-wrap: break-word;         
+    overflow-wrap: break-word;   
+    max-width: 100%;            
+    box-sizing: border-box;        
+    font-size: 14px;
 
 
 
