@@ -71,19 +71,20 @@ function Navigation({ isLoaded }) {
                     )}
                     {isLoaded && sessionUser && (
                         <>
+                            <div className='search-nav' >
+                            <label>
+    <input 
+      placeholder='search connections' 
+      onFocus={() => document.getElementById('tooltip').style.display = 'block'} 
+      onBlur={() => document.getElementById('tooltip').style.display = 'none'} 
+    />
+    <div id="tooltip" className="tooltip-message">Search feature coming soon!</div>
+  </label>
+</div>
                             <div className='search-bar-navigation'>
                             <ProfileButton user={sessionUser} />
 
                             </div>
-                            <div className='search-nav' >
-                             <label >
-                    
-                    <input
-                    placeholder='search connections'
-                        
-                    />
-                </label>
-                </div>
 
                             </>
                     )}

@@ -84,6 +84,15 @@
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
 }
+
+#left-background-image img{
+    background-color: olivedrab;
+    object-fit: cover;
+    width: 100%;
+    height: 48px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
 .left-profile-image img{
     cursor: pointer;
     border-radius: 100%;
@@ -209,4 +218,29 @@
 .right-user-info h3:hover{
     text-decoration: underline;
     color: rgba(16, 91, 47, 0.866);
+}
+
+
+/* @media (max-width: 1076px) {
+     .center-feed {
+        width: 80%;
+    }
+
+    .right-section {
+        display: none;
+    }
+}
+
+@media (min-width: 1026px) {
+    .user-left-section {
+        margin-left: 20%; 
+        width: 50%;
+    }
+} */
+
+@media (min-width: 1700px) {
+    .user-left-section {
+        margin-left: 20%; 
+        width: 50%;
+    }
 }

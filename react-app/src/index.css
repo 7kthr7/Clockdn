@@ -1,1 +1,9 @@
 /* TODO Add site wide styles */
+
+#root {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    /* width: 1026px; */
+    margin: 0 auto;
+    /* border: 2px solid red; */
+    font-size: 12px;
+}

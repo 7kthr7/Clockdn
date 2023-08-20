@@ -198,5 +198,9 @@ edit-form-button:disabled {
     cursor: not-allowed; 
 
 }
+.post-form-button:disabled {
+    background-color: #b0d5b4; 
+   cursor: not-allowed; 
 
+}
 

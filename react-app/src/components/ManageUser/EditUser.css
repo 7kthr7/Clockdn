@@ -1,0 +1,68 @@
+.edit-wrapper {
+width: 450px;
+    display: flex;
+    flex-direction: column;
+    /* border: 2px solid rgb(238, 25, 25); */
+    align-items: center;
+}
+
+#edit-biography {
+    height: 30px;
+}
+
+.edit-form-splash input, .edit-form-splash textarea {
+    margin-top: 5px;
+    height: 18px;
+    width: 280px;
+    padding: 8px;
+    border: 1px rgba(0, 0, 0) solid; 
+    border-radius: 5px;
+}
+.edit-form-splash label, .edit-form-splash textarea {
+    display: flex;
+    flex-direction: column;
+    margin-top: 14px; 
+  }
+
+  .edit-form-splash button {
+    margin-top: 12px;
+    margin-left: 10px;
+    border-radius: 4px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-size: 16px;
+    color: white;
+    background-color: #3E8867;
+    border: 0px;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+
+  .edit-form-splash button:hover{
+    background-color: rgb(29, 89, 62); 
+  }
+
+
+  .edit-name, .edit-location, .edit-password{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .edit-name input, .edit-location input, .edit-password input{
+    display: flex;
+    flex-direction: row;
+    width: 126px;
+    align-items: center;
+    gap: 2px;
+  
+  }
+
+  .edit-name label, .edit-location label {
+    display: flex;
+    flex-direction: column;
+    margin-top: 14px; 
+    align-items: flex-start;
+  }
+
