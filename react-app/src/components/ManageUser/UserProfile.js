@@ -54,10 +54,12 @@ const UserProfile = () => {
                 </div>
                 <div className="user-information">
                     <img src={user.profile_image} />
+                    <div className="user-name-occupation">
                     <h2>
                         {user.first_name}{user.last_name}
                     </h2>
                     <p>{user.occupation}</p>
+                    </div>
                     <p>{user.city}, {user.state}</p>
                     <p>{user.biography}</p>
                 </div>
