@@ -41,5 +41,10 @@
     background-color: rgb(29, 89, 62); 
   }
 
+  .errors-and-login, .on-submit-errors{
+    color: red;
+    font-size: 14px;
+  }
+
 
   
