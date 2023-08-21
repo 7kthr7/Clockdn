@@ -10,6 +10,7 @@ import HomePage from "./components/Feed";
 import UserProfile from "./components/ManageUser/UserProfile";
 import ViewUserProfile from "./components/ManageUser/SingleUser";
 import SplashPage from "./components/SplashPage";
+import Connections from "./components/Connections/Connections";
 // import UserActivity from "./components/ManageUser/UserActivity";
 
 function App() {
@@ -41,6 +42,11 @@ function App() {
             <HomePage/>
             </ProtectedRoute>
           </Route>
+          <Route path="/connections">
+          <ProtectedRoute>
+            <Connections/>
+            </ProtectedRoute>
+          </Route>
           <Route path="/profile">
           <ProtectedRoute>
             <UserProfile/>
@@ -52,11 +58,6 @@ function App() {
             <ViewUserProfile/>
             </ProtectedRoute>
           </Route>
-          {/* <Route path="/users/:userId">
-          <ProtectedRoute>
-            <SingleUser/>
-            </ProtectedRoute>
-          </Route> */}
          
         </Switch>
       )}

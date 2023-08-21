@@ -7,6 +7,9 @@ import OpenModalButton from '../OpenModalButton'
 import './style.css'
 import PostFeed from "../PostCard"
 import Background from '../../assets/background.jpg'
+import GitHubLogo from '../../assets/github.png'
+import Linkdn from '../../assets/linkedinlogo.png'
+
 
 
 const HomePage = () => {
@@ -42,6 +45,9 @@ const handleOnClick = (e) => {
 
 const handleProfilePage = (userId) => {
     history.push(`/user/${userId}`);
+};
+const handleConnectionPage = () => {
+    history.push(`/connections`);
 };
 
 
@@ -81,9 +87,25 @@ const handleProfilePage = (userId) => {
                     </div>
                 </div>
                 <div className="left-section-middle">
-                    <p>Followers</p>
-                    <p>Following</p>
-                    <p>My activity</p>
+                    <p onClick={handleConnectionPage} style={{ cursor:"pointer" }}>My Connections</p>
+                    <p   style={{ cursor:"pointer" }} onClick={() => document.getElementById('tooltip-message-activity').style.display = 'block'}
+   onMouseLeave={() => document.getElementById('tooltip-message-activity').style.display = 'none'} 
+>My activity</p>
+<div id="tooltip-message-activity" className="tooltip-message-activity">My activity feature coming soon</div>
+
+                </div>
+                <div className="left-bottom-section">
+                    <p>Python | Flask-SQLAlchemy | PostgresSQL | React-Redux | AWS | HTML | CSS</p>
+                    <p>Connect with Clockdn developer on LinkedIn and GitHub </p>
+
+
+                    <a href="https://www.linkedin.com/in/kawthar-mohamud/" target="_blank" rel="noopener noreferrer">
+                        <img src={Linkdn} alt="LinkedIn Logo" style={{ width: "20px", height: "20px", marginTop: "-50px" }} />
+                    </a>
+                    <a href="https://github.com/7kthr7/Clockdn" target="_blank" rel="noopener noreferrer">
+                        <img src={GitHubLogo} alt="GitHub Logo"
+                            style={{ width: "30px", height: "30px", marginBottom: "-6px" }} />
+                    </a>
                 </div>
             </div>
         

@@ -57,7 +57,7 @@ const CreateComment = ({ postId, allComments }) => {
                     <label className="comment-label">
                     <textarea
                         className="comment-textarea"
-                        row = {9}
+                        row = {2}
                         type='text'
                         value={body}
                         onChange={(e) => setBody(e.target.value)}

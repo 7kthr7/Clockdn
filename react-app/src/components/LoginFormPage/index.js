@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { login } from "../../store/session";
-import * as sessionActions from "../../store/session";
 
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
@@ -13,7 +12,7 @@ function LoginFormPage() {
   const dispatch = useDispatch();
   // const { closeModal } = useModal();
   const history = useHistory()
-  const sessionUser = useSelector((state) => state.session.user);
+  // const sessionUser = useSelector((state) => state.session.user);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
@@ -22,17 +21,10 @@ function LoginFormPage() {
 
   
 
-const demoSignIn = async (e) => {
-    e.preventDefault();
-    const email = "demo_lition@aa.io"
-    const password = "password"
-    await dispatch(login(email, password));
-    history.push('/')
-}
 
 
 
-if (sessionUser) return <Redirect to="/" />;
+// if (sessionUser) return <Redirect to="/" />;
 
 
 const handleSubmit = async (e) => {
@@ -55,13 +47,18 @@ const handleSubmit = async (e) => {
   setFrontendErrors(newFrontendErrors); 
 
   if (Object.keys(newFrontendErrors).length === 0) {
-      setErrors({});
       const data = await dispatch(login(email, password));
   if (data) {
     setErrors(data);
       } 
   }
 };
+
+const demoSignIn = async (e) => {
+  e.preventDefault();
+ const data = await dispatch(login('demo_lition@aa.io', "password"));
+  history.push('/')
+}
 
 
   const handleOnClick = async (e) => {
@@ -90,6 +87,11 @@ const handleSubmit = async (e) => {
               <p className='on-submit-errors'> Invalid Credentials</p>
             )}
           </p>
+          {/* <ul className="error-messages">
+            {errors.map((error, idx) => (
+              <li key={idx}>{error}</li>
+            ))}
+          </ul> */}
         </div>
         <label>
           Email
@@ -111,15 +113,15 @@ const handleSubmit = async (e) => {
         </label>
 
         
-        <h2>---------- or ----------</h2>
-        <button onClick={demoSignIn}>Demo User</button>
         <button type="submit">Log In</button>
+        <button  type="submit" onClick={demoSignIn}>Demo User</button>
+        <h2>---------- or ----------</h2>
 
         <div className="join-now-splash" 
                     onClick={handleOnClick}> New to Clockdn? Join now</div>
       
         </div>
-      </form>
+                    </form>
     </>
   );
 }

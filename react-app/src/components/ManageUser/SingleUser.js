@@ -1,6 +1,8 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
+
 import { getSingleUserThunk } from '../../store/user'
 import Background from '../../assets/background.jpg'
 import './SingleUser.css'
@@ -9,47 +11,30 @@ import './SingleUser.css'
 
 
 const ViewUserProfile = () => {
-    function shuffleArray(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]]; // Swap elements
-        }
-        return array;
-    }
-
-
+ 
     const { userId } = useParams();
+    console.log("UserID from params:", userId);
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(true);
+    const history = useHistory()
+    const sessionUser = useSelector((state) => state.session.user);
 
-    // const sessionUser = useSelector(state => state.session.user)
     const user = useSelector((state) => state.user.singleUser);
-    const userArray = Object.values(user);
-    
-    let currentUserFollowingIds = [];
-    let usersNotFollowed = [];
-    
-    if (userArray && userArray.following) {
-        currentUserFollowingIds = userArray.following.map(followedUser => followedUser.id);
-        usersNotFollowed = userArray.filter(usr => currentUserFollowingIds.includes(usr.id) && usr.id !== user.id);
-    }
-    
-    const usersToDisplay = shuffleArray(usersNotFollowed).slice(0, 3);
-    
-    
+    const followerFirstNames = user?.followers?.map(follower => follower).slice(0, 5);
+    console.log("First Names of Followers:", followerFirstNames);
 
     useEffect(() => {
         setLoading(true);
         async function fetchUserData() {
             await dispatch(getSingleUserThunk(userId));
             setLoading(false);
+    
+            if (sessionUser && sessionUser.id === parseInt(userId)) {
+                history.push('/profile'); 
+            }
         }
         fetchUserData();
-    }, [dispatch, userId]);
-
-    // useEffect(() => {
-    //     dispatch(getSingleUserThunk(userId));
-    // }, [dispatch, userId]);
+    }, [dispatch, userId, sessionUser, history]);
 
 
     if (loading) {
@@ -59,6 +44,13 @@ const ViewUserProfile = () => {
     if (!user) {
         return <div>Loading...</div>;
     }
+
+
+    const handleProfilePage = (userId) => {
+        history.push(`/user/${userId}`);
+    };
+
+ 
 
     return (
         <div className="single-profile-page">
@@ -86,15 +78,18 @@ const ViewUserProfile = () => {
                 <div className="single-second-section">
                         <h2>Recent Follows</h2>
                     <div className="single-second-section-content">
-                        {usersToDisplay.map((userr) => (
-                            <div key={userr.id} >
-                                {/* <img
-                                    src={user.profile_image}
+                        {followerFirstNames.map((userr) => (
+                            
+                            <div key={userr.id}  onClick={() => handleProfilePage(userr.id)}>
+                                <img
+                                    src={userr.profile_image}
                                     
-                                /> */}
+                                />
                                 <p>{userr.first_name} {userr.last_name}</p>
                             </div>
                         ))}
+                     
+                        
                     </div>
                 </div>
                 <div className="single-third-section">

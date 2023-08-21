@@ -1,5 +1,6 @@
 from app.models import db, User, environment, SCHEMA
 from sqlalchemy.sql import text
+import random
 
 
 # Adds a demo user, you can add other users here if you want
@@ -13,7 +14,7 @@ def seed_users():
         state = 'CA',
         occupation = 'Student',
         biography = 'Student at App Academy',
-        profile_image = 'https://tinyurl.com/yn36x35m',
+        profile_image = 'https://www.yourlifeupdated.net/wp-content/uploads/2019/08/Anime-sub-ita-streaming.jpg',
         password = 'password',
         )
     
@@ -25,7 +26,7 @@ def seed_users():
         state = 'CA',
         occupation = 'The Seventh Hokage',
         biography = 'I am the 7th Hokage of the Hidden Leaf Village',
-        profile_image = 'https://tinyurl.com/mpcxtheb',
+        profile_image = 'https://artworks.thetvdb.com/banners/person/7903091/62083792.jpg',
         password = 'password',
         )
     Levi = User (
@@ -48,7 +49,7 @@ def seed_users():
         state = 'CA',
         occupation = 'Detective',
         biography = 'I am a highly skilled an eccentric detective who studied forensic science and criminal psychology',
-        profile_image = 'https://tinyurl.com/yxenke6j',
+        profile_image = 'https://www.giantbomb.com/a/uploads/scale_medium/9/96986/1456248-1288248_blurb_light_yagami_20080627.jpg',
         password = 'password',
         )
     Satotu = User (
@@ -71,7 +72,7 @@ def seed_users():
         state = 'CA',
         occupation = 'Demon Slayer',
         biography = 'I was a former charcoal burner and became a self-taught Demon Slayer. I work with the Hashira group in the Demon Slayer Corps',
-        profile_image = 'https://tinyurl.com/3f6vxk43',
+        profile_image = 'https://flxt.tmsimg.com/assets/p16787843_i_v10_ab.jpg',
         password = 'password',
     )
 
@@ -118,7 +119,7 @@ def seed_users():
         state = 'CA',
         occupation = 'Swordswoman',
         biography = ' I am an expert swordswoman and have amazing attention to detail skills.',
-        profile_image = 'https://tinyurl.com/24aen24m',
+        profile_image = 'https://c4.wallpaperflare.com/wallpaper/974/74/381/anime-claymore-clare-claymore-wallpaper-thumb.jpg',
         password = 'password',
     )
 
@@ -139,6 +140,9 @@ def seed_users():
 
 
 
+    # def add_follow_relationships(user, users_to_follow):
+    #     for user_to_follow in users_to_follow:
+    #         user.follow(user_to_follow)
     def add_follow_relationships(user, users_to_follow):
         for user_to_follow in users_to_follow:
             user.follow(user_to_follow)
@@ -147,7 +151,8 @@ def seed_users():
 
     for user in all_users:
         other_users = [u for u in all_users if u != user]
-        add_follow_relationships(user, other_users)
+        users_to_follow = random.sample(other_users, 5)
+        add_follow_relationships(user, users_to_follow)
 
     db.session.commit()
 

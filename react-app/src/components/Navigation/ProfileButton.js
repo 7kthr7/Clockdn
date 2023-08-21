@@ -102,10 +102,13 @@ function ProfileButton({ user }) {
               <button onClick={handleManageAccount} className="manage-account-button" type="submit">View Profile</button>                           
               </div>
 
-              <div className="profile-dropdown-two">
+              <div style={{ cursor:"pointer" }} onClick={() => document.getElementById('tooltip-message-profile').style.display = 'block'}
+   onMouseLeave={() => document.getElementById('tooltip-message-profile').style.display = 'none'} 
+ className="profile-dropdown-two">
                 <h3>Manage Activity</h3>
                 <p>Liked Posts</p>
                 <p>New Connections</p>
+                <div id="tooltip-message-profile" className="tooltip-message-profile">My activity feature coming soon</div>
 
 
               </div>
