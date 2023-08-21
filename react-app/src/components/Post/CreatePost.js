@@ -25,6 +25,7 @@ const CreatePost = () => {
     let disable = false;
     body.length > 5 || (disable = true);
     body || (disable = true);
+    body.length > 2000 || (disable = true);
 
 
     useEffect(() => {
