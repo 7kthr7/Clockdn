@@ -55,8 +55,8 @@ const CreatePost = () => {
         newPost.append('post_images', post_images);
 
         dispatch(createPostThunk(newPost));
-        dispatch(getPostsThunk())
         closeModal();
+        dispatch(getPostsThunk())
     };
 
     const handleImageChange = (e) => {
