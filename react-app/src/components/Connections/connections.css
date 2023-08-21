@@ -1,0 +1,47 @@
+.connections-page{
+    background-color: #f3f2ef;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    min-height: 770px;
+}
+
+.left-section-connections{
+    /* border: 2px solid red; */
+    margin-left: 10%;
+    background-color: white;
+    width: 560px;
+    height: fit-content;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-top: 20px;
+    padding-left: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.left-section-connections h2{
+    text-align: center;
+}
+
+.followings-list{
+    /* border: 1px solid blue; */
+    margin-bottom: 20px;
+}
+
+.left-section-connections img{
+    /* border: 2px solid red; */
+    margin-left: 20px;
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+    object-fit: cover;
+
+}
+
+.img-user-info{
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}

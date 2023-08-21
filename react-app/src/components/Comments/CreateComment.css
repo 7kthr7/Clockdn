@@ -33,11 +33,12 @@
     border: 1px solid #e1e4e8;
     border-radius: 4px;
     font-size: 14px;
-    height: 150px;
+    height: 90px;
     color: #24292e;
     overflow-y: scroll;
     scroll-behavior: smooth;
     box-sizing: border-box; 
+    resize: vertical;
 }
 
 .comment-textarea:focus {

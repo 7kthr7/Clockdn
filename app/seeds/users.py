@@ -1,5 +1,6 @@
 from app.models import db, User, environment, SCHEMA
 from sqlalchemy.sql import text
+import random
 
 
 # Adds a demo user, you can add other users here if you want
@@ -139,6 +140,9 @@ def seed_users():
 
 
 
+    # def add_follow_relationships(user, users_to_follow):
+    #     for user_to_follow in users_to_follow:
+    #         user.follow(user_to_follow)
     def add_follow_relationships(user, users_to_follow):
         for user_to_follow in users_to_follow:
             user.follow(user_to_follow)
@@ -147,7 +151,8 @@ def seed_users():
 
     for user in all_users:
         other_users = [u for u in all_users if u != user]
-        add_follow_relationships(user, other_users)
+        users_to_follow = random.sample(other_users, 5)
+        add_follow_relationships(user, users_to_follow)
 
     db.session.commit()
 

@@ -11,20 +11,13 @@ import './SingleUser.css'
 
 
 const ViewUserProfile = () => {
-    // function shuffleArray(array) {
-    //     for (let i = array.length - 1; i > 0; i--) {
-    //         const j = Math.floor(Math.random() * (i + 1));
-    //         [array[i], array[j]] = [array[j], array[i]]; 
-    //     }
-    //     return array;
-    // }
-
-
+ 
     const { userId } = useParams();
     console.log("UserID from params:", userId);
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(true);
     const history = useHistory()
+    const sessionUser = useSelector((state) => state.session.user);
 
     const user = useSelector((state) => state.user.singleUser);
     const followerFirstNames = user?.followers?.map(follower => follower).slice(0, 5);
@@ -35,9 +28,13 @@ const ViewUserProfile = () => {
         async function fetchUserData() {
             await dispatch(getSingleUserThunk(userId));
             setLoading(false);
+    
+            if (sessionUser && sessionUser.id === parseInt(userId)) {
+                history.push('/profile'); 
+            }
         }
         fetchUserData();
-    }, [dispatch, userId]);
+    }, [dispatch, userId, sessionUser, history]);
 
 
     if (loading) {

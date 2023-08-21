@@ -42,6 +42,11 @@ function App() {
             <HomePage/>
             </ProtectedRoute>
           </Route>
+          <Route path="/connections">
+          <ProtectedRoute>
+            <Connections/>
+            </ProtectedRoute>
+          </Route>
           <Route path="/profile">
           <ProtectedRoute>
             <UserProfile/>
@@ -51,11 +56,6 @@ function App() {
           <Route path="/user/:userId">
           <ProtectedRoute>
             <ViewUserProfile/>
-            </ProtectedRoute>
-          </Route>
-          <Route path="/connections/user/:userId">
-          <ProtectedRoute>
-            <Connections/>
             </ProtectedRoute>
           </Route>
          
