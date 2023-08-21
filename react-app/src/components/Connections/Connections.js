@@ -8,7 +8,7 @@ const Connections = () => {
 
 const { userId } = useParams();
 const dispatch = useDispatch();
-const [loading, setLoading] = useState(true);
+// const [loading, setLoading] = useState(true);
 const history = useHistory()
 
 const user = useSelector(state => state.session.user);
@@ -16,22 +16,22 @@ const followerFirstNames = user.followers.map(follower => follower);
 console.log("First Names of Followers:", followerFirstNames);
 
 
-useEffect(() => {
-    setLoading(true);
-    async function fetchUserData() {
-        await dispatch(getSingleUserThunk(userId));
-        setLoading(false);
-    }
-    fetchUserData();
-}, [dispatch, userId]);
+// useEffect(() => {
+//     // setLoading(true);
+//     async function fetchUserData() {
+//         await dispatch(getSingleUserThunk(userId));
+//         // setLoading(false);
+//     }
+//     fetchUserData();
+// }, [dispatch, userId]);
 
-if (loading) {
-    return <div>Loading...</div>;
-}
+// if (loading) {
+//     return <div>Loading...</div>;
+// }
 
-if (!user) {
-    return <div>Loading...</div>;
-}
+// if (!user) {
+//     return <div>Loading...</div>;
+
 
 const handleProfilePage = (userId) => {
     history.push(`/user/${userId}`);
