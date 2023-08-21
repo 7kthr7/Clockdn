@@ -82,6 +82,7 @@ class User(db.Model, UserMixin):
 
     def to_dict_connections(self):
         return {
+            'id': self.id,
             'first_name': self.first_name,
             'last_name': self.last_name,
             'occupation': self.occupation,

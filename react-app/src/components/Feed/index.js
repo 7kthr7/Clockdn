@@ -128,7 +128,7 @@ const HomePage = () => {
                     <h3> Make Connections </h3>
 
                     {usersToDisplay.map((user) => (
-                        <div key={user.id} className="right-section-two-content" onClick={() => handleProfilePage(user.id)}>
+                        <div  key={user.id} className="right-section-two-content" onClick={() => handleProfilePage(user.id)}>
                             <img
                                 src={user.profile_image}
 
