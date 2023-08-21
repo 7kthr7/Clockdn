@@ -25,6 +25,7 @@ const CreatePost = () => {
     let disable = false;
     body.length > 5 || (disable = true);
     body || (disable = true);
+    body.length > 2000 || (disable = true);
 
 
     useEffect(() => {
@@ -54,8 +55,8 @@ const CreatePost = () => {
         newPost.append('post_images', post_images);
 
         dispatch(createPostThunk(newPost));
-        dispatch(getPostsThunk())
         closeModal();
+        dispatch(getPostsThunk())
     };
 
     const handleImageChange = (e) => {
