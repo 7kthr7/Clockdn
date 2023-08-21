@@ -127,6 +127,19 @@
     font-size: 12px;
 }
 
+.left-bottom-section {
+    background-color: #f3f2ef;
+   border-bottom-left-radius: 8px;
+   padding-top: 30px;
+   margin-bottom: -50px;
+   padding-left: 10px;
+   padding-right: 10px;
+   text-align: center;
+   /* margin-top: -30px; */
+    /* border: 2px solid rgb(190, 18, 18); */
+    height: fit-content;
+}
+
 
 
 .center-feed{
