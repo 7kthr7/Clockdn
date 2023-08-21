@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from "react-redux";
 
 import { useDispatch } from 'react-redux';
-import { createPostThunk } from '../../store/post';
+import { createPostThunk, getPostsThunk } from '../../store/post';
 import { useModal } from '../../context/Modal';
 // import OpenModalButton from '../OpenModalButton'
 import './CreatePost.css'
@@ -54,7 +54,7 @@ const CreatePost = () => {
         newPost.append('post_images', post_images);
 
         dispatch(createPostThunk(newPost));
-
+        dispatch(getPostsThunk())
         closeModal();
     };
 
