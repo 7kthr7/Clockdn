@@ -1,3 +1,24 @@
+# WELCOME TO Clockdn
+
+Clockdn is a professional networking platform where users can foster career connections and share insights. Drawing inspiration from LinkedIn, it offers a dynamic space for users to create, read, update, and delete their posts and comments. Beyond that, members can also 'like' content and establish meaningful connections with fellow users to expand their professional network.
+
+
+
+[View Live](https://clockdn.onrender.com/)
+
+### The languages & frameworks we used to complete this project are as follows:
+
+![Python](https://img.shields.io/badge/Python-%233776AB.svg?style=for-the-badge&logo=python&logoColor=white)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white)
+![Flask](https://img.shields.io/badge/Flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white)
+![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-%23FCA121.svg?style=for-the-badge&logo=sqlalchemy&logoColor=white)
+
+
+
 # Flask React Project
 
 This is the starter for the Flask React project.
