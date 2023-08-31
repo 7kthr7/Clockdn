@@ -53,7 +53,7 @@ const handleConnectionPage = () => {
 
     return (
         <div id="home-page">
-            <div className="start-post-wrapper">
+            {/* <div className="start-post-wrapper">
                 <div className="start-post-image">
                     <img src={user.profile_image} alt="Profile" />
                 </div>
@@ -66,7 +66,7 @@ const handleConnectionPage = () => {
                 <div id="pencil-icon">
                     <span className="material-symbols-outlined">edit</span>
                 </div>
-            </div>
+            </div> */}
 
             <div className="left-section">
                 <div className="left-section-top">
@@ -89,9 +89,9 @@ const handleConnectionPage = () => {
                 <div className="left-section-middle">
                     <p onClick={handleConnectionPage} style={{ cursor:"pointer" }}>My Connections</p>
                     <p   style={{ cursor:"pointer" }} onClick={() => document.getElementById('tooltip-message-activity').style.display = 'block'}
-   onMouseLeave={() => document.getElementById('tooltip-message-activity').style.display = 'none'} 
->My activity</p>
-<div id="tooltip-message-activity" className="tooltip-message-activity">My activity feature coming soon</div>
+                    onMouseLeave={() => document.getElementById('tooltip-message-activity').style.display = 'none'} 
+                        >My activity</p>
+                        <div id="tooltip-message-activity" className="tooltip-message-activity">My activity feature coming soon</div>
 
                 </div>
                 <div className="left-bottom-section">
@@ -111,6 +111,20 @@ const handleConnectionPage = () => {
         
 
             <div className="center-feed">
+            <div className="start-post-wrapper">
+                <div className="start-post-image">
+                    <img src={user.profile_image} alt="Profile" />
+                </div>
+                <div className="start-post-button">
+                    <OpenModalButton
+                        buttonText="Start a post"
+                        modalComponent={<CreatePost />}
+                    />
+                </div>
+                <div id="pencil-icon">
+                    <span className="material-symbols-outlined">edit</span>
+                </div>
+            </div>
                 <PostFeed />
             </div>
                       

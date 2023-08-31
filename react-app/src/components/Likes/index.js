@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { getPostsThunk } from "../../store/post";
 import { getLikesThunk, createLikeThunk, deleteLikeThunk } from "../../store/likes";
 import { useModal } from "../../context/Modal";
 import OpenModalButton from "../OpenModalButton";
+import { useHistory } from "react-router-dom";
+
 import './style.css';
 
 const LikeToggle = ({ postId }) => {
@@ -11,8 +14,9 @@ const LikeToggle = ({ postId }) => {
     const sessionUser = useSelector(state => state.session.user);
     const userLiked = likesArr.some(like => like.post_id === postId && like.userId === sessionUser.id);
     const [liked, setLiked] = useState(userLiked);
+    const history = useHistory()
     // const [showLikes, setShowLikes] = useState(false);
-
+   
 
     const LikeUnlike = async () => {
         if (liked) {
@@ -20,15 +24,17 @@ const LikeToggle = ({ postId }) => {
         } else {
             await dispatch(createLikeThunk(postId));
         }
-        dispatch(getLikesThunk())
-       await setLiked(!liked);   
+        await dispatch(getLikesThunk())
+        await setLiked(!liked);   
     };
 
     return (
-        <div class="like-toggle-button">
-            <span className={`material-symbols-sharp ${liked ? 'liked' : 'not-liked'}`} onClick={LikeUnlike}> 
+        <>
+        <div  class="like-toggle-button">
+            <span  className={`material-symbols-sharp ${liked ? 'liked' : 'not-liked'}`} onClick={LikeUnlike}> 
                 favorite
             </span>
+            
             {/* <ViewLikes postId={postId} likesArr={likesArr} onClick={() => setShowLikes(true)} />
             {showLikes && <LikesModal postId={postId} likesArr={likesArr} onClose={() => setShowLikes(false)} />} */}
             <div className="view-likes-button">
@@ -37,7 +43,9 @@ const LikeToggle = ({ postId }) => {
                 modalComponent={<LikesModal postId={postId} likesArr={likesArr} />}
             /> 
             </div>
-        </div>
+            </div>
+       
+        </>
     );
 }
 
@@ -45,8 +53,9 @@ const LikeToggle = ({ postId }) => {
     const ViewLikes = ({ postId, likesArr, onClick }) => {
         const allLikes = likesArr.filter(like => like.post_id === postId);
 
-        if (!allLikes.length) return "Be the first to like 💚"
-      
+        if (!allLikes.length) {
+            return <span style={{ cursor: 'default', textDecoration: 'none'}} onClick={(e) => e.stopPropagation()}>Be the first to like 💚</span>;
+        }
 
         if (allLikes.length === 1) {
             const oneLike = allLikes[0];
@@ -61,12 +70,22 @@ const LikeToggle = ({ postId }) => {
     
     const LikesModal = ({ postId, likesArr }) => {
         const allLikes = likesArr.filter(like => like.post_id === postId);
+        const history = useHistory()
+        const { closeModal } = useModal();
+
+
+        const handleProfilePage = (userId) => {
+            closeModal();
+
+            history.push(`/user/${userId}`);
+        };
+        
 
         return (
             <div className="likes-modal">
                 {allLikes.map(liker => (
-                    <div className="user-liked" key={liker.id}>
-                        <div className="liked-modal-user">
+                    <div  className="user-liked" key={liker.id}>
+                        <div onClick={() => handleProfilePage(liker.user_id)}className="liked-modal-user">
                         <img src={liker.profile_image}
                         />
                         <div className="liked-user-occupation">

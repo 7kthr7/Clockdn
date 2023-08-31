@@ -76,14 +76,14 @@ function ProfileButton({ user }) {
       
 </div> */}
 
-<div id="git-hub-icon">
+{/* <div id="git-hub-icon">
     <a href="https://www.linkedin.com/in/kawthar-mohamud/" target="_blank" rel="noopener noreferrer">
         <img src={Linkdn} alt="LinkedIn Logo" />
     </a>
     <a href="https://github.com/7kthr7/Clockdn" target="_blank" rel="noopener noreferrer">
         <img src={GitHubLogo} alt="GitHub Logo" />
     </a>
-</div>
+</div> */}
 
       {showMenu && <div className="overlay" />}
 
