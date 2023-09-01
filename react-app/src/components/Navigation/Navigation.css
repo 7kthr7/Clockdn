@@ -115,10 +115,9 @@ width: 320px;
 .read-icon h3 {
   color: #525f58;
   margin-top: 0px;
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 100;
-  font-family: 'monospace';
-  transition: font-size 0.3s ease-in-out;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;  transition: font-size 0.3s ease-in-out;
 }
 
 /* --------LOGO---------- */
@@ -250,10 +249,13 @@ top: 90%;
 }
 .profile-dropdown-two p {
   margin-bottom: 4px;
+  
 }
 .profile-dropdown-two h3{
   margin-top: 8px;
   margin-bottom: 4px;
+  font-size: 13px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 

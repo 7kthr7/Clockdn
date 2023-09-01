@@ -77,7 +77,7 @@ def seed_posts():
         user_id=6,
         title='Finding Strength in Bonds and Blossoms! ',
         body="Hello, friends! Just like a wisteria flower that blooms even amidst adversity, our bonds with fellow demon slayers give us the strength to persevere. The path ahead might be tough, but together, we're writing a story of hope and determination. Let's keep fighting, supporting, and cherishing every moment along the way.",
-        post_images = 'https://tinyurl.com/47chey34'
+        post_images = 'https://wallpapers.com/images/hd/tanjiro-and-wisteria-flowers-jindnvyvl0yo5sad.jpg'
     )
     
 
