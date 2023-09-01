@@ -23,7 +23,28 @@ const EditProfile = (props) => {
     const [occupation, setOccupation] = useState(user.occupation);
     const [biography, setBiography] = useState(user.biography);
     const [profile_image, setProfile_image] = useState(user.profile_image);
+    const [imagePreview, setImagePreview] = useState(user.profile_image);
 
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        
+        if (file) {
+          setProfile_image(file)
+          const reader = new FileReader();
+          
+          reader.onloadend = () => {
+            setImagePreview(reader.result);
+          }
+          
+          reader.readAsDataURL(file);
+        }
+      };
+      
+      const handleImageRemove = () => {
+          setProfile_image(null);
+          setImagePreview(null);
+        };
+      
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -122,20 +143,33 @@ const EditProfile = (props) => {
                             required
                         />
                     </label>
-                    <div >
-                        <label>
-                            <input
+                    <div className='post-image-button-section'>
 
+                    <label>
 
-                                type="file"
-                                onChange={(e) => setProfile_image(e.target.files[0])}
-                                accept=".jpg, .jpeg, .png"
-
-                            />
+                        <input
+                            className="hidden-input"
+                            type='file'
+                            // onChange={(e) => setPost_images(e.target.files[0])}
+                            onChange={handleImageChange}
+                            accept='.jpg, .jpeg, .png'
+                        // name='post_images'
+                        />
+                        <span
+                            className="material-symbols-outlined"
+                            onClick={() => document.querySelector('.hidden-input')}
+                        >
+                            image
+                        </span>
+                        Image (Optional)
                         </label>
-
-                    </div>
-
+                        {imagePreview && (
+                            <>
+                                <img src={imagePreview} alt="Preview" />
+                                <button style={{ color: "black" }} id='remove-image-button' onClick={handleImageRemove}>X</button>
+                            </>
+                        )}
+</div>
 
 
 

@@ -72,11 +72,15 @@ const UserProfile = () => {
                             </h2>
                             <p>{user.occupation}</p>
                         </div>
-                        <p className="single-user-biography" >{user.biography}</p>
                         <p className="single-user-location">{user.city}, {user.state}</p>
                     </div>
                 </div>
 
+                <div className="single-third-section">
+                    <h3>About</h3>
+                    <p className="single-user-biography" >{user.biography}</p>
+
+                </div>
                 <div className="single-second-section">
                     <h2>People you may know</h2>
                     <div className="single-second-section-content">
@@ -90,11 +94,6 @@ const UserProfile = () => {
                             </div>
                         ))}
                     </div>
-                </div>
-                <div className="single-third-section">
-                    <h3>Recent Posts</h3>
-                    <p>Coming soon...</p>
-
                 </div>
             </div>
             <div className="single-user-right-section">

@@ -3,15 +3,16 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
     min-height: 770px;
+    
 }
 
 .left-section-connections{
     /* border: 2px solid red; */
     margin-left: 10%;
     background-color: white;
-    width: 560px;
+    width: 800px;
     height: fit-content;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -26,8 +27,10 @@
 }
 
 .followings-list{
-    /* border: 1px solid blue; */
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(62, 66, 66, 0.199);
     margin-bottom: 20px;
+    margin-right: 10px;
 }
 
 .left-section-connections img{

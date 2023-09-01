@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
 import logo from '../../assets/clockdnLogo.png'
+import SearchBar from '../Search';
 
 function Navigation({ isLoaded }) {
 	const sessionUser = useSelector(state => state.session.user);
@@ -73,12 +74,8 @@ function Navigation({ isLoaded }) {
                         <>
                             <div className='search-nav' >
                             <label>
-    <input 
-      placeholder='search connections' 
-      onFocus={() => document.getElementById('tooltip').style.display = 'block'} 
-      onBlur={() => document.getElementById('tooltip').style.display = 'none'} 
-    />
-    <div id="tooltip" className="tooltip-message">Search feature coming soon!</div>
+   
+    <SearchBar/>
   </label>
 </div>
                             <div className='search-bar-navigation'>

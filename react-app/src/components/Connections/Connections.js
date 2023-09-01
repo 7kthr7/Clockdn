@@ -1,9 +1,10 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getSingleUserThunk } from '../../store/user'
+import { getUserThunk } from '../../store/user'
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 import './connections.css'
+import ToggleConnection from ".";
 const Connections = () => {
 
 const { userId } = useParams();
@@ -16,14 +17,16 @@ const followerFirstNames = user.followers.map(follower => follower);
 console.log("First Names of Followers:", followerFirstNames);
 
 
-// useEffect(() => {
-//     // setLoading(true);
-//     async function fetchUserData() {
-//         await dispatch(getSingleUserThunk(userId));
-//         // setLoading(false);
-//     }
-//     fetchUserData();
-// }, [dispatch, userId]);
+
+
+useEffect(() => {
+    // setLoading(true);
+    async function fetchUserData() {
+        await dispatch(getUserThunk());
+        // setLoading(false);
+    }
+    fetchUserData();
+}, [dispatch, userId]);
 
 // if (loading) {
 //     return <div>Loading...</div>;
@@ -43,16 +46,18 @@ return (
         <div className="left-section-connections">
         <h2>My Connections</h2>
             {followerFirstNames.map((userr) => (
-                <div className="followings-list" key={userr.id}  onClick={() => handleProfilePage(userr.id)}>
+                <div className="followings-list" key={userr.id} >
                     <div className="img-user-info">
                     <img
                         src={userr.profile_image}
                         />
-                    <div className="followers-info">
+                    <div className="followers-info"  onClick={() => handleProfilePage(userr.id)}>
                     <h3>{userr.first_name} {userr.last_name}</h3>
                     <p>{userr.occupation}</p>
+                    <p>{user.city}, {user.state}</p>
                     </div>
                     </div>
+                    <ToggleConnection userId={userr.id}/>
                     </div>
             ))}
         </div>

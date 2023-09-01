@@ -1,0 +1,36 @@
+
+
+    .search-suggestions {
+      position: relative;
+      position: absolute;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      z-index: 10;
+   
+      width: 225px;
+      margin-top: 40px;
+    }
+    
+  
+    .search-suggestion {
+        border-bottom: .3px solid rgba(128, 128, 128, 0.11);
+      padding: 10px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      display: flex;
+      align-items: center;
+    }
+    
+    
+    .restaurant-info {
+      margin-right: 10px;
+     
+    }
+    
+    .search-suggestion:hover {
+        background-color: rgba(213, 226, 211, 0.336);
+    }
+    
+    /* Rest of your CSS styles */
+    
