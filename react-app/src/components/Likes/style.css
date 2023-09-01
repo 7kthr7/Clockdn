@@ -25,6 +25,15 @@
    align-items: center;
 }
 
+.create-like-button-container {
+   background: none;
+   border: none;
+   cursor: pointer;
+   display: flex;
+   align-items: center;
+}
+
+
 .likes-modal{
    width: 100%;
    height: fit-content;

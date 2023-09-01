@@ -6,8 +6,8 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 import { getSingleUserThunk } from '../../store/user'
 import Background from '../../assets/background.jpg'
 import './SingleUser.css'
+import ToggleConnection from "../Connections";
 
-// import ToggleConnection from "../Connections";
 
 
 const ViewUserProfile = () => {
@@ -69,10 +69,17 @@ const ViewUserProfile = () => {
                                 {user.first_name} {user.last_name}
                             </h2>
                             <p>{user.occupation}</p>
+                            <p style={{ paddingTop: "20px" }} className="single-user-location">{user.city}, {user.state}</p>
+                            <ToggleConnection userId={userId}/>
                         </div>
-                            <p className="single-user-biography" >{user.biography}</p>
-                            <p className="single-user-location">{user.city}, {user.state}</p>
+                            {/* <p className="single-user-biography" >{user.biography}</p> */}
                     </div>
+                </div>
+
+                <div className="single-third-section" >
+                    <h3 style={{ textAlign: "start" }} >About</h3>
+                    <p className="single-user-biography" >{user.biography}</p>
+
                 </div>
 
                 <div className="single-second-section">

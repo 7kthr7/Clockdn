@@ -151,7 +151,7 @@ def seed_users():
 
     for user in all_users:
         other_users = [u for u in all_users if u != user]
-        users_to_follow = random.sample(other_users, 5)
+        users_to_follow = random.sample(other_users, 2)
         add_follow_relationships(user, users_to_follow)
 
     db.session.commit()

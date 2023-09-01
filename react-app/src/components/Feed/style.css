@@ -1,80 +1,41 @@
 #home-page{
    display: flex;
-   /* flex: 1 30px; */
+   flex: 1 30px;
    flex-direction: row;
    background-color: #f3f2ef;
    /* width: 100%; */
    min-width: fit-content;
+   justify-content: center;
    margin-left: -7px;
    margin-right: -8px;
-   justify-content: center;
-   border-top: .5px solid rgba(0, 0, 0, 0.171);
-   /* font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; */
+   gap: 20px;
+   border-top: .5px solid rgba(143, 143, 143, 0.171);
 
 } 
 
-.start-post-wrapper {
-    position: absolute;
-    border: .5px solid rgba(0, 0, 0, 0.204);
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: row;
-    height: 85px;
-    width: 450px;
-    margin-left: 10px;
-    margin-right: 44px;
-    margin-top: 10px;
-    align-items:center;
-    background-color: white;
-    border-radius: 10px;
 
-}
-.start-post-image img{
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    border-radius: 100%;
-    margin-left: 10px;
-    margin-top: 0px;
-}
 
-.start-post-button button{
-    border-radius: 35px;
-    width: 350px;
-    height: 50px;
-    background-color: transparent;
-    max-width: none;
-    border: 1px solid rgba(0, 0, 0, 0.237);
-    flex-grow: 1;
-    cursor: pointer;
-    margin-left: 10px;
-    margin-top: 0px;
-    margin-bottom: 8px;
-    text-align: left;
-    padding-left: 40px;   
-} 
-#pencil-icon{
-    position: absolute;
-    margin-left: 80px;
-    margin-bottom: 4px;
-    transform: scaleX(-1);
-}
+/* ------------LEFT SECTION */
 .left-section{
     position: relative;
-    margin-top: 10px;
+    margin-top: 20px;
     background-color: white;
-    width: 200px;
+    width: 225px;
     border-radius: 8px;
     height: fit-content;
-    margin-left: 20px;
+    margin-left: 35px;
 }
 
 .left-section-top{
-    border-bottom: .5px solid rgba(128, 128, 128, 0.274);
     display: flex;
     flex-direction: column;
     align-items: center;
     align-self: center;
+    border: .5px solid rgba(161, 161, 161, 0.39);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+
+    /* border: 1px solid blue; */
     /* font-family:Verdana, Geneva, Tahoma, sans-serif */
 }
 #left-background-image{
@@ -83,6 +44,7 @@
     height: 48px;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
+   
 }
 
 #left-background-image img{
@@ -113,7 +75,11 @@
     width: fit-content;
     margin-top: -12px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    
+}
 
+.left-section-middle{
+    border: .5px solid rgba(161, 161, 161, 0.39);
 }
 
 .left-user-info p{
@@ -128,27 +94,72 @@
 }
 
 .left-bottom-section {
+    padding-top: 10px;
     background-color: #f3f2ef;
-   border-bottom-left-radius: 8px;
-   padding-top: 30px;
-   margin-bottom: -50px;
-   padding-left: 10px;
-   padding-right: 10px;
-   text-align: center;
-   /* margin-top: -30px; */
-    /* border: 2px solid rgb(190, 18, 18); */
+    border-bottom-left-radius: 8px;
+    text-align: center;
+    /* border: 1px solid rgb(221, 12, 204); */
     height: fit-content;
+    
 }
 
-
+/* -----------CENTER FEED  */
 
 .center-feed{
-    margin-top: 80px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
+.start-post-wrapper {
+    border: .5px solid rgba(0, 0, 0, 0.204);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: row;
+    height: 85px;
+    width: 100%;
+    align-items:center;
+    background-color: white;
+    border-radius: 10px;
+
+}
+.start-post-image img{
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 100%;
+    margin-left: 10px;
+    margin-top: 0px;
+}
+
+.start-post-button button{
+    border-radius: 35px;
+    width: 400px;
+    height: 50px;
+    background-color: transparent;
+    max-width: none;
+    border: 1px solid rgba(0, 0, 0, 0.237);
+    flex-grow: 1;
+    cursor: pointer;
+    margin-left: 10px;
+    margin-top: 0px;
+    margin-bottom: 8px;
+    text-align: left;
+    padding-left: 40px;   
+} 
+#pencil-icon{
+    position: absolute;
+    margin-left: 80px;
+    margin-bottom: 4px;
+    transform: scaleX(-1);
+}
+
+/* ----------RIGHT SECTION */
 
 .right-section{
     margin-top: 10px;
-    width: 240px;
+    width: 300px;
     position: relative;
     margin-right: 20px;
     height: fit-content;
@@ -194,7 +205,8 @@
 .right-section-two {
     padding-left: 10px;
     height: fit-content;
-    border-top: 1px solid rgba(128, 128, 128, 0.329);
+    border-top: 9px solid 
+    #f3f2ef
 }
 .right-section-two-content {
     display: flex;

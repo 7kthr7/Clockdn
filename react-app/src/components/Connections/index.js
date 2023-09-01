@@ -1,59 +1,51 @@
-// import React, { useState } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { followUserThunk, unfollowUserThunk } from '../../store/user';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { followUserThunk, unfollowUserThunk } from '../../store/user';
 
-// const ToggleConnection = ({ userId }) => {
-//     const dispatch = useDispatch();
-//     const user = useSelector(state => state.session.user);
+const ToggleConnection = ({ userId }) => {
+    const dispatch = useDispatch();
+    const user = useSelector(state => state.session.user);
 
-//     const [errorMsg, setErrorMsg] = useState("");
-//     const [isFollowing, setIsFollowing] = useState(false);
+    const isInitiallyFollowing = user.following.some(followingUser => followingUser.id === userId);
 
-//     const handleToggleFollow = async () => {
+    const [isFollowing, setIsFollowing] = useState(isInitiallyFollowing);
 
-//         setErrorMsg("");
+    const handleToggleFollow = async () => {
+        setIsFollowing(prevState => !prevState);
 
-//         if (user.id === userId) {
-//             setErrorMsg("You can't follow/unfollow yourself!");
-//             return;
-//         }
+        if(isFollowing) {
+            dispatch(unfollowUserThunk(userId));
+        } else {
+            dispatch(followUserThunk(userId));
+        }
+        setIsFollowing(!isFollowing)
+    };
 
-//         try {
-//             let result;
-//             if (isFollowing) {
-//                 result = await dispatch(unfollowUserThunk(userId));
-//             } else {
-//                 result = await dispatch(followUserThunk(userId));
-//             }
+    return (
+        <div>
+            <button 
+                onClick={handleToggleFollow}
+                style={{
+                    position: 'relative',
+                    // marginLeft: '500px',
+                    marginTop: '18px',
+                    width: '150px',
+                    border: '.5px solid #44795f ',
+                    borderRadius: '4px',
+                    backgroundColor: isFollowing ? 'white' : '#2c684bc4',
+                    borderColor: '#44795f',
+                    transition: 'background-color 0.1s ease-in',
+                    paddingTop: '6px',
+                    paddingBottom: '6px',
+                    cursor: 'pointer',
+                    fontWeight: 'bold',
+                    fontSize: '12px'
+                }}
+            >
+                {isFollowing ? "disconnect" : "Connect"}
+            </button>
+        </div>
+    );
+}
 
-
-//             if (result && !result.errors) {
-//                 setIsFollowing(!isFollowing);
-//             } else if (result.errors) {
-//                 setErrorMsg(result.errors);
-//             }
-
-//         } catch (error) {
-//             const message = isFollowing ? 
-//                 "Error unfollowing this user" : 
-//                 "Error following this user";
-//             setErrorMsg(message);
-//         }
-//     };
-
-//     return (
-//         <div>
-//             <button 
-//                 onClick={handleToggleFollow}
-//                 style={{
-//                     backgroundColor: isFollowing ? "red" : "green", 
-//                 }}
-//             >
-//                 {isFollowing ? "Unfollow" : "Follow"}
-//             </button>
-//             {errorMsg && <p className="error-message">{errorMsg}</p>}
-//         </div>
-//     );
-// }
-
-// export default ToggleConnection;
+export default ToggleConnection;

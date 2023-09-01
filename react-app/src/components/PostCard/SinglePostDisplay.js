@@ -1,4 +1,4 @@
-
+import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import OpenModalButton from '../OpenModalButton'
 import EditPost from "../Post/EditPost";
@@ -11,6 +11,8 @@ import "./style.css"
 
 const SinglePostCard = ({ post, postComments, user }) => {
     const history = useHistory()
+    const [showComments, setShowComments] = useState(false)
+
 
     const handleProfilePage = (userId) => {
         history.push(`/user/${userId}`);
@@ -78,21 +80,18 @@ const SinglePostCard = ({ post, postComments, user }) => {
                                         <p id="coment-user-name"> {comment.first_name} {comment.last_name} </p>
                                     </div>
                                         <p id="comment-user-occupation" >{comment.occupation}</p>
-                                    {/* <p id="comment-created-at"> {comment.created_at}</p> */}
-                                    <p id="comment-body"> {comment.body}</p>
+                                        {/* <p id="comment-created-at"> {comment.created_at}</p> */}
+                                        <p id="comment-body"> {comment.body}</p>
                                     <div className="edit-comment">
                                         {comment.user_id === user.id && (
                                             <OpenModalButton buttonText='...' modalComponent={<EditComment commentId={comment.id} />} />
                                         )}
-                                        {/* {comment.user_id === user.id && (
-                                            <OpenModalButton buttonText='Delete Comment' modalComponent={<DeleteComment commentId={comment.id} />} />
-                                        )} */}
+                                        
                                     </div>
                                 </div>
                                 
                             ))}
                             <CreateComment postId={post.id} />
-                           {/* <button > <CreateComment postId={post.id} /></button> <CreateComment postId={post.id} /> */}
                     </div>
                 </div>
             </div>

@@ -22,6 +22,8 @@ function SignupFormModal() {
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [errors, setErrors] = useState([]);
 	const [frontendErrors, setFrontendErrors] = useState({})
+	const [imagePreview, setImagePreview] = useState("");
+
 
 	console.log('PROFILE IMAGE--->', profileImage)
 	// const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
@@ -78,7 +80,26 @@ function SignupFormModal() {
 		e.preventDefault();
 		history.push('/login')
 	}
-
+	const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        
+        if (file) {
+          setProfileImage(file)
+          const reader = new FileReader();
+          
+          reader.onloadend = () => {
+            setImagePreview(reader.result);
+          }
+          
+          reader.readAsDataURL(file);
+        }
+      };
+      
+      const handleImageRemove = () => {
+          setProfileImage(null);
+          setImagePreview(null);
+        };
+      
 
 	return (
 		<>
@@ -173,19 +194,33 @@ function SignupFormModal() {
 						/>
 					</label>
 
-					<div >
-						<label >
-							<input
+					<div className='post-image-button-section'>
 
+                    <label>
 
-								type="file"
-								onChange={(e) => setProfileImage(e.target.files[0])}
-								accept=".jpg, .jpeg, .png"
-
-							/>
-						</label>
-
-					</div>
+                        <input
+                            className="hidden-input"
+                            type='file'
+                            // onChange={(e) => setPost_images(e.target.files[0])}
+                            onChange={handleImageChange}
+                            accept='.jpg, .jpeg, .png, .gif'
+                        // name='post_images'
+                        />
+                        <span
+                            className="material-symbols-outlined"
+                            onClick={() => document.querySelector('.hidden-input')}
+                        >
+                            image
+                        </span>
+                        Image (Optional)
+                        </label>
+                        {imagePreview && (
+                            <>
+                                <img src={imagePreview} alt="Preview" />
+                                <button id='remove-image-button' onClick={handleImageRemove}>X</button>
+                            </>
+                        )}
+</div>
 					<div className="sign-up-password">
 
 						<label>
