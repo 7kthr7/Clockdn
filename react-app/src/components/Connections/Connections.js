@@ -1,9 +1,9 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getUserThunk } from '../../store/user'
+import { getUserConnectionsThunk, getUserThunk } from '../../store/user'
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
-import './connections.css'
+import './style.css'
 import ToggleConnection from ".";
 const Connections = () => {
 
@@ -13,8 +13,8 @@ const dispatch = useDispatch();
 const history = useHistory()
 
 const user = useSelector(state => state.session.user);
-const followerFirstNames = user.followers.map(follower => follower);
-console.log("First Names of Followers:", followerFirstNames);
+const followers = user.following.map(follower => follower);
+console.log("First Names of Followers:", followers);
 
 
 
@@ -23,17 +23,12 @@ useEffect(() => {
     // setLoading(true);
     async function fetchUserData() {
         await dispatch(getUserThunk());
-        // setLoading(false);
+        dispatch(getUserConnectionsThunk(userId));
     }
     fetchUserData();
-}, [dispatch, userId]);
+}, [dispatch, userId, followers]);
 
-// if (loading) {
-//     return <div>Loading...</div>;
-// }
 
-// if (!user) {
-//     return <div>Loading...</div>;
 
 
 const handleProfilePage = (userId) => {
@@ -45,8 +40,9 @@ return (
     <div className="connections-page">
         <div className="left-section-connections">
         <h2>My Connections</h2>
-            {followerFirstNames.map((userr) => (
+            {followers.map((userr) => (
                 <div className="followings-list" key={userr.id} >
+                    {/* <ToggleConnection/> */}
                     <div className="img-user-info">
                     <img
                         src={userr.profile_image}
@@ -57,7 +53,7 @@ return (
                     <p>{user.city}, {user.state}</p>
                     </div>
                     </div>
-                    <ToggleConnection userId={userr.id}/>
+               
                     </div>
             ))}
         </div>

@@ -17,7 +17,7 @@ const CreateComment = ({ postId, allComments }) => {
 
 
 
-    console.log('SINGLE POST FROM ALL POST STATE-->', postDetail)
+ 
     console.log('POST ID AND OCCUPATION OF SINGLE POST -->', postId)
 
     //useEffect monitoring changes to the body variable. the error conditional re-renders when ever body changes.

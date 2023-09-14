@@ -16,9 +16,7 @@ const PostFeed = () => {
     const posts = Object.values(useSelector((state) => state.post.allPosts))
     const comments = Object.values(useSelector(state => state.comment.allComments))
     const likes = Object.values(useSelector(state => state.likes.allLikes))
-    console.log("POSTS-------->:", posts);
-    console.log("COMMENTS-------->:", comments);
-    console.log("LIKES-------->:", likes);
+
     
 
     // const handleProfilePage = (userId) => {
@@ -31,7 +29,6 @@ const PostFeed = () => {
         dispatch(getLikesThunk())
         dispatch(getPostsThunk())
     }, [dispatch])
-    console.log("COMMENTS DISPATCH-------->:", dispatch(getCommentsThunk));
 
 
     return (
