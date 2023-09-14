@@ -29,11 +29,11 @@ class User(db.Model, UserMixin):
     posts = db.relationship('Post', back_populates='user', cascade='all, delete-orphan')
     comments = db.relationship('Comment', back_populates='user', cascade='all, delete-orphan')
     likes = db.relationship('Like', back_populates='user', cascade='all, delete-orphan')
-    followed = db.relationship(
-        'User', secondary=connections,
-        primaryjoin=(connections.c.follower_id == id),
-        secondaryjoin=(connections.c.followed_id == id),
-        backref=db.backref('connections', lazy='dynamic'), lazy='dynamic'
+    followers = db.relationship(
+    'User', secondary=connections,
+    primaryjoin=(connections.c.followed_id == id),
+    secondaryjoin=(connections.c.follower_id == id),
+    backref=db.backref('following', lazy='dynamic'), lazy='dynamic'
     )
 
     @property
@@ -49,16 +49,19 @@ class User(db.Model, UserMixin):
     
     def follow(self, user):
         if not self.is_following(user):
-            self.followed.append(user)
-            return self
+            self.following.append(user)
         
     def unfollow(self, user):
         if self.is_following(user):
-            self.followed.remove(user)
+            self.following.remove(user)
             return self
         
     def is_following(self, user):
-            return self.followed.filter(connections.c.followed_id == user.id).count() > 0
+        return self.following.filter(connections.c.followed_id == user.id).count() > 0
+    
+    def is_follower(self, user):
+        return self.followers.filter(connections.c.follower_id == user.id).count() > 0
+
 
     
     def to_dict(self):
@@ -74,8 +77,9 @@ class User(db.Model, UserMixin):
             'profile_image': self.profile_image,
             'created_at': self.created_at.strftime('%B %d, %Y %I:%M %p'),
             'updated_at': self.updated_at.strftime('%B %d, %Y %I:%M %p'),
-            'followers': [follower.to_dict_connections() for follower in self.followed],
-            'following': [following.to_dict_connections() for following in self.connections] 
+            'followers': [follower.to_dict_connections() for follower in self.followers],
+            'following': [following.to_dict_connections() for following in self.following]
+
         }
     
    

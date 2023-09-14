@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import User, db
+from app.models import User, db, connections
 # from app.forms import EditUserForm
 
 from .aws_helpers import get_unique_filename, upload_file_to_s3, remove_file_from_s3
@@ -94,6 +94,27 @@ def delete_user(id):
     db.session.commit()
 
     return {'User Successfully Deleted': id}
+
+
+@user_routes.route('/connections/<int:id>')
+@login_required
+def connection(id):
+
+    # Get the user with the given id from the database
+    user = User.query.get(id)
+
+    # Check if this user exists
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+
+    # Check if the user is a follower of the current user
+    connection_status = user.is_follower(current_user)
+
+    # Return a meaningful response based on the connection status
+    if connection_status:
+        return jsonify({"message": f"User with id {id} is a follower of the current user."}), 200
+    else:
+        return jsonify({"message": f"User with id {id} is not a follower of the current user."}), 200
 
 
 @user_routes.route('/<int:id>/follow', methods=['POST'])
