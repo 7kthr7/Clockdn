@@ -1,4 +1,5 @@
 from app.models import db, Event, environment, SCHEMA
+from sqlalchemy.sql import text
 from datetime import datetime
 
 def seed_events():

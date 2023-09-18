@@ -27,7 +27,7 @@ class Event(db.Model):
     event_end_date = db.Column(db.DateTime, nullable=False)
     event_start_time = db.Column(db.DateTime, nullable=False)
     event_end_time = db.Column(db.DateTime, nullable=False)
-    event_description = db.Column(db.Text, nullable=True)
+    event_description = db.Column(db.String, nullable=True)
     speakers = db.relationship('User', secondary=event_speakers, backref=db.backref('event_speakers', lazy='dynamic'))
     event_owner = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
     created_at = db.Column(db.Date, default=datetime.now())
