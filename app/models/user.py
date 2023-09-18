@@ -25,7 +25,7 @@ class User(db.Model, UserMixin):
     updated_at = db.Column(db.DateTime, default=datetime.now)
 
     
-    
+    events = db.relationship('Event', back_populates='user')
     posts = db.relationship('Post', back_populates='user', cascade='all, delete-orphan')
     comments = db.relationship('Comment', back_populates='user', cascade='all, delete-orphan')
     likes = db.relationship('Like', back_populates='user', cascade='all, delete-orphan')
