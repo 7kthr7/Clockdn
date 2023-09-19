@@ -24,7 +24,6 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now)
 
-    event_speakers = db.relationship('Event', backref=db.backref('speakers', lazy='dynamic'))    
     events = db.relationship('Event', back_populates='user')
     posts = db.relationship('Post', back_populates='user', cascade='all, delete-orphan')
     comments = db.relationship('Comment', back_populates='user', cascade='all, delete-orphan')
