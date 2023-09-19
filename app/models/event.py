@@ -32,7 +32,7 @@ class Event(db.Model):
     created_at = db.Column(db.Date, default=datetime.now())
     updated_at = db.Column(db.Date, default=datetime.now())
 
-    speakers = db.relationship('User', secondary=event_speakers, backref=db.backref('event_speakers', lazy='dynamic'))
+    speakers = db.relationship('User', secondary=event_speakers, backref='events_as_speaker')
     user = db.relationship('User', back_populates='events')
 
 
