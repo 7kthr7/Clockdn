@@ -3,10 +3,11 @@ from datetime import datetime
 
 
 event_speakers = db.Table(
-'event_speakers',
-db.Column('event_id', db.Integer, db.ForeignKey('events.id'), primary_key=True),
-db.Column('user_id', db.Integer, db.ForeignKey('users.id'), primary_key=True)
+    'event_speakers',
+    db.Column('event_id', db.Integer, db.ForeignKey(add_prefix_for_prod('events.id')), primary_key=True),
+    db.Column('user_id', db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), primary_key=True)
 )
+
 
 class Event(db.Model):
     __tablename__ = 'events'
