@@ -30,4 +30,8 @@ boto3 = "*"
 [dev-packages]
 
 [requires]
+<<<<<<< HEAD
 python_version = "3.9"
+=======
+python_version = "3.9"
+>>>>>>> main
