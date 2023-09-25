@@ -124,6 +124,7 @@ const handleConnectionPage = () => {
                 <div id="pencil-icon">
                     <span className="material-symbols-outlined">edit</span>
                 </div>
+                <div className="sort-by-top-and-recent"></div>
             </div>
                 <PostFeed />
             </div>
