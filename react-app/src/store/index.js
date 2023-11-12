@@ -5,13 +5,15 @@ import post from './post'
 import comment from './comment'
 import likes from './likes'
 import user from './user'
+import events from './events'
 
 const rootReducer = combineReducers({
   session,
   post,
   comment,
   likes,
-  user
+  user,
+  events
 });
 
 

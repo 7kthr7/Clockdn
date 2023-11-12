@@ -37,3 +37,28 @@ class Event(db.Model):
     user = db.relationship('User', back_populates='events')
 
 
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'event_name': self.event_name,
+            'event_description': self.event_description,
+            'event_image': self.event_image,
+            'event_type': self.event_type,
+            'event_name': self.event_name,
+            'event_link': self.event_link,
+            'event_address': self.event_address,
+            'event_city': self.event_city,
+            'event_state': self.event_state,
+            'event_time_zone': self.event_time_zone,
+            'event_start_date': self.event_start_date,
+            'event_end_date': self.event_end_date,
+            'event_start_time': self.event_start_time,
+            'event_end_time': self.event_end_time,
+            'event_description': self.event_description,
+            'event_owner': self.event_owner,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at,
+            'speakers': [speaker.to_dict() for speaker in self.speakers],
+            'user': self.user.to_dict()
+            
+        }

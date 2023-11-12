@@ -11,6 +11,8 @@ import UserProfile from "./components/ManageUser/UserProfile";
 import ViewUserProfile from "./components/ManageUser/SingleUser";
 import SplashPage from "./components/SplashPage";
 import Connections from "./components/Connections/Connections";
+import Events from "./components/Events/index";
+import SingleEvent from "./components/Events/SingleEvent";
 // import UserActivity from "./components/ManageUser/UserActivity";
 
 function App() {
@@ -47,6 +49,11 @@ function App() {
             <Connections/>
             </ProtectedRoute>
           </Route>
+          <Route path="/events">
+          <ProtectedRoute>
+            <Events/>
+            </ProtectedRoute>
+          </Route>
           <Route path="/profile">
           <ProtectedRoute>
             <UserProfile/>
@@ -56,6 +63,11 @@ function App() {
           <Route path="/user/:userId">
           <ProtectedRoute>
             <ViewUserProfile/>
+            </ProtectedRoute>
+          </Route>
+          <Route path="/singleEvent/:eventId">
+          <ProtectedRoute>
+            <SingleEvent/>
             </ProtectedRoute>
           </Route>
          
