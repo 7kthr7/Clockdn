@@ -18,6 +18,8 @@ const Events = () => {
         return null;
     }
 
+    // events done however need to fix the time zones and the event owner and multiple other things. 
+
     return (
         <div className="events-container">
             <div className="events-header">
@@ -29,6 +31,10 @@ const Events = () => {
                         <div className="event-card-header">
                             <h3>{event.event_name}, {event.event_city}</h3>
                         </div>
+                        <div className="event-card-image">
+                            <img src={event.event_image} alt="event" style={{ paddingRight: '250px', border: '1px solid pink' }}/>
+
+                            </div>
                         <div className="event-card-body">
                             <p>{event.description}</p>
                         </div>

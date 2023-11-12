@@ -1,5 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-from datetime import datetime
+from datetime import datetime, date, time
 
 
 event_speakers = db.Table(
@@ -24,10 +24,10 @@ class Event(db.Model):
     event_city = db.Column(db.String, nullable=True)
     event_state = db.Column(db.String, nullable=True)
     event_time_zone = db.Column(db.String, nullable=False)
-    event_start_date = db.Column(db.DateTime, nullable=False)
-    event_end_date = db.Column(db.DateTime, nullable=False)
-    event_start_time = db.Column(db.DateTime, nullable=False)
-    event_end_time = db.Column(db.DateTime, nullable=False)
+    event_start_date = db.Column(db.Date, nullable=False)
+    event_end_date = db.Column(db.Date, nullable=False)
+    event_start_time = db.Column(db.Time, nullable=False)
+    event_end_time = db.Column(db.Time, nullable=False)
     event_description = db.Column(db.String, nullable=True)
     event_owner = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
     created_at = db.Column(db.Date, default=datetime.now())
@@ -50,10 +50,10 @@ class Event(db.Model):
             'event_city': self.event_city,
             'event_state': self.event_state,
             'event_time_zone': self.event_time_zone,
-            'event_start_date': self.event_start_date,
-            'event_end_date': self.event_end_date,
-            'event_start_time': self.event_start_time,
-            'event_end_time': self.event_end_time,
+            'event_start_date': self.event_start_date.strftime('%Y-%m-%d'),
+            'event_end_date': self.event_end_date.strftime('%Y-%m-%d'),
+            'event_start_time': self.event_start_time.strftime('%H:%M'),
+            'event_end_time': self.event_end_time.strftime('%H:%M'),
             'event_description': self.event_description,
             'event_owner': self.event_owner,
             'created_at': self.created_at,
@@ -62,3 +62,18 @@ class Event(db.Model):
             'user': self.user.to_dict()
             
         }
+    
+    # def format_event_date(self):
+    #     # Format the date to m/d/y
+    #     date_str = self.event_start_datetime.strftime('%-m/%-d/%Y')
+    #     return date_str
+
+    # def format_event_start_time(self):
+    #     # Format the start time to show hours:minutes
+    #     start_time_str = self.event_start_datetime.strftime('%-I:%M %p')  # Using %-I for 12-hour format without leading zero
+    #     return start_time_str
+
+    # def format_event_end_time(self):
+    #     # Format the end time to show hours:minutes
+    #     end_time_str = self.event_end_datetime.strftime('%-I:%M %p')  # Using %-I for 12-hour format without leading zero
+    #     return end_time_str
